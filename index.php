@@ -18,7 +18,7 @@
 
 <?php get_header(); ?>
 
-    <div id="content-container" class="span-18">
+    <div id="content-container" class="span-15">
         <div id="content">
 
         <?php
