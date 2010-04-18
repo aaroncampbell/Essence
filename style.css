@@ -292,43 +292,52 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .menu {
 	clear: both;
 	height: 31px;
-	background-color: #666;
-	color: #FFF;
-	border-bottom: 1px solid #999;
-	text-transform: uppercase;
+	/*
 	margin: 0;
 	padding: 0;
+	*/
+	text-transform: uppercase;
+}
+.menu,
+.menu li a {
+	background-color: #666;
+	border-bottom: 1px solid #999;
+	color: #FFF;
 }
 
+
 .menu ul {
-	width: 100%;
 	float: left;
 	list-style: none;
+	/*
 	margin: 0;
 	padding: 0;
+	*/
+	width: 100%;
 }
 
 .menu li {
 	float: left;
 	list-style: none;
+	/*
 	margin: 0;
 	padding: 0;
+	*/
 }
 
 .menu li a {
-	background: #666;
-	color: #FFF;
 	display: block;
 	font-size: 12px;
     margin: 0;
 	padding: 6px 10px 5px 10px;
-	text-decoration: none;
-	border-right: 1px solid #999;
 	position: relative;
+	text-decoration: none;
 }
 
-.menu li a:hover, .menu li a:active, .menu .current_page_item a {
-	background: #333;
+.menu li a:hover,
+.menu li a:active,
+.menu .current_page_item a {
+	background-color: #333;
 	color: #FFF;
 }
 
@@ -337,69 +346,81 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 }
 
 .menu li a .sf-sub-indicator {
-	background: url(images/arrow-down.png);
+	background-image: url(images/arrow-down.png);
 	display: block;
-	width: 9px;
 	height: 9px;
-	text-indent: -9999px;
 	overflow: hidden;
 	position: absolute;
-	top: 11px;
 	right: 5px;
+	text-indent: -9999px;
+	top: 11px;
+	width: 9px;
 }
 
-.menu li li a, .menu li li a:link, .menu li li a:visited {
-	background: #666;
+.menu li li a,
+.menu li li a:link,
+.menu li li a:visited {
+	background-color: #666;
+	border: 1px solid #999;
+	border-top:none;
 	color: #FFF;
-	width: 158px;
 	font-size: 11px;
 	margin: 0 0 0 -1px;
-	padding: 6px 10px 6px 10px;
-	border-left: 1px solid #999;
-	border-right: 1px solid #999;
-	border-bottom: 1px solid #999;
+	padding: 6px 10px;
 	position: relative;
+	width: 158px;
 }
 
-.menu li li a:hover, .menu li li a:active {
+.menu li li a:hover,
+.menu li li a:active {
 	background: #333;
 }
 
 .menu li li a .sf-sub-indicator {
-	background: url(images/arrow-right.png);
+	background-image: url(images/arrow-right.png);
 	top: 10px;
 }
 
 .menu li ul {
-	z-index: 9999;
-	position: absolute;
-	left: -999em;
 	height: auto;
-	width: 180px;
+	left: -999em;
 	margin: 0;
 	padding: 0;
+	position: absolute;
+	width: 180px;
+	z-index: 9999;
 }
 
 .menu li ul a {
 	width: 160px;
 }
 
-.menu li ul a:hover, .menu li ul a:active {
+.menu li ul a:hover,
+.menu li ul a:active {
 }
 
 .menu li ul ul {
 	margin: -33px 0 0 179px;
 }
 
-.menu li:hover ul ul, .menu li:hover ul ul ul, .menu li.sfHover ul ul, .menu li.sfHover ul ul ul {
+.menu li:hover ul ul,
+.menu li:hover ul ul ul,
+.menu li.sfHover ul ul,
+.menu li.sfHover ul ul ul {
 	left: -999em;
 }
 
-.menu li:hover ul, .menu li li:hover ul, .menu li li li:hover ul, .menu li.sfHover ul, .menu li li.sfHover ul, .menu li li li.sfHover ul {
+.menu li:hover ul,
+.menu li li:hover ul,
+.menu li li li:hover ul,
+.menu li.sfHover ul,
+.menu li li.sfHover ul,
+.menu li li li.sfHover ul {
 	left: auto;
 }
 
-.menu li:hover, .menu li.sfHover {
+.menu li:hover,
+.menu li.sfHover {
 	position: static;
 }
 
