@@ -292,9 +292,9 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .menu {
 	clear: both;
 	height: 31px;
-	background: #333333;
-	color: #FFFFFF;
-	border-bottom: 1px solid #666666;
+	background-color: #666;
+	color: #FFF;
+	border-bottom: 1px solid #999;
 	text-transform: uppercase;
 	margin: 0;
 	padding: 0;
@@ -319,20 +319,20 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	}
 
 .menu li a {
-	background: #333333;
-	color: #FFFFFF;
+	background: #666;
+	color: #FFF;
 	display: block;
 	font-size: 12px;
     margin: 0;
 	padding: 6px 10px 5px 10px;
 	text-decoration: none;
-	border-right: 1px solid #666666;
+	border-right: 1px solid #999;
 	position: relative;
 	}
 
 .menu li a:hover, .menu li a:active, .menu .current_page_item a {
-	background: #000000;
-	color: #FFFFFF;
+	background: #333;
+	color: #FFF;
 	}
 
 .menu li a.sf-with-ul {
@@ -352,20 +352,20 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	}
 
 .menu li li a, .menu li li a:link, .menu li li a:visited {
-	background: #333333;
-	color: #FFFFFF;
+	background: #666;
+	color: #FFF;
 	width: 158px;
 	font-size: 11px;
 	margin: 0 0 0 -1px;
 	padding: 6px 10px 6px 10px;
-	border-left: 1px solid #666666;
-	border-right: 1px solid #666666;
-	border-bottom: 1px solid #666666;
+	border-left: 1px solid #999;
+	border-right: 1px solid #999;
+	border-bottom: 1px solid #999;
 	position: relative;
 	}
 
 .menu li li a:hover, .menu li li a:active {
-	background: #000000;
+	background: #333;
 	}
 
 .menu li li a .sf-sub-indicator {
@@ -418,13 +418,13 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	padding: 0;
 	border: none;
 	background: none;
-	color: #FFFFFF;
+	color: #FFF;
 	font-weight: normal;
 	text-decoration: none;
 	}
 
 .menu li.right a:hover {
-	color: #FFFFFF;
+	color: #FFF;
 	text-decoration: underline;
 	}
 
