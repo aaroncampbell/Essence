@@ -22,6 +22,13 @@
         <div id="content">
 
         <?php
+		/**
+		 * @todo Hide on home page and show on others?
+		 * @todo Use a hook here such as framework_hook_content_open or something similar (talk to Joost to get it included)
+		 */
+		if ( function_exists('yoast_breadcrumb') ) {
+			yoast_breadcrumb('<p id="breadcrumbs">','</p>');
+		}
         /* Run the loop to output the posts.
          * If you want to overload this in a child theme then include a file
          * called loop-index.php and that will be used instead.
