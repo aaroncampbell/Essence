@@ -36,7 +36,7 @@
          get_template_part( 'loop', 'index' );
         ?>
         </div><!-- #content -->
-    </div><!-- #container -->
+    </div><!-- #content-container -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

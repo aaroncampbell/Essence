@@ -10,7 +10,7 @@
 
 <?php get_header(); ?>
 
-		<div id="container">
+		<div id="content-container" class="span-15">
 			<div id="content">
 
 <?php the_post(); ?>
@@ -81,7 +81,7 @@
 				<?php comments_template( '', true ); ?>
 
 			</div><!-- #content -->
-		</div><!-- #container -->
+		</div><!-- #ccontent-ontainer -->
 
 <?php get_sidebar(); ?>
 <?php get_footer(); ?>

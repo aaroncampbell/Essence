@@ -42,11 +42,8 @@
 	<div id="header">
 		<div id="masthead">
 			<div id="branding">
-				<?php if ( is_home() || is_front_page() ) { ?>
-					<h1 id="site-title"><span><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></h1>
-				<?php } else { ?>
-					<div id="site-title"><span><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></div>
-				<?php } ?>
+				<?php $hTag = apply_filters( 'esssence_title_tag', ( is_home() || is_front_page() )?'h1':'h4'); ?>
+				<<?php echo $hTag; ?> id="site-title"><span><a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></span></<?php echo $hTag;?>>
 
 				<div id="site-description"><?php bloginfo( 'description' ); ?></div>
 
