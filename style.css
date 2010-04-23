@@ -284,6 +284,13 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	max-width: 100%;
 }
 
+#breadcrumbs {
+	border:1px solid #CCC;
+	border-top:none;
+	padding:5px 10px;
+	background-color:#EFEFEF;
+}
+
 
 /**
  * Menus
@@ -292,35 +299,28 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .menu {
 	border-bottom: 1px solid #999;
 	clear: both;
-	height: 31px;
+	height: 30px;
+	line-height:20px;
 	margin: 0;
 	padding: 0;
 	text-transform: uppercase;
 }
+
 .menu,
 .menu li a {
 	background-color: #666;
 	color: #FFF;
 }
 
-
 .menu ul {
 	float: left;
 	list-style: none;
-	/*
-	margin: 0;
-	padding: 0;
-	*/
 	width: 100%;
 }
 
 .menu li {
 	float: left;
 	list-style: none;
-	/*
-	margin: 0;
-	padding: 0;
-	*/
 }
 
 .menu li a {
@@ -328,7 +328,7 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	display: block;
 	font-size: 12px;
     margin: 0;
-	padding: 6px 10px 5px 10px;
+	padding: 5px 10px 5px;
 	position: relative;
 	text-decoration: none;
 }
@@ -446,6 +446,172 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	text-decoration: underline;
 }
 */
+
+/**
+ * End Menus
+ */
+
+/**
+ * Widget Areas
+ */
+
+.widget-area ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+.widget-area ul ul {
+	list-style-type: square;
+	margin: 10px;
+	padding-left:15px;
+}
+
+.widget-container {
+	border:1px solid #CCC;
+	margin:1em 0 1em 10px;
+}
+
+.widget-container p,
+.widget-container div {
+	margin:0;
+	padding:10px;
+}
+.widget-container h2,
+.widget-container h3,
+.widget-container h4 {
+	border-bottom:1px solid #CCC;
+	padding:5px 10px;
+	display:block;
+	background-color:#EFEFEF;
+}
+
+.widget-title {
+}
+.widget-title a {
+	color: #111;
+}
+.widget-area a:link,
+.widget-area a:visited {
+	text-decoration: none;
+}
+.widget-area a:active,
+.widget-area a:hover {
+	text-decoration: underline;
+}
+
+.widget_twitter div {
+	padding:0;
+}
+
+.widget_twitter .widget-title {
+	background-image: url(images/twitter-bird.png);
+	background-position: 99% 2px;
+	background-repeat: no-repeat;
+}
+
+.widget_twitter ul li {
+	margin-bottom:5px;
+}
+
+.widget_twitter .xavisys-link {
+	list-style-type:none;
+	margin-top:10px;
+}
+
+.widget_twitter .entry-meta {
+	display:block;
+	font-size:80%;
+}
+
+.widget_search #s { /* This keeps the search inputs in line */
+	width: 70%;
+}
+.widget_search label {
+	font-size: 14px;
+	font-weight: bold;
+	color: #222;
+	display: block;
+}
+.widget_search label {
+	color: #ccc;
+	left: 5px;
+	position: absolute;
+	top: 5px;
+}
+
+.widget-area ul li.widget_search:first-child {
+	padding-top:10px;
+}
+.widget-area ul li.widget_search:first-child,
+.widget-area ul li.widget_search:first-child div {
+	border-top:none;
+	margin-top:0;
+}
+.widget_search div {
+	margin:10px;
+	padding:0;
+	position:relative;
+}
+
+#searchsubmit {
+	background-color:#666;
+	border:1px solid #999;
+	color:#FFF;
+}
+#searchsubmit:hover {
+	background-color:#333;
+}
+/*
+	font-family:Arial,Tahoma,Verdana;
+	font-size:11px;
+	margin:0;
+	padding:2px 5px;
+	text-decoration:none;
+	text-transform:uppercase;
+*/
+}
+
+#wp_tag_cloud div {
+	line-height: 1.6em;
+}
+#wp-calendar {
+	width:100%;
+}
+#wp-calendar caption {
+	font-weight: bold;
+	color: #222;
+	text-align: left;
+	font-size:14px;
+	padding-bottom: 4px;
+}
+#wp-calendar thead {
+	font-size:11px;
+}
+#wp-calendar thead th {
+}
+#wp-calendar tbody {
+	color: #aaa;
+}
+#wp-calendar tbody td {
+	padding: 3px 0 2px;
+	background: #f5f5f5;
+	border:1px solid #fff;
+	text-align: center;
+}
+#wp-calendar tbody .pad {
+	background: none;
+}
+#wp-calendar tfoot #next {
+	text-align: right;
+}
+.widget_rss .widget-title img {
+	height: 11px;
+	width: 11px;
+}
+
+/**
+ * End Widget Areas
+ */
 
 /**
  * Mobile Safari ( iPad, iPhone and iPod Touch )
