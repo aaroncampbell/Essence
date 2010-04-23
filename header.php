@@ -78,7 +78,7 @@
 				/**
 				 * @todo Make this a theme option?
 				 */
-				wp_nav_menu( array( 'sort_column' => 'menu_order', 'container_class' => 'menu-header' ) );
+				//wp_nav_menu( array( 'sort_column' => 'menu_order', 'container_class' => 'menu-header' ) );
 ?>
 			</div><!-- #access -->
 		</div><!-- #masthead -->
