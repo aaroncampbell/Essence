@@ -23,8 +23,8 @@ function essence_load_scripts() {
 	 */
 	wp_enqueue_script('superfish', PARENT_URL.'/js/superfish.js', array('jquery'), '1.4.8', TRUE);
 	wp_enqueue_script('superfish-args', PARENT_URL.'/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
+	wp_enqueue_script('label-over', PARENT_URL.'/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
 }
-
 
 
 /**
@@ -398,8 +398,8 @@ function twentyten_widgets_init() {
 		'description' => __( 'The primary widget area' , 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
 	) );
 
 	// Area 2
@@ -409,8 +409,8 @@ function twentyten_widgets_init() {
 		'description' => __( 'The secondary widget area' , 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
 	) );
 
 	// Area 3
@@ -420,8 +420,8 @@ function twentyten_widgets_init() {
 		'description' => __( 'The first footer widget area' , 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
 	) );
 
 	// Area 4
@@ -431,8 +431,8 @@ function twentyten_widgets_init() {
 		'description' => __( 'The second footer widget area' , 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
 	) );
 
 	// Area 5
@@ -442,8 +442,8 @@ function twentyten_widgets_init() {
 		'description' => __( 'The third footer widget area' , 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
 	) );
 
 	// Area 6
@@ -453,8 +453,8 @@ function twentyten_widgets_init() {
 		'description' => __( 'The fourth footer widget area' , 'twentyten' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
-		'before_title' => '<h3 class="widget-title">',
-		'after_title' => '</h3>',
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
 	) );
 }
 add_action( 'init', 'twentyten_widgets_init' );
