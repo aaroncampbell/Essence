@@ -284,6 +284,10 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	max-width: 100%;
 }
 
+#nav-above {
+	display:none;
+}
+
 #breadcrumbs {
 	border:1px solid #CCC;
 	border-top:none;
