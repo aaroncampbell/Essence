@@ -26,6 +26,24 @@ function essence_load_scripts() {
 	wp_enqueue_script('label-over', PARENT_URL.'/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
 }
 
+/**
+ * For use with debugging
+ */
+if ( !function_exists('dump') ) {
+	function dump($v, $title = '', $return = false) {
+		if (!empty($title)) {
+			echo '<h4>' . htmlentities($title) . '</h4>';
+		}
+		ob_start();
+		var_dump($v);
+		$v = ob_get_clean();
+		$v = '<pre>' . htmlentities($v) . '</pre>';
+		if ( $return ) {
+			return $v;
+		}
+		echo $v;
+	}
+}
 
 /**
  * TwentyTen functions and definitions
