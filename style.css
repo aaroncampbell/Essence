@@ -288,13 +288,6 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	display:none;
 }
 
-#breadcrumbs {
-	border:1px solid #CCC;
-	border-top:none;
-	padding:5px 10px;
-	background-color:#EFEFEF;
-}
-
 #header #site-title {
 	font-size:30px;
 	line-height:normal;
@@ -310,10 +303,137 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	margin-bottom:10px;
 }
 
+blockquote {
+	padding:10px 10px 0;
+}
+
+/**
+ * Posts
+ */
+#content .entry-title {
+	margin-bottom: 0;
+}
+.entry-title a:link,
+.entry-title a:visited {
+	color:#111;
+	text-decoration: none;
+}
+.entry-title a:active,
+.entry-title a:hover {
+	color: #009;
+}
+.entry-meta {
+	margin-bottom: 5px;
+}
+.entry-meta,
+.entry-utility {
+	color: #888;
+	font-size: 12px;
+}
+.entry-meta abbr,
+.entry-utility abbr {
+	border: none;
+}
+.entry-meta abbr:hover,
+.entry-utility abbr:hover {
+	border-bottom: 1px dotted #666;
+}
+.entry-utility {
+	border-top:1px solid #DDD;
+	margin-top: 5px;
+}
+.hentry {
+	margin-bottom:42px;
+}
+/**
+ * End Posts
+ */
+
+
+/**
+ * Images
+ */
+img.centered ,
+img.alignnone,
+img.alignleft,
+img.alignright {
+	display: inline;
+	padding: 0;
+}
+
+img.centered  {
+	display: block;
+	margin:0 auto 10px auto;
+}
+
+img.alignnone {
+	margin: 0 0 10px 0;
+}
+
+img.alignleft {
+	margin: 0 10px 10px 0;
+}
+
+img.alignright {
+	margin: 0 0 10px 10px;
+}
+
+.aligncenter {
+	display: block;
+	margin: 0 auto 10px;
+}
+
+.alignleft {
+	float: left;
+	margin: 0 10px 0 0;
+}
+
+.alignright {
+	float: right;
+	margin: 0 0 0 10px;
+}
+
+.widget-container h2,
+.widget-container h3,
+.widget-container h4,
+#breadcrumbs,
+blockquote,
+.wp-caption {
+	background: #F6F6F6;
+	border: 1px solid #DDD;
+}
+.wp-caption {
+	padding: 5px;
+	text-align: center;
+}
+
+.wp-caption img {
+}
+
+.wp-caption p.wp-caption-text {
+	font-size: 11px;
+	line-height: 12px;
+	margin: 0;
+}
+
+img.wp-smiley, img.wp-wink {
+	float: none;
+	border: none;
+	margin: 0;
+	padding: 0;
+}
+/**
+ * End Images
+ */
+
+#breadcrumbs {
+	border-top:none;
+	padding:5px 10px;
+}
+
 /**
  * Menus
  */
-
 .menu {
 	border-bottom: 1px solid #999;
 	clear: both;
@@ -440,31 +560,6 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .menu li.sfHover {
 	position: static;
 }
-
-/*
-.menu li.right {
-	float: right;
-	margin: 0;
-	padding: 6px 10px 6px 10px;
-}
-
-.menu li.right a {
-	display: inline;
-	margin: 0;
-	padding: 0;
-	border: none;
-	background: none;
-	color: #FFF;
-	font-weight: normal;
-	text-decoration: none;
-}
-
-.menu li.right a:hover {
-	color: #FFF;
-	text-decoration: underline;
-}
-*/
-
 /**
  * End Menus
  */
@@ -472,7 +567,6 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 /**
  * Widget Areas
  */
-
 .widget-area ul {
 	list-style: none;
 	margin: 0;
@@ -485,7 +579,7 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 }
 
 .widget-container {
-	border:1px solid #CCC;
+	border:1px solid #DDD;
 	margin:1em 0 1em 10px;
 }
 
@@ -497,10 +591,10 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .widget-container h2,
 .widget-container h3,
 .widget-container h4 {
-	border-bottom:1px solid #CCC;
-	padding:5px 10px;
+	border-width:0 0 1px 0;
 	display:block;
-	background-color:#EFEFEF;
+	margin-bottom:0;
+	padding:5px 10px;
 }
 
 .widget-title {
@@ -551,7 +645,7 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	display: block;
 }
 .widget_search label {
-	color: #ccc;
+	color: #CCC;
 	left: 5px;
 	position: absolute;
 	top: 5px;
@@ -579,15 +673,6 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 #searchsubmit:hover {
 	background-color:#333;
 }
-/*
-	font-family:Arial,Tahoma,Verdana;
-	font-size:11px;
-	margin:0;
-	padding:2px 5px;
-	text-decoration:none;
-	text-transform:uppercase;
-*/
-}
 
 #wp_tag_cloud div {
 	line-height: 1.6em;
@@ -596,25 +681,27 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	width:100%;
 }
 #wp-calendar caption {
-	font-weight: bold;
+	border:1px solid #FFF;
 	color: #222;
-	text-align: left;
 	font-size:14px;
+	font-weight: bold;
 	padding-bottom: 4px;
+	text-align: left;
 }
 #wp-calendar thead {
 	font-size:11px;
 }
+#wp-calendar tbody td,
 #wp-calendar thead th {
+	border:1px solid #FFF;
+	text-align: center;
 }
 #wp-calendar tbody {
-	color: #aaa;
+	color: #999;
 }
 #wp-calendar tbody td {
+	background: #F6F6F6;
 	padding: 3px 0 2px;
-	background: #f5f5f5;
-	border:1px solid #fff;
-	text-align: center;
 }
 #wp-calendar tbody .pad {
 	background: none;
