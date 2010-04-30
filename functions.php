@@ -1,14 +1,61 @@
 <?php
+/**
+ * Essence functions and definitions
+ *
+ * Sets up the theme and provides some helper functions. Some helper functions
+ * are used in the theme as custom template tags. Others are attached to action
+ * and filter hooks in WordPress to change core functionality.
+ *
+ * The function essence_setup(), sets up the theme by registering support
+ * for various features in WordPress, such as post thumbnails, navigation menus,
+ * and the like.
+ *
+ * When using a child theme (see http://codex.wordpress.org/Theme_Development),
+ * you can override certain functions (those wrapped in a function_exists()
+ * call) by defining them first in your child theme's functions.php file. The
+ * child theme's functions.php file is included before the parent theme's file,
+ * so the child theme functions would be used.
+ *
+ * Functions that are not pluggable (not wrapped in function_exists()) are
+ * instead attached to a filter or action hook. The hook can be removed by using
+ * remove_action() or remove_filter() and you can attach your own function to
+ * the hook.
+ *
+ * We can remove the parent theme's hook only after it is attached, which means
+ * we need to wait until setting up the child theme:
+ *
+ * <code>
+ * add_action( 'after_setup_theme', 'my_child_theme_setup' );
+ * function my_child_theme_setup() {
+ *     // We are providing our own filter for excerpt_length (or using the unfiltered value)
+ *     remove_filter( 'excerpt_length', 'twentyten_excerpt_length' );
+ *     ...
+ * }
+ * </code>
+ *
+ * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
+ */
+
 define('PARENT_URL', get_bloginfo('template_directory'));
 define('CHILD_URL', get_bloginfo('stylesheet_directory'));
 define('ESSENCE_VERSION', '0.0.1');
+
+/**
+ * Set the content width based on the theme's design and stylesheet.
+ *
+ * Used to set the width of images and content. Should be equal to the width the
+ * theme is designed for, generally via the style.css stylesheet.
+ *
+ * @todo Swap this out based on the page layout?  Is that possible?
+ */
+if ( ! isset( $content_width ) )
+	$content_width = 640;
 
 
 /**
  * This function loads front-end JS files
  *
  */
-add_action('get_header', 'essence_load_scripts');
 function essence_load_scripts() {
 	/**
 	 * @todo Comment reply script?
@@ -25,87 +72,111 @@ function essence_load_scripts() {
 	wp_enqueue_script('superfish-args', PARENT_URL.'/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
 	wp_enqueue_script('label-over', PARENT_URL.'/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
 }
+add_action('get_header', 'essence_load_scripts');
 
-/**
- * For use with debugging
- */
-if ( !function_exists('dump') ) {
-	function dump($v, $title = '', $return = false) {
-		if (!empty($title)) {
-			echo '<h4>' . htmlentities($title) . '</h4>';
-		}
-		ob_start();
-		var_dump($v);
-		$v = ob_get_clean();
-		$v = '<pre>' . htmlentities($v) . '</pre>';
-		if ( $return ) {
-			return $v;
-		}
-		echo $v;
+
+function essence_init() {
+	/**
+	 * If Joost's breadcrumb plugin is installed, hook it into the
+	 * essence_content_open action
+	 *
+	 * @todo ask Joost to include the essence filter in the plugin
+	 */
+	if ( function_exists('yoast_breadcrumb_output') ) {
+		add_action('essence_content_open','yoast_breadcrumb_output',10,1);
 	}
 }
+add_action( 'init', 'essence_init' );
+
 
 /**
- * TwentyTen functions and definitions
+ * Register widgetized areas, including two sidebars and four widget-ready
+ * columns in the footer.
  *
- * Sets up the theme and provides some helper functions. Some helper functions
- * are used in the theme as custom template tags. Others are attached to action and
- * filter hooks in WordPress to change core functionality.
- *
- * The first function, twentyten_setup(), sets up the theme by registering support
- * for various features in WordPress, such as post thumbnails, navigation menus, and the like.
- *
- * When using a child theme (see http://codex.wordpress.org/Theme_Development), you can
- * override certain functions (those wrapped in a function_exists() call) by defining
- * them first in your child theme's functions.php file. The child theme's functions.php
- * file is included before the parent theme's file, so the child theme functions would
- * be used.
- *
- * Functions that are not pluggable (not wrapped in function_exists()) are instead attached
- * to a filter or action hook. The hook can be removed by using remove_action() or
- * remove_filter() and you can attach your own function to the hook.
- *
- * We can remove the parent theme's hook only after it is attached, which means we need to
- * wait until setting up the child theme:
- *
- * <code>
- * add_action( 'after_setup_theme', 'my_child_theme_setup' );
- * function my_child_theme_setup() {
- *     // We are providing our own filter for excerpt_length (or using the unfiltered value)
- *     remove_filter( 'excerpt_length', 'twentyten_excerpt_length' );
- *     ...
- * }
- * </code>
- *
- * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
- *
- * @package WordPress
- * @subpackage Twenty Ten
- * @since 3.0.0
+ * To override essence_widgets_init() in a child theme, remove the action hook
+ * and add your own function tied to the init hook.
+ * @uses register_sidebar
  */
+function essence_widgets_init() {
+	// Area 1
+	register_sidebar( array (
+		'name' => 'Primary Widget Area',
+		'id' => 'primary-widget-area',
+		'description' => __( 'The primary widget area' , 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
+	) );
 
-/**
- * Set the content width based on the theme's design and stylesheet.
- *
- * Used to set the width of images and content. Should be equal to the width the theme
- * is designed for, generally via the style.css stylesheet.
- */
-if ( ! isset( $content_width ) )
-	$content_width = 640;
+	// Area 2
+	register_sidebar( array (
+		'name' => 'Secondary Widget Area',
+		'id' => 'secondary-widget-area',
+		'description' => __( 'The secondary widget area' , 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
+	) );
 
-/** Tell WordPress to run twentyten_setup() when the 'after_setup_theme' hook is run. */
-add_action( 'after_setup_theme', 'twentyten_setup' );
+	// Area 3
+	register_sidebar( array (
+		'name' => 'First Footer Widget Area',
+		'id' => 'first-footer-widget-area',
+		'description' => __( 'The first footer widget area' , 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
+	) );
 
-if ( ! function_exists('twentyten_setup') ):
+	// Area 4
+	register_sidebar( array (
+		'name' => 'Second Footer Widget Area',
+		'id' => 'second-footer-widget-area',
+		'description' => __( 'The second footer widget area' , 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
+	) );
+
+	// Area 5
+	register_sidebar( array (
+		'name' => 'Third Footer Widget Area',
+		'id' => 'third-footer-widget-area',
+		'description' => __( 'The third footer widget area' , 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
+	) );
+
+	// Area 6
+	register_sidebar( array (
+		'name' => 'Fourth Footer Widget Area',
+		'id' => 'fourth-footer-widget-area',
+		'description' => __( 'The fourth footer widget area' , 'twentyten' ),
+		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</li>",
+		'before_title' => '<h4 class="widget-title">',
+		'after_title' => '</h4>',
+	) );
+}
+add_action( 'init', 'essence_widgets_init' );
+
+
+if ( ! function_exists('essence_setup') ):
 /**
  * Sets up theme defaults and registers support for various WordPress features.
  *
  * Note that this function is hooked into the after_setup_theme hook, which runs
- * before the init hook. The init hook is too late for some features, such as indicating
- * support post thumbnails.
+ * before the init hook. The init hook is too late for some features, such as
+ * indicating support post thumbnails.
  *
- * To override twentyten_setup() in a child theme, add your own twentyten_setup to your child theme's
- * functions.php file.
+ * To override essence_setup() in a child theme, add your own essence_setup to
+ * your child theme's functions.php file.
  *
  * @uses add_theme_support() To add support for post thumbnails, navigation menus, and automatic feed links.
  * @uses add_custom_background() To add support for a custom background.
@@ -117,7 +188,7 @@ if ( ! function_exists('twentyten_setup') ):
  *
  * @since 3.0.0
  */
-function twentyten_setup() {
+function essence_setup() {
 
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
@@ -131,18 +202,27 @@ function twentyten_setup() {
 	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
 
+	/**
+	 * @todo Generate POT and get translations
+	 */
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'twentyten', TEMPLATEPATH . '/languages' );
+	load_theme_textdomain( 'essence', TEMPLATEPATH . '/languages' );
 
 	$locale = get_locale();
-	$locale_file = TEMPLATEPATH . "/languages/$locale.php";
+	$locale_file = TEMPLATEPATH . "/languages/{$locale}.php";
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file );
 
+	/**
+	 * @todo implement custom backgrounds
+	 */
 	// This theme allows users to set a custom background
 	add_custom_background();
 
+	/**
+	 * @todo implement this header stuff
+	 */
 	// Your changeable header business starts here
 	define( 'HEADER_TEXTCOLOR', '' );
 	// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
@@ -153,19 +233,28 @@ function twentyten_setup() {
 	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'twentyten_header_image_width',  940 ) );
 	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'twentyten_header_image_height',	198 ) );
 
+	/**
+	 * Post thumbnails should be set to the size of my content showcase once that's implementd
+	 */
 	// We'll be using post thumbnails for custom header images on posts and pages.
 	// We want them to be 940 pixels wide by 198 pixels tall (larger images will be auto-cropped to fit).
 	set_post_thumbnail_size( HEADER_IMAGE_WIDTH, HEADER_IMAGE_HEIGHT, true );
 
+	/**
+	 * @todo check on NO_HEADER_TEXT
+	 */
 	// Don't support text inside the header image.
 	define( 'NO_HEADER_TEXT', true );
 
 	// Add a way for the custom header to be styled in the admin panel that controls
-	// custom headers. See twentyten_admin_header_style(), below.
-	add_custom_image_header( '', 'twentyten_admin_header_style' );
+	// custom headers. See essence_admin_header_style(), below.
+	add_custom_image_header( '', 'essence_admin_header_style' );
 
 	// ... and thus ends the changeable header business.
 
+	/**
+	 * @todo Include my own custom headers, talk to Matt about including these ones?
+	 */
 	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 	register_default_headers( array (
 		'berries' => array (
@@ -211,16 +300,19 @@ function twentyten_setup() {
 	) );
 }
 endif;
+/** Tell WordPress to run essence_setup() when the 'after_setup_theme' hook is run. */
+add_action( 'after_setup_theme', 'essence_setup' );
 
-if ( ! function_exists( 'twentyten_admin_header_style' ) ) :
+
+if ( ! function_exists( 'essence_admin_header_style' ) ) :
 /**
  * Styles the header image displayed on the Appearance > Header admin panel.
  *
- * Referenced via add_custom_image_header() in twentyten_setup().
+ * Referenced via add_custom_image_header() in essence_setup().
  *
  * @since 3.0.0
  */
-function twentyten_admin_header_style() {
+function essence_admin_header_style() {
 ?>
 <style type="text/css">
 #headimg {
@@ -235,20 +327,81 @@ function twentyten_admin_header_style() {
 }
 endif;
 
-if ( ! function_exists( 'twentyten_the_page_number' ) ) :
+
+if ( ! function_exists( 'essence_the_page_number' ) ) :
 /**
- * Prints the page number currently being browsed, with a vertical bar before it.
+ * Prints the page number currently being browsed, with a pipe before it.
  *
- * Used in Twenty Ten's header.php to add the page number to the <title> HTML tag.
+ * Used in Essence's header.php to add the page number to the <title> HTML tag.
  *
- * @since 3.0.0
+ * @todo Make the | a setting?  Add rtl support?
  */
-function twentyten_the_page_number() {
+function essence_the_page_number() {
 	global $paged; // Contains page number.
 	if ( $paged >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s' , 'twentyten' ), $paged );
+		echo ' | ' . sprintf( __( 'Page %s' , 'essence' ), $paged );
 }
 endif;
+
+
+/**
+ * For use with debugging
+ */
+if ( !function_exists('dump') ) {
+	function dump($v, $title = '', $return = false) {
+		if (!empty($title)) {
+			echo '<h4>' . htmlentities($title) . '</h4>';
+		}
+		ob_start();
+		var_dump($v);
+		$v = ob_get_clean();
+		$v = '<pre>' . htmlentities($v) . '</pre>';
+		if ( $return ) {
+			return $v;
+		}
+		echo $v;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /**
  * Sets the post excerpt length to 40 characters.
@@ -401,81 +554,6 @@ function twentyten_term_list( $taxonomy, $glue = ', ', $text = '', $also_text = 
 }
 endif;
 
-/**
- * Register widgetized areas, including two sidebars and four widget-ready columns in the footer.
- *
- * To override twentyten_widgets_init() in a child theme, remove the action hook and add your own
- * function tied to the init hook.
- * @uses register_sidebar
- */
-function twentyten_widgets_init() {
-	// Area 1
-	register_sidebar( array (
-		'name' => 'Primary Widget Area',
-		'id' => 'primary-widget-area',
-		'description' => __( 'The primary widget area' , 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>',
-	) );
-
-	// Area 2
-	register_sidebar( array (
-		'name' => 'Secondary Widget Area',
-		'id' => 'secondary-widget-area',
-		'description' => __( 'The secondary widget area' , 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>',
-	) );
-
-	// Area 3
-	register_sidebar( array (
-		'name' => 'First Footer Widget Area',
-		'id' => 'first-footer-widget-area',
-		'description' => __( 'The first footer widget area' , 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>',
-	) );
-
-	// Area 4
-	register_sidebar( array (
-		'name' => 'Second Footer Widget Area',
-		'id' => 'second-footer-widget-area',
-		'description' => __( 'The second footer widget area' , 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>',
-	) );
-
-	// Area 5
-	register_sidebar( array (
-		'name' => 'Third Footer Widget Area',
-		'id' => 'third-footer-widget-area',
-		'description' => __( 'The third footer widget area' , 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>',
-	) );
-
-	// Area 6
-	register_sidebar( array (
-		'name' => 'Fourth Footer Widget Area',
-		'id' => 'fourth-footer-widget-area',
-		'description' => __( 'The fourth footer widget area' , 'twentyten' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
-		'before_title' => '<h4 class="widget-title">',
-		'after_title' => '</h4>',
-	) );
-}
-add_action( 'init', 'twentyten_widgets_init' );
 
 /**
  * Removes the default styles that are packaged with the Recent Comments widget.

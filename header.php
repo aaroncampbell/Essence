@@ -19,15 +19,15 @@
 		if ( is_single() ) {
 			single_post_title(); echo ' | '; bloginfo( 'name' );
 		} elseif ( is_home() || is_front_page() ) {
-			bloginfo( 'name' ); echo ' | '; bloginfo( 'description' ); twentyten_the_page_number();
+			bloginfo( 'name' ); echo ' | '; bloginfo( 'description' ); essence_the_page_number();
 		} elseif ( is_page() ) {
 			single_post_title( '' ); echo ' | '; bloginfo( 'name' );
 		} elseif ( is_search() ) {
-			printf( __( 'Search results for "%s"', 'twentyten' ), esc_html( $s ) ); twentyten_the_page_number(); echo ' | '; bloginfo( 'name' );
+			printf( __( 'Search results for "%s"', 'twentyten' ), esc_html( $s ) ); essence_the_page_number(); echo ' | '; bloginfo( 'name' );
 		} elseif ( is_404() ) {
 			_e( 'Not Found', 'twentyten' ); echo ' | '; bloginfo( 'name' );
 		} else {
-			wp_title( '' ); echo ' | '; bloginfo( 'name' ); twentyten_the_page_number();
+			wp_title( '' ); echo ' | '; bloginfo( 'name' ); essence_the_page_number();
 		}
 	?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
