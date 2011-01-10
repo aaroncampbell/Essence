@@ -1,5 +1,30 @@
 <?php
 /**
+ * For use with debugging
+ */
+if ( !function_exists('dump') ) {
+	function dump($v, $title = '', $return = false, $htmlcomment = false) {
+		if (!empty($title)) {
+			$before_title = ($htmlcomment)? '::' : '<h4>';
+			$after_title = ($htmlcomment)? '::' : '</h4>';
+			$title = $before_title . htmlentities($title) . $after_title;
+		}
+		ob_start();
+		var_dump($v);
+		$v = ob_get_clean();
+		if ( $htmlcomment ) {
+			$v = "<!--\r\n{$title}\r\n{$v}\r\n-->";
+		} else {
+			$v = $title . '<pre>' . htmlentities($v) . '</pre>';
+		}
+		if ( $return ) {
+			return $v;
+		}
+		echo $v;
+	}
+}
+
+/**
  * Essence functions and definitions
  *
  * Sets up the theme and provides some helper functions. Some helper functions
@@ -28,7 +53,7 @@
  * add_action( 'after_setup_theme', 'my_child_theme_setup' );
  * function my_child_theme_setup() {
  *     // We are providing our own filter for excerpt_length (or using the unfiltered value)
- *     remove_filter( 'excerpt_length', 'twentyten_excerpt_length' );
+ *     remove_filter( 'excerpt_length', 'essence_excerpt_length' );
  *     ...
  * }
  * </code>
@@ -100,9 +125,9 @@ add_action( 'init', 'essence_init' );
 function essence_widgets_init() {
 	// Area 1
 	register_sidebar( array (
-		'name' => 'Primary Widget Area',
+		'name' => __( 'Primary Widget Area', 'essence' ),
 		'id' => 'primary-widget-area',
-		'description' => __( 'The primary widget area' , 'twentyten' ),
+		'description' => __( 'The primary widget area' , 'essence' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h4 class="widget-title">',
@@ -111,9 +136,9 @@ function essence_widgets_init() {
 
 	// Area 2
 	register_sidebar( array (
-		'name' => 'Secondary Widget Area',
+		'name' => __( 'Secondary Widget Area', 'essence' ),
 		'id' => 'secondary-widget-area',
-		'description' => __( 'The secondary widget area' , 'twentyten' ),
+		'description' => __( 'The secondary widget area' , 'essence' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h4 class="widget-title">',
@@ -122,9 +147,9 @@ function essence_widgets_init() {
 
 	// Area 3
 	register_sidebar( array (
-		'name' => 'First Footer Widget Area',
+		'name' => __( 'First Footer Widget Area', 'essence' ),
 		'id' => 'first-footer-widget-area',
-		'description' => __( 'The first footer widget area' , 'twentyten' ),
+		'description' => __( 'The first footer widget area' , 'essence' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h4 class="widget-title">',
@@ -133,9 +158,9 @@ function essence_widgets_init() {
 
 	// Area 4
 	register_sidebar( array (
-		'name' => 'Second Footer Widget Area',
+		'name' => __( 'Second Footer Widget Area', 'essence' ),
 		'id' => 'second-footer-widget-area',
-		'description' => __( 'The second footer widget area' , 'twentyten' ),
+		'description' => __( 'The second footer widget area' , 'essence' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h4 class="widget-title">',
@@ -144,9 +169,9 @@ function essence_widgets_init() {
 
 	// Area 5
 	register_sidebar( array (
-		'name' => 'Third Footer Widget Area',
+		'name' => __( 'Third Footer Widget Area', 'essence' ),
 		'id' => 'third-footer-widget-area',
-		'description' => __( 'The third footer widget area' , 'twentyten' ),
+		'description' => __( 'The third footer widget area' , 'essence' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h4 class="widget-title">',
@@ -155,9 +180,9 @@ function essence_widgets_init() {
 
 	// Area 6
 	register_sidebar( array (
-		'name' => 'Fourth Footer Widget Area',
+		'name' => __( 'Fourth Footer Widget Area', 'essence' ),
 		'id' => 'fourth-footer-widget-area',
-		'description' => __( 'The fourth footer widget area' , 'twentyten' ),
+		'description' => __( 'The fourth footer widget area' , 'essence' ),
 		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
 		'after_widget' => "</li>",
 		'before_title' => '<h4 class="widget-title">',
@@ -193,11 +218,14 @@ function essence_setup() {
 	// This theme styles the visual editor with editor-style.css to match the theme style.
 	add_editor_style();
 
+	/**
+	 * @todo actually add this support, as well as support for chat, link, image, quote, status, video, and audio
+	 */
+	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
+	add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+
 	// This theme uses post thumbnails
 	add_theme_support( 'post-thumbnails' );
-
-	// This theme uses wp_nav_menu()
-	add_theme_support( 'nav-menus' );
 
 	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
@@ -215,6 +243,14 @@ function essence_setup() {
 		require_once( $locale_file );
 
 	/**
+	 * @todo support secondary navigation?
+	 */
+	// This theme uses wp_nav_menu() in one location.
+	register_nav_menus( array(
+		'primary' => __( 'Primary Navigation', 'essence' ),
+	) );
+
+	/**
 	 * @todo implement custom backgrounds
 	 */
 	// This theme allows users to set a custom background
@@ -224,17 +260,19 @@ function essence_setup() {
 	 * @todo implement this header stuff
 	 */
 	// Your changeable header business starts here
-	define( 'HEADER_TEXTCOLOR', '' );
+	if ( ! defined( 'HEADER_TEXTCOLOR' ) )
+		define( 'HEADER_TEXTCOLOR', '' );
 	// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
-	define( 'HEADER_IMAGE', '%s/images/headers/forestfloor.jpg' );
+	if ( ! defined( 'HEADER_IMAGE' ) )
+		define( 'HEADER_IMAGE', '%s/images/headers/path.jpg' );
 
 	// The height and width of your custom header. You can hook into the theme's own filters to change these values.
-	// Add a filter to twentyten_header_image_width and twentyten_header_image_height to change these values.
-	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'twentyten_header_image_width',  940 ) );
-	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'twentyten_header_image_height',	198 ) );
+	// Add a filter to essence_header_image_width and essence_header_image_height to change these values.
+	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'essence_header_image_width',  940 ) );
+	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'essence_header_image_height',	198 ) );
 
 	/**
-	 * Post thumbnails should be set to the size of my content showcase once that's implementd
+	 * @todo Post thumbnails should be set to the size of my content showcase once that's implementd
 	 */
 	// We'll be using post thumbnails for custom header images on posts and pages.
 	// We want them to be 940 pixels wide by 198 pixels tall (larger images will be auto-cropped to fit).
@@ -244,7 +282,8 @@ function essence_setup() {
 	 * @todo check on NO_HEADER_TEXT
 	 */
 	// Don't support text inside the header image.
-	define( 'NO_HEADER_TEXT', true );
+	if ( ! defined( 'NO_HEADER_TEXT' ) )
+		define( 'NO_HEADER_TEXT', true );
 
 	// Add a way for the custom header to be styled in the admin panel that controls
 	// custom headers. See essence_admin_header_style(), below.
@@ -260,42 +299,42 @@ function essence_setup() {
 		'berries' => array (
 			'url' => '%s/images/headers/berries.jpg',
 			'thumbnail_url' => '%s/images/headers/berries-thumbnail.jpg',
-			'description' => __( 'Berries', 'twentyten' )
+			'description' => __( 'Berries', 'essence' )
 		),
 		'cherryblossom' => array (
 			'url' => '%s/images/headers/cherryblossoms.jpg',
 			'thumbnail_url' => '%s/images/headers/cherryblossoms-thumbnail.jpg',
-			'description' => __( 'Cherry Blossoms', 'twentyten' )
+			'description' => __( 'Cherry Blossoms', 'essence' )
 		),
 		'concave' => array (
 			'url' => '%s/images/headers/concave.jpg',
 			'thumbnail_url' => '%s/images/headers/concave-thumbnail.jpg',
-			'description' => __( 'Concave', 'twentyten' )
+			'description' => __( 'Concave', 'essence' )
 		),
 		'fern' => array (
 			'url' => '%s/images/headers/fern.jpg',
 			'thumbnail_url' => '%s/images/headers/fern-thumbnail.jpg',
-			'description' => __( 'Fern', 'twentyten' )
+			'description' => __( 'Fern', 'essence' )
 		),
 		'forestfloor' => array (
 			'url' => '%s/images/headers/forestfloor.jpg',
 			'thumbnail_url' => '%s/images/headers/forestfloor-thumbnail.jpg',
-			'description' => __( 'Forest Floor', 'twentyten' )
+			'description' => __( 'Forest Floor', 'essence' )
 		),
 		'inkwell' => array (
 			'url' => '%s/images/headers/inkwell.jpg',
 			'thumbnail_url' => '%s/images/headers/inkwell-thumbnail.jpg',
-			'description' => __( 'Inkwell', 'twentyten' )
+			'description' => __( 'Inkwell', 'essence' )
 		),
 		'path' => array (
 			'url' => '%s/images/headers/path.jpg',
 			'thumbnail_url' => '%s/images/headers/path-thumbnail.jpg',
-			'description' => __( 'Path', 'twentyten' )
+			'description' => __( 'Path', 'essence' )
 		),
 		'sunset' => array (
 			'url' => '%s/images/headers/sunset.jpg',
 			'thumbnail_url' => '%s/images/headers/sunset-thumbnail.jpg',
-			'description' => __( 'Sunset', 'twentyten' )
+			'description' => __( 'Sunset', 'essence' )
 		)
 	) );
 }
@@ -327,7 +366,6 @@ function essence_admin_header_style() {
 }
 endif;
 
-
 if ( ! function_exists( 'essence_the_page_number' ) ) :
 /**
  * Prints the page number currently being browsed, with a pipe before it.
@@ -343,65 +381,19 @@ function essence_the_page_number() {
 }
 endif;
 
-
 /**
- * For use with debugging
+ * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
+ *
+ * To override this in a child theme, remove the filter and optionally add
+ * your own function tied to the wp_page_menu_args filter hook.
+ *
+ * @since 0.0.1
  */
-if ( !function_exists('dump') ) {
-	function dump($v, $title = '', $return = false) {
-		if (!empty($title)) {
-			echo '<h4>' . htmlentities($title) . '</h4>';
-		}
-		ob_start();
-		var_dump($v);
-		$v = ob_get_clean();
-		$v = '<pre>' . htmlentities($v) . '</pre>';
-		if ( $return ) {
-			return $v;
-		}
-		echo $v;
-	}
+function essence_page_menu_args( $args ) {
+	$args['show_home'] = true;
+	return $args;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+add_filter( 'wp_page_menu_args', 'essence_page_menu_args' );
 
 /**
  * Sets the post excerpt length to 40 characters.
@@ -411,155 +403,174 @@ if ( !function_exists('dump') ) {
  *
  * @return int
  */
-function twentyten_excerpt_length( $length ) {
+function essence_excerpt_length( $length ) {
 	return 40;
 }
-add_filter( 'excerpt_length', 'twentyten_excerpt_length' );
+add_filter( 'excerpt_length', 'essence_excerpt_length' );
+/**
+ * Returns a "Continue Reading" link for excerpts
+ *
+ * @since 0.0.1
+ * @return string "Continue Reading" link
+ */
+function essence_continue_reading_link() {
+	return ' <a href="'. get_permalink() . '">' . __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'essence' ) . '</a>';
+}
 
 /**
- * Sets the "read more" link to something pretty.
+ * Replaces "[...]" (appended to automatically generated excerpts) with an ellipsis and essence_continue_reading_link().
  *
- * To override this link in a child theme, remove the filter and add your own
+ * To override this in a child theme, remove the filter and add your own
  * function tied to the excerpt_more filter hook.
  *
- * @since 3.0.0
- * @return string A pretty 'Continue reading' link.
+ * @since 0.0.1
+ * @return string An ellipsis
  */
-function twentyten_excerpt_more( $more ) {
-	return '&nbsp;&hellip; <a href="'. get_permalink() . '">' . __('Continue&nbsp;reading&nbsp;<span class="meta-nav">&rarr;</span>', 'twentyten') . '</a>';
+function essence_auto_excerpt_more( $more ) {
+	return ' &hellip;' . essence_continue_reading_link();
 }
-add_filter( 'excerpt_more', 'twentyten_excerpt_more' );
+add_filter( 'excerpt_more', 'essence_auto_excerpt_more' );
+
+/**
+ * Adds a pretty "Continue Reading" link to custom post excerpts.
+ *
+ * To override this link in a child theme, remove the filter and add your own
+ * function tied to the get_the_excerpt filter hook.
+ *
+ * @since 0.0.1
+ * @return string Excerpt with a pretty "Continue Reading" link
+ */
+function essence_custom_excerpt_more( $output ) {
+	if ( has_excerpt() && ! is_attachment() ) {
+		$output .= essence_continue_reading_link();
+	}
+	return $output;
+}
+add_filter( 'get_the_excerpt', 'essence_custom_excerpt_more' );
 
 /**
  * Remove inline styles printed when the gallery shortcode is used.
  *
- * Galleries are styled by the theme in Twenty Ten's style.css.
+ * Galleries are styled by the theme in style.css. This is just a simple filter
+ * call that tells WordPress to not use the default styles.
  *
- * @return string The gallery style filter, with the styles themselves removed.
+ * @since 0.0.1
  */
-function twentyten_remove_gallery_css( $css ) {
-	return preg_replace( "#<style type='text/css'>(.*?)</style>#s", '', $css );
-}
-add_filter( 'gallery_style', 'twentyten_remove_gallery_css' );
+add_filter( 'use_default_gallery_style', '__return_false' );
 
-if ( ! function_exists( 'twentyten_comment' ) ) :
+/**
+ * Removes the default styles that are packaged with the Recent Comments widget.
+ *
+ * To override this in a child theme, remove the filter and optionally add your own
+ * function tied to the widgets_init action hook.
+ *
+ * @since 0.0.1
+ */
+function essence_remove_recent_comments_style() {
+	add_filter( 'show_recent_comments_widget_style', '__return_false' );
+}
+add_action( 'widgets_init', 'essence_remove_recent_comments_style' );
+
+if ( ! function_exists( 'essence_posted_on' ) ) :
+/**
+ * Prints HTML with meta information for the current post-date/time and author.
+ *
+ * @since 0.0.1
+ */
+function essence_posted_on() {
+	printf( __( '<span class="%1$s">Posted on</span> %2$s <span class="meta-sep">by</span> %3$s', 'essence' ),
+		'meta-prep meta-prep-author',
+		sprintf( '<a href="%1$s" title="%2$s" rel="bookmark"><span class="entry-date">%3$s</span></a>',
+			get_permalink(),
+			esc_attr( get_the_time() ),
+			get_the_date()
+		),
+		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+			get_author_posts_url( get_the_author_meta( 'ID' ) ),
+			sprintf( esc_attr__( 'View all posts by %s', 'essence' ), get_the_author() ),
+			get_the_author()
+		)
+	);
+}
+endif;
+
+if ( ! function_exists( 'essence_posted_in' ) ) :
+/**
+ * Prints HTML with meta information for the current post (category, tags and permalink).
+ *
+ * @since 0.0.1
+ */
+function essence_posted_in() {
+	// Retrieves tag list of current post, separated by commas.
+	$tag_list = get_the_tag_list( '', ', ' );
+	if ( $tag_list ) {
+		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'essence' );
+	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
+		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'essence' );
+	} else {
+		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'essence' );
+	}
+	// Prints the string, replacing the placeholders.
+	printf(
+		$posted_in,
+		get_the_category_list( ', ' ),
+		$tag_list,
+		get_permalink(),
+		the_title_attribute( 'echo=0' )
+	);
+}
+endif;
+
+if ( ! function_exists( 'essence_comment' ) ) :
 /**
  * Template for comments and pingbacks.
  *
  * To override this walker in a child theme without modifying the comments template
- * simply create your own twentyten_comment(), and that function will be used instead.
+ * simply create your own essence_comment(), and that function will be used instead.
  *
  * Used as a callback by wp_list_comments() for displaying the comments.
  *
- * @since 3.0.0
+ * @since 0.0.1
  */
-function twentyten_comment( $comment, $args, $depth ) {
-	$GLOBALS ['comment'] = $comment; ?>
-	<?php if ( '' == $comment->comment_type ) : ?>
+function essence_comment( $comment, $args, $depth ) {
+	$GLOBALS['comment'] = $comment;
+	switch ( $comment->comment_type ) :
+		case '' :
+	?>
 	<li <?php comment_class(); ?> id="li-comment-<?php comment_ID(); ?>">
 		<div id="comment-<?php comment_ID(); ?>">
 		<div class="comment-author vcard">
 			<?php echo get_avatar( $comment, 40 ); ?>
-			<?php printf( __( '<cite class="fn">%s</cite> <span class="says">says:</span>', 'twentyten' ), get_comment_author_link() ); ?>
-		</div>
+			<?php printf( __( '%s <span class="says">says:</span>', 'essence' ), sprintf( '<cite class="fn">%s</cite>', get_comment_author_link() ) ); ?>
+		</div><!-- .comment-author .vcard -->
 		<?php if ( $comment->comment_approved == '0' ) : ?>
-			<em><?php _e( 'Your comment is awaiting moderation.', 'twentyten' ); ?></em>
+			<em class="comment-awaiting-moderation"><?php _e( 'Your comment is awaiting moderation.', 'essence' ); ?></em>
 			<br />
 		<?php endif; ?>
 
-		<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>"><?php printf( __( '%1$s at %2$s', 'twentyten' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'twentyten' ),'  ','' ); ?></div>
+		<div class="comment-meta commentmetadata"><a href="<?php echo esc_url( get_comment_link( $comment->comment_ID ) ); ?>">
+			<?php
+				/* translators: 1: date, 2: time */
+				printf( __( '%1$s at %2$s', 'essence' ), get_comment_date(),  get_comment_time() ); ?></a><?php edit_comment_link( __( '(Edit)', 'essence' ), ' ' );
+			?>
+		</div><!-- .comment-meta .commentmetadata -->
 
 		<div class="comment-body"><?php comment_text(); ?></div>
 
 		<div class="reply">
 			<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
-		</div>
-	</div>
+		</div><!-- .reply -->
+	</div><!-- #comment-##  -->
 
-	<?php else : ?>
+	<?php
+			break;
+		case 'pingback'  :
+		case 'trackback' :
+	?>
 	<li class="post pingback">
-		<p><?php _e( 'Pingback: ', 'twentyten' ); ?><?php comment_author_link(); ?><?php edit_comment_link ( __('edit', 'twentyten'), '&nbsp;&nbsp;', '' ); ?></p>
-	<?php endif;
+		<p><?php _e( 'Pingback:', 'essence' ); ?> <?php comment_author_link(); ?><?php edit_comment_link( __( '(Edit)', 'essence' ), ' ' ); ?></p>
+	<?php
+			break;
+	endswitch;
 }
 endif;
-
-if ( ! function_exists( 'twentyten_cat_list' ) ) :
-/**
- * Returns the list of categories
- *
- * Returns the list of categories based on if we are or are
- * not browsing a category archive page.
- *
- * @uses twentyten_term_list
- *
- * @return string
- */
-function twentyten_cat_list() {
-	return twentyten_term_list( 'category', ', ', __( 'Posted in %s', 'twentyten' ), __( 'Also posted in %s', 'twentyten' ) );
-}
-endif;
-
-if ( ! function_exists( 'twentyten_tag_list' ) ) :
-/**
- * Returns the list of tags
- *
- * Returns the list of tags based on if we are or are not
- * browsing a tag archive page
- *
- * @uses twentyten_term_list
- *
- * @return string
- */
-function twentyten_tag_list() {
-	return twentyten_term_list( 'post_tag', ', ', __( 'Tagged %s', 'twentyten' ), __( 'Also tagged %s', 'twentyten' ) );
-}
-endif;
-
-
-if ( ! function_exists( 'twentyten_term_list' ) ) :
-/**
- * Returns the list of taxonomy items in multiple ways
- *
- * Returns the list of taxonomy items differently based on
- * if we are browsing a term archive page or a different
- * type of page.  If browsing a term archive page and the
- * post has no other taxonomied terms, it returns empty
- *
- * @return string
- */
-function twentyten_term_list( $taxonomy, $glue = ', ', $text = '', $also_text = '' ) {
-	global $wp_query, $post;
-	$current_term = $wp_query->get_queried_object();
-	$terms = wp_get_object_terms( $post->ID, $taxonomy );
-	// If we're viewing a Taxonomy page..
-	if ( isset( $current_term->taxonomy ) && $taxonomy == $current_term->taxonomy ) {
-		// Remove the term from display.
-		foreach ( (array) $terms as $key => $term ) {
-			if ( $term->term_id == $current_term->term_id ) {
-				unset( $terms[$key] );
-				break;
-			}
-		}
-		// Change to Also text as we've now removed something from the terms list.
-		$text = $also_text;
-	}
-	$tlist = array();
-	$rel = 'category' == $taxonomy ? 'rel="category"' : 'rel="tag"';
-	foreach ( (array) $terms as $term ) {
-		$tlist[] = '<a href="' . get_term_link( $term, $taxonomy ) . '" title="' . esc_attr( sprintf( __( 'View all posts in %s', 'twentyten' ), $term->name ) ) . '" ' . $rel . '>' . $term->name . '</a>';
-	}
-	if ( ! empty( $tlist ) )
-		return sprintf( $text, join( $glue, $tlist ) );
-	return '';
-}
-endif;
-
-
-/**
- * Removes the default styles that are packaged with the Recent Comments widget.
- */
-function twentyten_remove_recent_comments_style() {
-	global $wp_widget_factory;
-	remove_action( 'wp_head', array( $wp_widget_factory->widgets['WP_Widget_Recent_Comments'], 'recent_comments_style' ) );
-}
-add_action( 'widgets_init', 'twentyten_remove_recent_comments_style' );
