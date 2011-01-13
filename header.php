@@ -78,7 +78,7 @@
 				?>
 			</div><!-- #branding -->
 
-			<div id="access" role="navigation">
+			<div id="access" class="navigation" role="navigation">
 				<?php /* Allow screen readers and text browsers to skip to the content */ ?>
 				<div class="skip-link screen-reader-text"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'essence' ); ?>"><?php _e( 'Skip to content', 'essence' ); ?></a></div>
 <?php

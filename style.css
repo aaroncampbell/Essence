@@ -434,7 +434,7 @@ img.wp-smiley, img.wp-wink {
 /**
  * Menus
  */
-.menu {
+.navigation .menu {
 	border-bottom: 1px solid #999;
 	clear: both;
 	height: 30px;
@@ -444,24 +444,24 @@ img.wp-smiley, img.wp-wink {
 	text-transform: uppercase;
 }
 
-.menu,
-.menu li a {
+.navigation .menu,
+.navigation .menu li a {
 	background-color: #666;
 	color: #FFF;
 }
 
-.menu ul {
+.navigation .menu ul {
 	float: left;
 	list-style: none;
 	width: 100%;
 }
 
-.menu li {
+.navigation .menu li {
 	float: left;
 	list-style: none;
 }
 
-.menu li a {
+.navigation .menu li a {
 	border-right: 1px solid #999;
 	display: block;
 	font-size: 12px;
@@ -471,18 +471,18 @@ img.wp-smiley, img.wp-wink {
 	text-decoration: none;
 }
 
-.menu li a:hover,
-.menu li a:active,
-.menu .current_page_item a {
+.navigation .menu li a:hover,
+.navigation .menu li a:active,
+.navigation .menu .current_page_item a {
 	background-color: #333;
 	color: #FFF;
 }
 
-.menu li a.sf-with-ul {
+.navigation .menu li a.sf-with-ul {
 	padding-right: 20px;
 }
 
-.menu li a .sf-sub-indicator {
+.navigation .menu li a .sf-sub-indicator {
 	background-image: url(images/arrow-down.png);
 	display: block;
 	height: 9px;
@@ -494,9 +494,9 @@ img.wp-smiley, img.wp-wink {
 	width: 9px;
 }
 
-.menu li li a,
-.menu li li a:link,
-.menu li li a:visited {
+.navigation .menu li li a,
+.navigation .menu li li a:link,
+.navigation .menu li li a:visited {
 	background-color: #666;
 	border: 1px solid #999;
 	border-top:none;
@@ -508,17 +508,17 @@ img.wp-smiley, img.wp-wink {
 	width: 158px;
 }
 
-.menu li li a:hover,
-.menu li li a:active {
+.navigation .menu li li a:hover,
+.navigation .menu li li a:active {
 	background: #333;
 }
 
-.menu li li a .sf-sub-indicator {
+.navigation .menu li li a .sf-sub-indicator {
 	background-image: url(images/arrow-right.png);
 	top: 10px;
 }
 
-.menu li ul {
+.navigation .menu li ul {
 	height: auto;
 	left: -999em;
 	margin: 0;
@@ -528,36 +528,36 @@ img.wp-smiley, img.wp-wink {
 	z-index: 9999;
 }
 
-.menu li ul a {
+.navigation .menu li ul a {
 	width: 160px;
 }
 
-.menu li ul a:hover,
-.menu li ul a:active {
+.navigation .menu li ul a:hover,
+.navigation .menu li ul a:active {
 }
 
-.menu li ul ul {
+.navigation .menu li ul ul {
 	margin: -33px 0 0 179px;
 }
 
-.menu li:hover ul ul,
-.menu li:hover ul ul ul,
-.menu li.sfHover ul ul,
-.menu li.sfHover ul ul ul {
+.navigation .menu li:hover ul ul,
+.navigation .menu li:hover ul ul ul,
+.navigation .menu li.sfHover ul ul,
+.navigation .menu li.sfHover ul ul ul {
 	left: -999em;
 }
 
-.menu li:hover ul,
-.menu li li:hover ul,
-.menu li li li:hover ul,
-.menu li.sfHover ul,
-.menu li li.sfHover ul,
-.menu li li li.sfHover ul {
+.navigation .menu li:hover ul,
+.navigation .menu li li:hover ul,
+.navigation .menu li li li:hover ul,
+.navigation .menu li.sfHover ul,
+.navigation .menu li li.sfHover ul,
+.navigation .menu li li li.sfHover ul {
 	left: auto;
 }
 
-.menu li:hover,
-.menu li.sfHover {
+.navigation .menu li:hover,
+.navigation .menu li.sfHover {
 	position: static;
 }
 /**
