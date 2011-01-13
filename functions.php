@@ -375,9 +375,11 @@ if ( ! function_exists( 'essence_the_page_number' ) ) :
  * @todo Make the | a setting?  Add rtl support?
  */
 function essence_the_page_number() {
-	global $paged; // Contains page number.
-	if ( $paged >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s' , 'essence' ), $paged );
+	global $page, $paged; // Contains page number.
+
+	// Add a page number if necessary:
+	if ( $paged >= 2 || $page >= 2 )
+		echo ' | ' . sprintf( __( 'Page %s', 'essence' ), max( $paged, $page ) );
 }
 endif;
 

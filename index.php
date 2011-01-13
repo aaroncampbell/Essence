@@ -19,7 +19,7 @@
 <?php get_header(); ?>
 
     <div id="content-container" class="span-15">
-        <div id="content">
+        <div id="content" role="main">
 			<?php do_action( 'essence_content_open' ); ?>
 
         <?php

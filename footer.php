@@ -2,27 +2,32 @@
 /**
  * The template used to display the footer
  *
- * Contains the closing of the id=main div and all content
- * after.  Calls sidebar-footer.php for bottom widgets
+ * Calls sidebar-footer.php for bottom widgets
  *
- * @package WordPress
- * @subpackage Twenty Ten
- * @since 3.0.0
+ * @since 0.0.1
  */
 ?>
 
-	<div id="footer">
+	<div id="footer" role="contentinfo">
 		<div id="colophon">
 
-<?php get_sidebar( 'footer' ); ?>
+<?php
+	/* A sidebar in the footer? Yep. You can can customize
+	 * your footer with four columns of widgets.
+	 */
+	get_sidebar( 'footer' );
+?>
 
 			<div id="site-info">
-				<a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-			</div>
+				<a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+					<?php bloginfo( 'name' ); ?>
+				</a>
+			</div><!-- #site-info -->
 
 			<div id="site-generator">
-				<?php printf( __( 'Proudly powered by <span id="generator-link">%s</span>.', 'twentyten' ), '<a href="http://wordpress.org/" title="' . esc_attr__( 'Semantic Personal Publishing Platform', 'twentyten' ) . '" rel="generator">' . __( 'WordPress', 'twentyten' ) . '</a>' ); ?>
-			</div>
+				<?php do_action( 'essence_credits' ); ?>
+				<a href="<?php echo esc_url( __( 'http://gotthemes.com/', 'essence' ) ); ?>" title="<?php esc_attr_e( 'Essence Theme Framework for WordPress', 'essence' ); ?>" rel="generator"><?php _e( 'Proudly powered by Essence Theme Framework.', 'essence' ); ?></a>
+			</div><!-- #site-generator -->
 
 		</div><!-- #colophon -->
 	</div><!-- #footer -->

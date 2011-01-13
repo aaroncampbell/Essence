@@ -1,13 +1,11 @@
-/*
-Theme Name: Twenty Ten
-*/
+/**
+ * Theme Name: Essence
+ */
 
 
-/* --------------------------------------------------------------
-
-   RTL Basics
-
--------------------------------------------------------------- */
+/**
+ * RTL Basics
+ */
 
 
 body {
@@ -26,7 +24,7 @@ DESCRIPTION: Two-column fixed layout with one sidebar right of content
 	margin: 0 0 0 -240px;
 }
 #content {
-	margin: 0 20px 0 280px;
+	margin: 0 20px 36px 280px;
 }
 #primary,
 #secondary {
@@ -42,15 +40,14 @@ DESCRIPTION: Two-column fixed layout with one sidebar right of content
 body,
 input,
 textarea,
-.page-title span {
-	font-family: Georgia, "Bitstream Charter", serif;
-}
-
+.page-title span,
+.pingback a.url,
 h3#comments-title,
 h3#reply-title,
 #access .menu,
+#access div.menu ul,
 #cancel-comment-reply-link,
-#form-allowed-tags,
+.form-allowed-tags,
 #site-info,
 #site-title,
 #wp-calendar,
@@ -63,22 +60,14 @@ h3#reply-title,
 .entry-meta,
 .entry-title,
 .entry-utility,
-.form-label,
+#respond label,
 .navigation,
 .page-title,
 .pingback p,
 .reply,
-.widget-title
-{
-	font-family: "Helvetica Neue", Helvetica, Arial, "Nimbus Sans L", sans-serif;
-}
-
-pre {
-	font-family: "Courier 10 Pitch", Courier, monospace;
-}
-
-code {
-	font-family: Consolas, Monaco, "Andale Mono", "DejaVu Sans Mono", monospace;
+.widget-title,
+input[type=submit] {
+	font-family: Arial, Tahoma, sans-serif;
 }
 
 /* =Structure
@@ -105,8 +94,7 @@ code {
 -------------------------------------------------------------- */
 
 /* Text elements */
-ul {
-	list-style: square;
+ul, ol {
 	margin: 0 1.5em 18px 0;
 }
 blockquote {
@@ -117,6 +105,7 @@ blockquote {
 .screen-reader-text {
 	left: auto;
 	text-indent:-9000px;
+	overflow:hidden;
 }
 
 
@@ -129,6 +118,10 @@ blockquote {
 #site-description {
 	clear: left;
 	float: left;
+	font-style: normal;
+}
+#branding img {
+	float: right;
 }
 
 /* =Menu
@@ -138,13 +131,14 @@ blockquote {
 	float:right;
 }
 
-#access .menu {
+#access .menu-header,
+div.menu {
     margin-right: 12px;
     margin-left: 0;
 }
 
-
-#access .menu li {
+#access .menu-header li,
+div.menu li{
 	float:right;
 }
 
@@ -164,6 +158,9 @@ blockquote {
 #content table {
 	text-align: right;
 	margin: 0 0 24px -1px;
+}
+.page-title span {
+	font-style:normal;
 }
 .entry-title,
 .entry-meta {
@@ -207,17 +204,18 @@ blockquote {
  	margin-left:20px;
 	margin-right:0;
 }
-#content .gallery .gallery-item {
-	float: right;
-}
 
-/* =Images
+
+/* Images
 -------------------------------------------------------------- */
 
 #content .gallery .gallery-caption {
 	margin-right: 0;
 }
 
+#content .gallery .gallery-item {
+	float: right;
+}
 
 /* =Navigation
 -------------------------------------------------------------- */
@@ -239,7 +237,7 @@ blockquote {
 	right: 0;
 	left: auto;
 }
-.comment-author .says {
+.comment-author .says, #comments .pingback .url  {
 	font-style: normal;
 }
 
@@ -264,6 +262,7 @@ blockquote {
 #wp-calendar tfoot #next {
 	text-align: left;
 }
+
 /* Main sidebars */
 #main .widget-area ul {
 	margin-right: 0;
@@ -276,11 +275,11 @@ blockquote {
 
 /* =Footer
 -------------------------------------------------------------- */
-
+#site-generator {
+	font-style:normal;
+}
 #site-generator a {
 	background-position: right center;
-	padding-right: 19px;
+	padding-right: 20px;
 	padding-left: 0;
-	margin-right: 1px;
-	margin-left: 0;
 }

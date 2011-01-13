@@ -1,24 +1,23 @@
 <?php
 /**
- * The template used to display Category Archive pages
+ * The template for displaying Category Archive pages.
  *
- * @package WordPress
- * @subpackage Twenty Ten
- * @since 3.0.0
+ * @since 0.0.1
  */
-?>
 
-<?php get_header(); ?>
+get_header(); ?>
 
 		<div id="container">
-			<div id="content">
+			<div id="content" role="main">
 
 				<h1 class="page-title"><?php
 					printf( __( 'Category Archives: %s', 'twentyten' ), '<span>' . single_cat_title( '', false ) . '</span>' );
 				?></h1>
-				<?php $categorydesc = category_description(); if ( ! empty( $categorydesc ) ) echo apply_filters( 'archive_meta', '<div class="archive-meta">' . $categorydesc . '</div>' ); ?>
-
 				<?php
+					$category_description = category_description();
+					if ( ! empty( $category_description ) )
+						echo '<div class="archive-meta">' . $category_description . '</div>';
+
 				/* Run the loop for the category page to output the posts.
 				 * If you want to overload this in a child theme then include a file
 				 * called loop-category.php and that will be used instead.
