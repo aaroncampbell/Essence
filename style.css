@@ -738,8 +738,15 @@ code {
 	-webkit-text-size-adjust: none;
 }
 
+#site-info {
+	float: left;
+	font-size: 14px;
+	font-weight: bold;
+}
 
-
+#site-generator {
+	float: right;
+}
 
 
 /**
