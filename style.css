@@ -619,7 +619,7 @@ img.wp-smiley, img.wp-wink {
 	padding-left:15px;
 }
 
-.sidebar-right.widget-container {
+.sidebar-right .widget-container {
 	margin-left:1em;
 }
 
