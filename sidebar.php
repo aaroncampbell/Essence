@@ -4,7 +4,7 @@
  */
 ?>
 
-		<div class="span-9 last">
+		<div class="span-9 last sidebar-right">
 			<div id="primary" class="widget-area" role="complementary">
 				<ul class="xoxo">
 <?php if ( ! dynamic_sidebar( 'primary-widget-area' ) ) : // begin primary widget area ?>
@@ -32,7 +32,7 @@
 			</div><!-- #primary .widget-area -->
 
 <?php if ( is_active_sidebar( 'secondary-widget-area' ) ) : // Nothing here by default and design ?>
-			<div id="secondary" class="widget-area" role="complementary">
+			<div id="secondary" class="widget-area sidebar-right" role="complementary">
 				<ul class="xoxo">
 					<?php dynamic_sidebar( 'secondary-widget-area' ); ?>
 				</ul>
