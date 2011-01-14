@@ -276,8 +276,48 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 	left: -9000px;
 }
 
+/**
+ * Footer
+ */
+
 #footer {
 	clear:both;
+	margin-bottom: 20px;
+}
+#colophon {
+	border-top: 4px solid #000;
+	margin-top: -4px;
+	overflow: hidden;
+	padding: 18px 0;
+}
+#site-info {
+	font-weight: bold;
+}
+#site-info a {
+	color: #000;
+	text-decoration: none;
+}
+#site-generator {
+	font-style: italic;
+	position: relative;
+}
+#site-generator a {
+	/**
+	 * @todo Add an Essence logo - make one first :-)
+	 */
+	/*background: url(images/wordpress.png) center left no-repeat;*/
+	color: #666;
+	display: inline-block;
+	line-height: 16px;
+	padding-left: 20px;
+	text-decoration: none;
+}
+#site-generator a:hover {
+	text-decoration: underline;
+}
+img#wpstats {
+	display: block;
+	margin: 0 auto 10px;
 }
 
 #content img {
