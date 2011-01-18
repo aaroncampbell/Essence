@@ -37,9 +37,71 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
+define('ESSENCE_VERSION', '0.0.1');
+
+/**
+ * Define Theme Name/Version Constants
+ *
+ **/
+define('PARENT_THEME_NAME', 'Essence');
+define('PARENT_THEME_VERSION', '1.4.1');
+define('PARENT_THEME_RELEASE_DATE', date_i18n('F j, Y', '1291960800'));
+
+/**
+ * Define Directory Location Constants
+ */
+define('PARENT_DIR', TEMPLATEPATH);
+define('CHILD_DIR', STYLESHEETPATH);
+define('ESSENCE_IMAGES_DIR', PARENT_DIR.'/images');
+define('ESSENCE_LIB_DIR', PARENT_DIR.'/lib');
+define('ESSENCE_FUNCTIONS_DIR', ESSENCE_LIB_DIR.'/functions');
+define('ESSENCE_STRUCTURE_DIR', ESSENCE_LIB_DIR.'/structure');
+if( !defined('ESSENCE_LANGUAGES_DIR') ) // So we can define with a child theme
+	define('ESSENCE_LANGUAGES_DIR', PARENT_DIR.'/languages');
+
+/**
+ * Define URL Location Constants
+ */
 define('PARENT_URL', get_bloginfo('template_directory'));
 define('CHILD_URL', get_bloginfo('stylesheet_directory'));
-define('ESSENCE_VERSION', '0.0.1');
+define('ESSENCE_IMAGES_URL', PARENT_URL.'/images');
+define('ESSENCE_LIB_URL', PARENT_URL.'/lib');
+define('ESSENCE_FUNCTIONS_URL', ESSENCE_LIB_URL.'/functions');
+define('ESSENCE_STRUCTURE_URL', ESSENCE_LIB_URL.'/structure');
+if( !defined('ESSENCE_LANGUAGES_URL') ) // So we can predefine to child theme
+	define('ESSENCE_LANGUAGES_URL', ESSENCE_LIB_URL.'/languages');
+
+/**
+ * Define Settings Field Constants (for DB storage)
+ */
+define('ESSENCE_SETTINGS_FIELD', apply_filters('essence_settings_field', 'essence-settings'));
+//define('ESSENCE_SEO_SETTINGS_FIELD', apply_filters('essence_seo_settings_field', 'essence-seo-settings'));
+
+//	Run the genesis_pre_framework Hook
+do_action('essence_pre_framework');
+
+/**
+ * Load Framework Components, unless a child theme says not to
+ *
+ **/
+if ( !defined('ESSENCE_LOAD_FRAMEWORK') || ESSENCE_LOAD_FRAMEWORK !== false ) {
+
+//	Load Framework
+//require_once(ESSENCE_LIB_DIR . '/framework.php');
+
+//	Load Functions
+require_once(ESSENCE_FUNCTIONS_DIR . '/tools.php');
+
+//	Load Structure
+require_once(ESSENCE_STRUCTURE_DIR . '/menus.php');
+
+//	Load Javascript
+//require_once(ESSENCE_JS_DIR . '/load-scripts.php');
+
+//	Load CSS
+//require_once(ESSENCE_CSS_DIR . '/load-styles.php');
+
+}
 
 /**
  * Set the content width based on the theme's design and stylesheet.
@@ -49,8 +111,9 @@ define('ESSENCE_VERSION', '0.0.1');
  *
  * @todo Swap this out based on the page layout?  Is that possible?
  */
-if ( ! isset( $content_width ) )
+if ( ! isset( $content_width ) ) {
 	$content_width = 640;
+}
 
 
 /**
