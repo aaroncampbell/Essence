@@ -1,28 +1,4 @@
 <?php
-/**
- * For use with debugging
- */
-if ( !function_exists('dump') ) {
-	function dump($v, $title = '', $return = false, $htmlcomment = false) {
-		if (!empty($title)) {
-			$before_title = ($htmlcomment)? '::' : '<h4>';
-			$after_title = ($htmlcomment)? '::' : '</h4>';
-			$title = $before_title . htmlentities($title) . $after_title;
-		}
-		ob_start();
-		var_dump($v);
-		$v = ob_get_clean();
-		if ( $htmlcomment ) {
-			$v = "<!--\r\n{$title}\r\n{$v}\r\n-->";
-		} else {
-			$v = $title . '<pre>' . htmlentities($v) . '</pre>';
-		}
-		if ( $return ) {
-			return $v;
-		}
-		echo $v;
-	}
-}
 
 /**
  * Essence functions and definitions
@@ -244,14 +220,6 @@ function essence_setup() {
 		require_once( $locale_file );
 
 	/**
-	 * @todo support secondary navigation?
-	 */
-	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary' => __( 'Primary Navigation', 'essence' ),
-	) );
-
-	/**
 	 * @todo implement custom backgrounds
 	 */
 	// This theme allows users to set a custom background
@@ -338,6 +306,8 @@ function essence_setup() {
 			'description' => __( 'Sunset', 'essence' )
 		)
 	) );
+
+	do_action( 'essence_setup' );
 }
 endif;
 /** Tell WordPress to run essence_setup() when the 'after_setup_theme' hook is run. */

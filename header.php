@@ -81,19 +81,8 @@
 			<div id="access" class="navigation" role="navigation">
 				<?php /* Allow screen readers and text browsers to skip to the content */ ?>
 				<div class="skip-link screen-reader-text"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'essence' ); ?>"><?php _e( 'Skip to content', 'essence' ); ?></a></div>
-<?php
-				/**
-				 * Our navigation menu.  If one isn't filled out, wp_nav_menu
-				 * falls back to wp_page_menu.  The menu assiged to the primary
-				 * position is the one used.  If none is assigned, the menu with
-				 * the lowest ID is used.
-				 */
-				wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) );
-				/**
-				 * @todo Make this a theme option? - Secondary navigation - add to functions.php as well
-				 */
-				//wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'secondary' ) );
-?>
+				<?php do_action( 'essence_primary_nav' ); ?>
+				<?php do_action( 'essence_secondary_nav' ); ?>
 			</div><!-- #access -->
 		</div><!-- #masthead -->
 	</div><!-- #header -->
