@@ -14,6 +14,15 @@
  * @since 3.0.0
  */
 
+if ( !empty( $_REQUEST['debug'] ) ) {
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo '<!-- ';
+	}
+	esc_html_e( 'Theme File: ' . __FILE__ );
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo ' -->';
+	}
+}
 ?>
 
 <?php get_header(); ?>

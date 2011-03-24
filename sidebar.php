@@ -2,6 +2,16 @@
 /**
  * The Sidebar containing the primary and secondary widget areas
  */
+if ( !empty( $_REQUEST['debug'] ) ) {
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo '<!-- ';
+	}
+	esc_html_e( 'Theme File: ' . __FILE__ );
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo ' -->';
+	}
+}
+
 ?>
 
 		<div class="span-9 last sidebar-right">

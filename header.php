@@ -2,6 +2,15 @@
 /**
  * The Header for our theme.
  */
+if ( !empty( $_REQUEST['debug'] ) ) {
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo '<!-- ';
+	}
+	esc_html_e( 'Theme File: ' . __FILE__ );
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo ' -->';
+	}
+}
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?>>
 <head>

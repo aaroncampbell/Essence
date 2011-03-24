@@ -15,6 +15,16 @@
  *
  * @since 0.0.1
  */
+if ( !empty( $_REQUEST['debug'] ) ) {
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo '<!-- ';
+	}
+	esc_html_e( 'Theme File: ' . __FILE__ );
+	if ( 'show' != $_REQUEST['debug'] ) {
+		echo ' -->';
+	}
+}
+
 ?>
 
 <?php /* Display navigation to next/previous pages when applicable */ ?>
