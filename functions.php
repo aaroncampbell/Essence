@@ -56,6 +56,7 @@ define('ESSENCE_IMAGES_DIR', PARENT_DIR.'/images');
 define('ESSENCE_LIB_DIR', PARENT_DIR.'/lib');
 define('ESSENCE_FUNCTIONS_DIR', ESSENCE_LIB_DIR.'/functions');
 define('ESSENCE_STRUCTURE_DIR', ESSENCE_LIB_DIR.'/structure');
+define('ESSENCE_ADMIN_DIR', ESSENCE_LIB_DIR.'/admin');
 if( !defined('ESSENCE_LANGUAGES_DIR') ) // So we can define with a child theme
 	define('ESSENCE_LANGUAGES_DIR', PARENT_DIR.'/languages');
 
@@ -68,6 +69,7 @@ define('ESSENCE_IMAGES_URL', PARENT_URL.'/images');
 define('ESSENCE_LIB_URL', PARENT_URL.'/lib');
 define('ESSENCE_FUNCTIONS_URL', ESSENCE_LIB_URL.'/functions');
 define('ESSENCE_STRUCTURE_URL', ESSENCE_LIB_URL.'/structure');
+define('ESSENCE_ADMIN_URL', ESSENCE_LIB_URL.'/admin');
 if( !defined('ESSENCE_LANGUAGES_URL') ) // So we can predefine to child theme
 	define('ESSENCE_LANGUAGES_URL', ESSENCE_LIB_URL.'/languages');
 
@@ -75,6 +77,7 @@ if( !defined('ESSENCE_LANGUAGES_URL') ) // So we can predefine to child theme
  * Define Settings Field Constants (for DB storage)
  */
 define('ESSENCE_SETTINGS_FIELD', apply_filters('essence_settings_field', 'essence-settings'));
+define('ESSENCE_SETTINGS_GROUP', apply_filters('essence_settings_group', 'essence-settings-group'));
 //define('ESSENCE_SEO_SETTINGS_FIELD', apply_filters('essence_seo_settings_field', 'essence-seo-settings'));
 
 //	Run the genesis_pre_framework Hook
@@ -91,9 +94,14 @@ if ( !defined('ESSENCE_LOAD_FRAMEWORK') || ESSENCE_LOAD_FRAMEWORK !== false ) {
 
 //	Load Functions
 require_once(ESSENCE_FUNCTIONS_DIR . '/tools.php');
+require_once(ESSENCE_FUNCTIONS_DIR . '/options.php');
 
 //	Load Structure
 require_once(ESSENCE_STRUCTURE_DIR . '/menus.php');
+
+//	Load Admin
+require_once(ESSENCE_ADMIN_DIR . '/menu.php');
+require_once(ESSENCE_ADMIN_DIR . '/essence-settings.php');
 
 //	Load Javascript
 //require_once(ESSENCE_JS_DIR . '/load-scripts.php');
