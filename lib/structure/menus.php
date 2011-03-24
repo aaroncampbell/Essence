@@ -24,9 +24,6 @@ function essence_do_primary_nav () {
 	 * position is the one used.  If none is assigned, the menu with
 	 * the lowest ID is used.
 	 */
-	wp_nav_menu( array( 'container' => '', 'theme_location' => 'primary' ) );
-	wp_nav_menu( array( 'container' => 'nav', 'theme_location' => 'primary' ) );
-	wp_list_pages();
 	wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) );
 }
 
