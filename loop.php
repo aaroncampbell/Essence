@@ -25,18 +25,20 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 	}
 }
 
+/* Display navigation to next/previous pages when applicable */
+if ( $wp_query->max_num_pages > 1 ) {
 ?>
-
-<?php /* Display navigation to next/previous pages when applicable */ ?>
-<?php if ( $wp_query->max_num_pages > 1 ) : ?>
 	<div id="nav-above" class="navigation">
 		<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'essence' ) ); ?></div>
 		<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'essence' ) ); ?></div>
 	</div><!-- #nav-above -->
-<?php endif; ?>
+<?php
+}
 
-<?php /* If there are no posts to display, such as an empty archive page */ ?>
-<?php if ( ! have_posts() ) : ?>
+
+/* If there are no posts to display, such as an empty archive page */
+if ( ! have_posts() ) {
+?>
 	<div id="post-0" class="post error404 not-found">
 		<h1 class="entry-title"><?php _e( 'Not Found', 'essence' ); ?></h1>
 		<div class="entry-content">
@@ -44,28 +46,19 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			<?php get_search_form(); ?>
 		</div><!-- .entry-content -->
 	</div><!-- #post-0 -->
-<?php endif; ?>
-
 <?php
-	/* Start the Loop.
-	 *
-	 * In Twenty Ten we use the same loop in multiple contexts.
-	 * It is broken into three main parts: when we're displaying
-	 * posts that are in the gallery category, when we're displaying
-	 * posts in the asides category, and finally all other posts.
-	 *
-	 * Additionally, we sometimes check for whether we are on an
-	 * archive page, a search page, etc., allowing for small differences
-	 * in the loop on each template without actually duplicating
-	 * the rest of the loop that is shared.
-	 *
-	 * Without further ado, the loop:
-	 */ ?>
-<?php while ( have_posts() ) : the_post(); ?>
+}
 
-<?php /* How to display posts of the Gallery format. The gallery category is the old way. */ ?>
+	/**
+	 * Start the Loop.
+	 */
+while ( have_posts() ) {
+	the_post();
 
-	<?php if ( 'gallery' == get_post_format( $post->ID ) || in_category( _x( 'gallery', 'gallery category slug', 'essence' ) ) ) : ?>
+/* How to display posts of the Gallery format. The gallery category is the old way. */
+
+	if ( 'gallery' == get_post_format( $post->ID ) || in_category( _x( 'gallery', 'gallery category slug', 'essence' ) ) ) {
+?>
 		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'essence' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 
@@ -74,15 +67,15 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			</div><!-- .entry-meta -->
 
 			<div class="entry-content">
-<?php if ( post_password_required() ) : ?>
-				<?php the_content(); ?>
-<?php else : ?>
-				<?php
-					$images = get_children( array( 'post_parent' => $post->ID, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order', 'order' => 'ASC', 'numberposts' => 999 ) );
-					if ( $images ) :
-						$total_images = count( $images );
-						$image = array_shift( $images );
-						$image_img_tag = wp_get_attachment_image( $image->ID, 'thumbnail' );
+<?php
+		if ( post_password_required() ) {
+			the_content();
+		} else {
+			$images = get_children( array( 'post_parent' => $post->ID, 'post_type' => 'attachment', 'post_mime_type' => 'image', 'orderby' => 'menu_order', 'order' => 'ASC', 'numberposts' => 999 ) );
+			if ( $images ) {
+				$total_images = count( $images );
+				$image = array_shift( $images );
+				$image_img_tag = wp_get_attachment_image( $image->ID, 'thumbnail' );
 				?>
 						<div class="gallery-thumb">
 							<a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo $image_img_tag; ?></a>
@@ -91,19 +84,21 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 								'href="' . get_permalink() . '" title="' . sprintf( esc_attr__( 'Permalink to %s', 'essence' ), the_title_attribute( 'echo=0' ) ) . '" rel="bookmark"',
 								number_format_i18n( $total_images )
 							); ?></em></p>
-				<?php endif; ?>
-						<?php the_excerpt(); ?>
-<?php endif; ?>
+				<?php
+			}
+			the_excerpt();
+		}
+?>
 			</div><!-- .entry-content -->
 
 			<div class="entry-utility">
-			<?php if ( 'gallery' == get_post_format( $post->ID ) ) : ?>
+			<?php if ( 'gallery' == get_post_format( $post->ID ) ) { ?>
 				<a href="<?php echo get_post_format_link( 'gallery' ); ?>" title="<?php esc_attr_e( 'View Galleries', 'essence' ); ?>"><?php _e( 'More Galleries', 'essence' ); ?></a>
 				<span class="meta-sep">|</span>
-			<?php elseif ( in_category( _x( 'gallery', 'gallery category slug', 'essence' ) ) ) : ?>
+			<?php } elseif ( in_category( _x( 'gallery', 'gallery category slug', 'essence' ) ) ) { ?>
 				<a href="<?php echo get_term_link( _x( 'gallery', 'gallery category slug', 'essence' ), 'category' ); ?>" title="<?php esc_attr_e( 'View posts in the Gallery category', 'essence' ); ?>"><?php _e( 'More Galleries', 'essence' ); ?></a>
 				<span class="meta-sep">|</span>
-			<?php endif; ?>
+			<?php } ?>
 				<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'essence' ), __( '1 Comment', 'essence' ), __( '% Comments', 'essence' ) ); ?></span>
 				<?php edit_post_link( __( 'Edit', 'essence' ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
 			</div><!-- .entry-utility -->
@@ -111,18 +106,18 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 
 <?php /* How to display posts of the Aside format. The asides category is the old way. */ ?>
 
-	<?php elseif ( 'aside' == get_post_format( $post->ID ) || in_category( _x( 'asides', 'asides category slug', 'essence' ) )  ) : ?>
+	<?php } elseif ( 'aside' == get_post_format( $post->ID ) || in_category( _x( 'asides', 'asides category slug', 'essence' ) )  ) { ?>
 		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
-		<?php if ( is_archive() || is_search() ) : // Display excerpts for archives and search. ?>
+		<?php if ( is_archive() || is_search() ) { // Display excerpts for archives and search. ?>
 			<div class="entry-summary">
 				<?php the_excerpt(); ?>
 			</div><!-- .entry-summary -->
-		<?php else : ?>
+		<?php } else { ?>
 			<div class="entry-content">
 				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'essence' ) ); ?>
 			</div><!-- .entry-content -->
-		<?php endif; ?>
+		<?php } ?>
 
 			<div class="entry-utility">
 				<?php essence_posted_on(); ?>
@@ -134,7 +129,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 
 <?php /* How to display all other posts. */ ?>
 
-	<?php else : ?>
+	<?php } else { ?>
 		<div id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 			<h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php printf( esc_attr__( 'Permalink to %s', 'essence' ), the_title_attribute( 'echo=0' ) ); ?>" rel="bookmark"><?php the_title(); ?></a></h2>
 
@@ -142,33 +137,33 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 				<?php essence_posted_on(); ?>
 			</div><!-- .entry-meta -->
 
-	<?php if ( is_archive() || is_search() ) : // Only display excerpts for archives and search. ?>
+	<?php if ( is_archive() || is_search() ) { // Only display excerpts for archives and search. ?>
 			<div class="entry-summary">
 				<?php the_excerpt(); ?>
 			</div><!-- .entry-summary -->
-	<?php else : ?>
+	<?php } else { ?>
 			<div class="entry-content">
 				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'essence' ) ); ?>
 				<?php wp_link_pages( array( 'before' => '<div class="page-link">' . __( 'Pages:', 'essence' ), 'after' => '</div>' ) ); ?>
 			</div><!-- .entry-content -->
-	<?php endif; ?>
+	<?php } ?>
 
 			<div class="entry-utility">
-				<?php if ( count( get_the_category() ) ) : ?>
+				<?php if ( count( get_the_category() ) ) { ?>
 					<span class="cat-links">
 						<?php printf( __( '<span class="%1$s">Posted in</span> %2$s', 'essence' ), 'entry-utility-prep entry-utility-prep-cat-links', get_the_category_list( ', ' ) ); ?>
 					</span>
 					<span class="meta-sep">|</span>
-				<?php endif; ?>
+				<?php } ?>
 				<?php
 					$tags_list = get_the_tag_list( '', ', ' );
-					if ( $tags_list ):
+					if ( $tags_list ) {
 				?>
 					<span class="tag-links">
 						<?php printf( __( '<span class="%1$s">Tagged</span> %2$s', 'essence' ), 'entry-utility-prep entry-utility-prep-tag-links', $tags_list ); ?>
 					</span>
 					<span class="meta-sep">|</span>
-				<?php endif; ?>
+				<?php } ?>
 				<span class="comments-link"><?php comments_popup_link( __( 'Leave a comment', 'essence' ), __( '1 Comment', 'essence' ), __( '% Comments', 'essence' ) ); ?></span>
 				<?php edit_post_link( __( 'Edit', 'essence' ), '<span class="meta-sep">|</span> <span class="edit-link">', '</span>' ); ?>
 			</div><!-- .entry-utility -->
@@ -176,14 +171,14 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 
 		<?php comments_template( '', true ); ?>
 
-	<?php endif; // This was the if statement that broke the loop into three parts based on categories. ?>
+	<?php } // This was the if statement that broke the loop into three parts based on categories. ?>
 
-<?php endwhile; // End the loop. Whew. ?>
+<?php } // End the loop. Whew. ?>
 
 <?php /* Display navigation to next/previous pages when applicable */ ?>
-<?php if (  $wp_query->max_num_pages > 1 ) : ?>
+<?php if (  $wp_query->max_num_pages > 1 ) { ?>
 				<div id="nav-below" class="navigation">
 					<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'essence' ) ); ?></div>
 					<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'essence' ) ); ?></div>
 				</div><!-- #nav-below -->
-<?php endif;
+<?php }
