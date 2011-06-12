@@ -8,11 +8,9 @@ function essence_theme_settings_defaults() {
 		'nav'						=> 1,
 		'nav_superfish'				=> 1,
 		'nav_home'					=> 1,
-		'nav_type'					=> 'pages',
 		'subnav'					=> 0,
 		'subnav_superfish'			=> 1,
 		'subnav_home'				=> 0,
-		'subnav_type'				=> 'categories',
 		'widgetize_header_right'	=> 0,
 	);
 
@@ -124,6 +122,15 @@ function essence_theme_settings_general_box() { ?>
 		</label>
 		<input type="text" value="<?php esc_attr_e( essence_get_option('blog_title_image') ); ?>" class="regular-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[blog_title_image]" id="blog_title_image">
 	</p>
-	<p><input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_right]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]" value="1" <?php checked(1, essence_get_option('widgetize_header_right')); ?> /> <label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]"><?php _e("Widgetize Right Side of Header?", 'essence'); ?></label></p>
+	<p>
+		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_subnav" value="0" />
+		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[subnav]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_subnav" value="1" <?php checked(1, essence_get_option('subnav')); ?> />
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>[subnav]"><?php _e("Include Secondary Navigation Menu?", 'essence'); ?></label>
+	</p>
+	<p>
+		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="0" />
+		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="1" <?php checked(1, essence_get_option('widgetize_header_right')); ?> />
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]"><?php _e("Widgetize Right Side of Header?", 'essence'); ?></label>
+	</p>
 <?php
 }
