@@ -80,7 +80,7 @@ define('ESSENCE_SETTINGS_FIELD', apply_filters('essence_settings_field', 'essenc
 define('ESSENCE_SETTINGS_GROUP', apply_filters('essence_settings_group', 'essence-settings-group'));
 //define('ESSENCE_SEO_SETTINGS_FIELD', apply_filters('essence_seo_settings_field', 'essence-seo-settings'));
 
-//	Run the genesis_pre_framework Hook
+//	Run the essence_pre_framework Hook
 do_action('essence_pre_framework');
 
 /**
