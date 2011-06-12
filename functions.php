@@ -125,28 +125,32 @@ if ( ! isset( $content_width ) ) {
 
 
 /**
- * This function loads front-end JS files
+ * This registers and enqueues front-end CSS & JS files
  *
  */
-function essence_load_scripts() {
+function essence_enqueue_scripts() {
+	wp_enqueue_style( 'essence', get_stylesheet_uri(), array(), ESSENCE_VERSION );
+	wp_enqueue_style( 'blueprint', PARENT_URL . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
+	wp_enqueue_style( 'blueprint-print', PARENT_URL . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
+	wp_enqueue_style( 'blueprint-ie', PARENT_URL . '/css/blueprint/ie.css', array( 'blueprint' ), '1.0.1', 'screen, projection' );
+
 	/**
-	 * @todo Comment reply script?
+	 * @var WP_Styles
 	 */
-	/*
-	if (is_singular() && get_option('thread_comments') && comments_open())
-		wp_enqueue_script('comment-reply');
-	*/
-	// Load superfish and our common JS (in the footer)
+	global $wp_styles;
+	// Conditionally load this only for IE < 8
+	$wp_styles->add_data( 'blueprint-ie', 'conditional', 'lt IE 8' );
+
+
 	/**
 	 * Load SuperFish
 	 */
-	wp_enqueue_script('hoverIntent', PARENT_URL.'/js/hoverIntent.js', array('jquery'), '0.0.1', true);
-	wp_enqueue_script('superfish', PARENT_URL.'/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
-	wp_enqueue_script('superfish-args', PARENT_URL.'/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
-	wp_enqueue_script('label-over', PARENT_URL.'/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
+	wp_enqueue_script('hoverIntent', PARENT_URL . '/js/hoverIntent.js', array('jquery'), '0.0.1', true);
+	wp_enqueue_script('superfish', PARENT_URL . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
+	wp_enqueue_script('superfish-args', PARENT_URL . '/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
+	wp_enqueue_script('label-over', PARENT_URL . '/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
 }
-add_action('get_header', 'essence_load_scripts');
-
+add_action( 'wp_enqueue_scripts', 'essence_enqueue_scripts' );
 
 function essence_init() {
 	/**
