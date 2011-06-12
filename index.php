@@ -9,9 +9,7 @@
  * E.g., it puts together the home page when no home.php file exists.
  * Learn more: http://codex.wordpress.org/Template_Hierarchy
  *
- * @package WordPress
- * @subpackage Twenty Ten
- * @since 3.0.0
+ * @since 0.0.1
  */
 
 if ( !empty( $_REQUEST['debug'] ) ) {

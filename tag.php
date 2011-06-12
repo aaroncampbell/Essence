@@ -22,7 +22,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			<div id="content">
 
 				<h1 class="page-title"><?php
-					printf( __( 'Tag Archives: %s', 'twentyten' ), '<span>' . single_tag_title( '', false ) . '</span>' );
+					printf( __( 'Tag Archives: %s', 'essence' ), '<span>' . single_tag_title( '', false ) . '</span>' );
 				?></h1>
 
 <?php
