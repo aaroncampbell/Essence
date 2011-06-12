@@ -145,7 +145,7 @@ function essence_enqueue_scripts() {
 	/**
 	 * Load SuperFish
 	 */
-	wp_enqueue_script('hoverIntent', PARENT_URL . '/js/hoverIntent.js', array('jquery'), '0.0.1', true);
+	wp_enqueue_script('hoverIntent', PARENT_URL . '/js/hoverIntent.js', array('jquery'), '20110226', true);
 	wp_enqueue_script('superfish', PARENT_URL . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
 	wp_enqueue_script('superfish-args', PARENT_URL . '/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
 	wp_enqueue_script('label-over', PARENT_URL . '/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
