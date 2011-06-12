@@ -51,7 +51,13 @@ class Essence_Options {
 		// check settings cache
 		if ( ! isset( $this->_settings_cache[$setting] ) ) {
 			// set value and cache setting
-			$this->_settings_cache[$setting] = get_option($setting);
+			$options = get_option($setting);
+			if  ( ESSENCE_SETTINGS_FIELD == $setting ) {
+				$options = wp_parse_args( $options, essence_theme_settings_defaults() );
+			} elseif ( is_callable( "essence_{$setting}_defaults" ) ) {
+				$options = wp_parse_args( $options, call_user_func( "essence_{$setting}_defaults" ) );
+			}
+			$this->_settings_cache[$setting] = $options;
 		}
 		// setting has been cached
 		$options = apply_filters( 'essence_options', $this->_settings_cache[$setting], $setting );
