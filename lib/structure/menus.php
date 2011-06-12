@@ -5,10 +5,18 @@ function essence_setup_menus() {
 	 * @todo support secondary navigation?
 	 */
 	// This theme uses wp_nav_menu() in one location.
-	register_nav_menus( array(
-		'primary'	=> __( 'Primary Navigation', 'essence' ),
-		'secondary'	=> __( 'Secondary Navigation', 'essence' ),
-	) );
+	if ( essence_get_option('nav') ) {
+		register_nav_menus( array(
+			'primary'	=> __( 'Primary Navigation', 'essence' ),
+		) );
+		add_action( 'essence_primary_nav', 'essence_do_primary_nav' );
+	}
+	if ( essence_get_option('subnav') ) {
+		register_nav_menus( array(
+			'secondary'	=> __( 'Secondary Navigation', 'essence' ),
+		) );
+		add_action( 'essence_secondary_nav', 'essence_do_secondary_nav' );
+	}
 }
 
 /** Tell WordPress to run essence_setup() when the 'after_setup_theme' hook is run. */
@@ -27,8 +35,6 @@ function essence_do_primary_nav () {
 	wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'primary' ) );
 }
 
-add_action( 'essence_primary_nav', 'essence_do_primary_nav' );
-
 function essence_do_secondary_nav () {
 	/**
 	 * @todo add settings to let you use pages, etc here.
@@ -41,5 +47,3 @@ function essence_do_secondary_nav () {
 	 */
 	wp_nav_menu( array( 'container_class' => 'menu-header', 'theme_location' => 'secondary' ) );
 }
-
-add_action( 'essence_secondary_nav', 'essence_do_secondary_nav' );
