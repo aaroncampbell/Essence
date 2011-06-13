@@ -16,7 +16,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 
 get_header(); ?>
 
-		<div id="container" class="single-attachment">
+		<div id="container" class="single-attachment span-15">
 			<div id="content" role="main">
 
 			<?php
@@ -30,4 +30,6 @@ get_header(); ?>
 			</div><!-- #content -->
 		</div><!-- #container -->
 
-<?php get_footer(); ?>
+<?php
+get_sidebar();
+get_footer();

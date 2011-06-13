@@ -14,11 +14,9 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 	}
 }
 
-?>
+get_header(); ?>
 
-<?php get_header(); ?>
-
-		<div id="container">
+		<div id="container" class="span-15">
 			<div id="content">
 
 				<h1 class="page-title"><?php
@@ -35,5 +33,6 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			</div><!-- #content -->
 		</div><!-- #container -->
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+get_sidebar();
+get_footer();

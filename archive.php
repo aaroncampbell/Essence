@@ -22,7 +22,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 get_header();
 ?>
 
-		<div id="container">
+		<div id="container" class="span-15">
 			<div id="content" role="main">
 
 <?php
@@ -65,5 +65,6 @@ get_header();
 			</div><!-- #content -->
 		</div><!-- #container -->
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+get_sidebar();
+get_footer();

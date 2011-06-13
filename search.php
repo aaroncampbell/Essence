@@ -18,7 +18,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 
 ?>
 
-		<div id="container">
+		<div id="container" class="span-15">
 			<div id="content" role="main">
 
 <?php if ( have_posts() ) : ?>
@@ -42,5 +42,6 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			</div><!-- #content -->
 		</div><!-- #container -->
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+get_sidebar();
+get_footer();

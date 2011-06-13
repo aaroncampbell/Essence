@@ -14,9 +14,8 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 	}
 }
 
+get_header();
 ?>
-
-<?php get_header(); ?>
 
 		<div id="content-container" class="span-15">
 			<div id="content">
@@ -32,5 +31,6 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			</div><!-- #content -->
 		</div><!-- #ccontent-ontainer -->
 
-<?php get_sidebar(); ?>
-<?php get_footer(); ?>
+<?php
+get_sidebar();
+get_footer();

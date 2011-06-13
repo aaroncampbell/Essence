@@ -19,9 +19,8 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 	}
 }
 
+get_header();
 ?>
-
-<?php get_header(); ?>
 
 		<div id="container" class="onecolumn">
 			<div id="content">
@@ -37,4 +36,4 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			</div><!-- #content -->
 		</div><!-- #container -->
 
-<?php get_footer(); ?>
+<?php get_footer();

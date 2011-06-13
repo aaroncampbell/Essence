@@ -16,7 +16,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 
 get_header(); ?>
 
-	<div id="container">
+	<div id="container" class="span-15">
 		<div id="content" role="main">
 
 			<div id="post-0" class="post error404 not-found">
@@ -34,4 +34,6 @@ get_header(); ?>
 		document.getElementById('s') && document.getElementById('s').focus();
 	</script>
 
-<?php get_footer(); ?>
+<?php
+get_sidebar();
+get_footer();
