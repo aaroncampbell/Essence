@@ -271,7 +271,7 @@ function essence_setup() {
 	add_editor_style();
 
 	/**
-	 * @todo actually add this support, as well as support for chat, link, image, quote, status, video, and audio
+	 * @todo actually add this support
 	 */
 	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
 	$post_formats = array(
@@ -634,3 +634,20 @@ function essence_comment( $comment, $args, $depth ) {
 	endswitch;
 }
 endif;
+
+/**
+ * Display navigation to next/previous pages when applicable
+ */
+function essence_content_nav( $nav_id ) {
+	global $wp_query;
+
+	if ( $wp_query->max_num_pages > 1 ) {
+?>
+		<nav id="<?php esc_attr_e( $nav_id ); ?>">
+			<h1 class="assistive-text"><?php _e( 'Post navigation', 'essence' ); ?></h1>
+			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'essence' ) ); ?></div>
+			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'essence' ) ); ?></div>
+		</nav><!-- #nav-above -->
+<?php
+	}
+}

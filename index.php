@@ -29,12 +29,14 @@ get_header();
         <div id="content" role="main">
 			<?php
 			do_action( 'essence_content_open' );
+			essence_content_nav( 'nav-above' );
 
 			/* Run the loop to output the posts.
 			 * If you want to overload this in a child theme then include a file
 			 * called loop-index.php and that will be used instead.
 			 */
-			 get_template_part( 'loop', 'index' );
+			get_template_part( 'loop', 'index' );
+			essence_content_nav( 'nav-below' );
 			?>
         </div><!-- #content -->
     </div><!-- #content-container -->
