@@ -119,9 +119,8 @@ require_once(ESSENCE_ADMIN_DIR . '/essence-settings.php');
  *
  * @todo Swap this out based on the page layout?  Is that possible?
  */
-if ( ! isset( $content_width ) ) {
-	$content_width = 640;
-}
+if ( ! isset( $content_width ) )
+	$content_width = 590;
 
 
 /**
