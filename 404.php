@@ -14,7 +14,8 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 	}
 }
 
-get_header(); ?>
+get_header();
+?>
 
 	<div id="container" class="span-15">
 		<div id="content" role="main">

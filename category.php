@@ -14,7 +14,8 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 	}
 }
 
-get_header(); ?>
+get_header();
+?>
 
 		<div id="container" class="span-15">
 			<div id="content" role="main">
@@ -24,7 +25,7 @@ get_header(); ?>
 				?></h1>
 				<?php
 					$category_description = category_description();
-					if ( ! empty( $category_description ) )
+					if ( ! empty( $category_description ) ) {
 						echo '<div class="archive-meta">' . $category_description . '</div>';
 
 				/* Run the loop for the category page to output the posts.
