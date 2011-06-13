@@ -37,7 +37,7 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define('ESSENCE_VERSION', '0.0.1');
+define('ESSENCE_VERSION', '0.0.1-201106121');
 
 /**
  * Define Theme Name/Version Constants
@@ -274,7 +274,19 @@ function essence_setup() {
 	 * @todo actually add this support, as well as support for chat, link, image, quote, status, video, and audio
 	 */
 	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
-	add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+	$post_formats = array(
+		'aside',
+		'chat',
+		'gallery',
+		'link',
+		'image',
+		'quote',
+		'status',
+		'video',
+		'audio',
+	);
+	$post_formats = apply_filters( 'essence_post_formats', $post_formats );
+	add_theme_support( 'post-formats', $post_formats );
 
 	// This theme uses post thumbnails
 	add_theme_support( 'post-thumbnails' );
