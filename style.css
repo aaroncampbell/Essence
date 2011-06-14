@@ -8,7 +8,12 @@
 */
 
 #content-container {
+	background-color:#FFF;
 	margin-top:1em;
+}
+
+#content {
+	padding:10px;
 }
 
 /* Text meant only for screen readers */
@@ -384,6 +389,7 @@ img.wp-smiley, img.wp-wink {
 }
 
 .widget-container {
+	background:#FFF;
 	border:1px solid #DDD;
 	margin:1em 0;
 }

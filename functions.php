@@ -648,11 +648,12 @@ function essence_content_nav( $nav_id ) {
 
 	if ( $wp_query->max_num_pages > 1 ) {
 ?>
-		<nav id="<?php esc_attr_e( $nav_id ); ?>">
+		<div id="<?php esc_attr_e( $nav_id ); ?>">
 			<h1 class="assistive-text"><?php _e( 'Post navigation', 'essence' ); ?></h1>
 			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'essence' ) ); ?></div>
 			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'essence' ) ); ?></div>
-		</nav><!-- #nav-above -->
+			<div class="clear"></div>
+		</div><!-- #<?php esc_html_e( $nav_id ); ?> -->
 <?php
 	}
 }
