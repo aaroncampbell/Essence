@@ -554,7 +554,7 @@ img.wp-smiley, img.wp-wink {
 	width: 25%;
 }
 .gallery img {
-	border: 2px solid #F6F6F6;
+	border: 10px solid #F6F6F6;
 }
 .gallery-columns-2 .attachment-medium {
 	max-width: 92%;
@@ -574,9 +574,6 @@ img.wp-smiley, img.wp-wink {
 }
 .gallery dd {
 	display:none;
-}
-.gallery img {
-	border: 10px solid #f1f1f1;
 }
 .gallery br+br {
 	display: none;
