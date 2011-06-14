@@ -7,6 +7,10 @@
  * Tags: essence
 */
 
+#content-container {
+	margin-top:1em;
+}
+
 /* Text meant only for screen readers */
 .screen-reader-text {
 	position:absolute;
@@ -100,16 +104,16 @@ blockquote {
  * Posts
  */
 #content .entry-title {
-	margin-bottom:0;
+	margin-bottom:0.1em;
 }
 .entry-title a:link,
 .entry-title a:visited {
-	color:#111;
+	color:#222;
 	text-decoration:none;
 }
 .entry-title a:active,
 .entry-title a:hover {
-	color:#009;
+	color:#06C;
 }
 .entry-meta {
 	margin-bottom:5px;
@@ -401,7 +405,7 @@ img.wp-smiley, img.wp-wink {
 .widget-title {
 }
 .widget-title a {
-	color:#111;
+	color:#222;
 }
 .widget-area a:link,
 .widget-area a:visited {
