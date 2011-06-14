@@ -230,6 +230,7 @@ img.wp-smiley, img.wp-wink {
 	height:30px;
 	line-height:20px;
 	margin:0;
+	overflow:hidden;
 	padding:0;
 	text-transform:uppercase;
 }
