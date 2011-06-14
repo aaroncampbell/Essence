@@ -9,7 +9,10 @@ function essence_wp_head() {
 			var group = Math.floor(Math.random()*10000);
 			$(this).find("a").colorbox({
 				rel: group,
-				current: '{current} of {total}',
+				current: "<?php echo sprintf( esc_js( 'Image %1$s of %2$s', 'essence' ), '{current}', '{total}' ); ?>",
+				close: "<?php echo esc_js( 'Close', 'essence' ); ?>",
+				next: "<?php echo esc_js( 'Next', 'essence' ); ?>",
+				previous: "<?php echo esc_js( 'Previous', 'essence' ); ?>",
 				title: function(){
 					var galleryItem = $(this).parents('.gallery-item').find('dd');
 					if ( galleryItem.size() ) {
