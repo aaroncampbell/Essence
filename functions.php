@@ -98,6 +98,7 @@ require_once(ESSENCE_FUNCTIONS_DIR . '/options.php');
 
 //	Load Structure
 require_once(ESSENCE_STRUCTURE_DIR . '/menus.php');
+require_once(ESSENCE_STRUCTURE_DIR . '/galleries.php');
 
 //	Load Admin
 require_once(ESSENCE_ADMIN_DIR . '/menu.php');
@@ -129,6 +130,7 @@ if ( ! isset( $content_width ) )
  */
 function essence_enqueue_scripts() {
 	wp_enqueue_style( 'essence', get_stylesheet_uri(), array(), ESSENCE_VERSION );
+	wp_enqueue_style( 'colorbox', PARENT_URL . '/css/gallery.css', array(), '0.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint', PARENT_URL . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint-print', PARENT_URL . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
 	wp_enqueue_style( 'blueprint-ie', PARENT_URL . '/css/blueprint/ie.css', array( 'blueprint' ), '1.0.1', 'screen, projection' );
@@ -148,6 +150,11 @@ function essence_enqueue_scripts() {
 	wp_enqueue_script('superfish', PARENT_URL . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
 	wp_enqueue_script('superfish-args', PARENT_URL . '/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
 	wp_enqueue_script('label-over', PARENT_URL . '/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
+
+	/**
+	 * Load color box for galleries
+	 */
+	wp_enqueue_script( 'colorbox', PARENT_URL . '/js/colorbox/jquery.colorbox-min.js', array( 'jquery' ), '1.3.17.2', true );
 }
 add_action( 'wp_enqueue_scripts', 'essence_enqueue_scripts' );
 
@@ -163,7 +170,6 @@ function essence_init() {
 	}
 }
 add_action( 'init', 'essence_init' );
-
 
 /**
  * Register widgetized areas, including two sidebars and four widget-ready

@@ -572,6 +572,9 @@ img.wp-smiley, img.wp-wink {
 .gallery dl {
 	margin: 0;
 }
+.gallery dd {
+	display:none;
+}
 .gallery img {
 	border: 10px solid #f1f1f1;
 }
