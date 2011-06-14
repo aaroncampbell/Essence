@@ -67,10 +67,10 @@
 			right: -18px;
 		}
         #cboxPrevious.hover {
-			border-right-color:#888;
+			border-right-color:#F6F6F6;
 		}
 		#cboxNext.hover {
-			border-left-color:#888;
+			border-left-color:#F6F6F6;
 		}
 
         #cboxClose{
