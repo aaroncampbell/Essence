@@ -63,10 +63,8 @@ if( !defined('ESSENCE_LANGUAGES_DIR') ) // So we can define with a child theme
 /**
  * Define URL Location Constants
  */
-define('PARENT_URL', get_bloginfo('template_directory'));
-define('CHILD_URL', get_bloginfo('stylesheet_directory'));
-define('ESSENCE_IMAGES_URL', PARENT_URL.'/images');
-define('ESSENCE_LIB_URL', PARENT_URL.'/lib');
+define('ESSENCE_IMAGES_URL', get_template_directory_uri().'/images');
+define('ESSENCE_LIB_URL', get_template_directory_uri().'/lib');
 define('ESSENCE_FUNCTIONS_URL', ESSENCE_LIB_URL.'/functions');
 define('ESSENCE_STRUCTURE_URL', ESSENCE_LIB_URL.'/structure');
 define('ESSENCE_ADMIN_URL', ESSENCE_LIB_URL.'/admin');
@@ -130,10 +128,10 @@ if ( ! isset( $content_width ) )
  */
 function essence_enqueue_scripts() {
 	wp_enqueue_style( 'essence', get_stylesheet_uri(), array(), ESSENCE_VERSION );
-	wp_enqueue_style( 'colorbox', PARENT_URL . '/css/gallery.css', array(), '0.0.1', 'screen, projection' );
-	wp_enqueue_style( 'blueprint', PARENT_URL . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
-	wp_enqueue_style( 'blueprint-print', PARENT_URL . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
-	wp_enqueue_style( 'blueprint-ie', PARENT_URL . '/css/blueprint/ie.css', array( 'blueprint' ), '1.0.1', 'screen, projection' );
+	wp_enqueue_style( 'colorbox', get_template_directory_uri() . '/css/gallery.css', array(), '0.0.1', 'screen, projection' );
+	wp_enqueue_style( 'blueprint', get_template_directory_uri() . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
+	wp_enqueue_style( 'blueprint-print', get_template_directory_uri() . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
+	wp_enqueue_style( 'blueprint-ie', get_template_directory_uri() . '/css/blueprint/ie.css', array( 'blueprint' ), '1.0.1', 'screen, projection' );
 
 	/**
 	 * @var WP_Styles
@@ -146,15 +144,15 @@ function essence_enqueue_scripts() {
 	/**
 	 * Load SuperFish
 	 */
-	wp_enqueue_script('hoverIntent', PARENT_URL . '/js/hoverIntent.js', array('jquery'), '20110226', true);
-	wp_enqueue_script('superfish', PARENT_URL . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
-	wp_enqueue_script('superfish-args', PARENT_URL . '/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
-	wp_enqueue_script('label-over', PARENT_URL . '/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
+	wp_enqueue_script('hoverIntent', get_template_directory_uri() . '/js/hoverIntent.js', array('jquery'), '20110226', true);
+	wp_enqueue_script('superfish', get_template_directory_uri() . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
+	wp_enqueue_script('superfish-args', get_template_directory_uri() . '/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
+	wp_enqueue_script('label-over', get_template_directory_uri() . '/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
 
 	/**
 	 * Load color box for galleries
 	 */
-	wp_enqueue_script( 'colorbox', PARENT_URL . '/js/colorbox/jquery.colorbox-min.js', array( 'jquery' ), '1.3.17.2', true );
+	wp_enqueue_script( 'colorbox', get_template_directory_uri() . '/js/colorbox/jquery.colorbox-min.js', array( 'jquery' ), '1.3.17.2', true );
 }
 add_action( 'wp_enqueue_scripts', 'essence_enqueue_scripts' );
 
