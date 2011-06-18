@@ -163,6 +163,15 @@ blockquote {
  * End Posts
  */
 
+/**
+ * Comments
+ * @todo comment styles
+ */
+.commentlist .bypostauthor {
+}
+/**
+ * End Comments
+ */
 
 /**
  * Images
