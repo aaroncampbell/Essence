@@ -107,6 +107,10 @@ img.size-full {
 	text-decoration:none;
 }
 
+.header-image {
+	text-align:center;
+}
+
 #site-description {
 	margin-bottom:10px;
 }
@@ -167,6 +171,38 @@ blockquote {
  * Comments
  * @todo comment styles
  */
+#comments-title {
+	margin-bottom:.5em;
+	text-transform: uppercase;
+}
+.commentlist {
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+.commentlist > li.comment {
+	background: #f6f6f6;
+	border: 1px solid #ddd;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	margin: 0 0 1.625em;
+	padding: 1.625em;
+	position: relative;
+}
+.commentlist .children {
+	list-style: none;
+	margin: 0;
+}
+.commentlist .children li.comment {
+	background: #fff;
+	border-left: 1px solid #ddd;
+	-moz-border-radius: 0 3px 3px 0;
+	border-radius: 0 3px 3px 0;
+	margin: 1.625em 0 0;
+	padding: 1.625em;
+	position: relative;
+}
+
 .commentlist .bypostauthor {
 }
 /**

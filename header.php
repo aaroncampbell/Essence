@@ -51,42 +51,49 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 	 * as styles, scripts, and meta tags.
 	 */
 	wp_head();
+	$hTag = apply_filters( 'esssence_title_tag', ( is_home() || is_front_page() )? 'h1' : 'h4' );
 ?>
 </head>
 
 <body <?php body_class(); ?>>
-<div id="wrapper" class="hfeed container">
 	<div id="header">
 		<div id="masthead">
-			<div id="branding" role="banner">
-				<?php $hTag = apply_filters( 'esssence_title_tag', ( is_home() || is_front_page() )? 'h1' : 'h4' ); ?>
+			<div id="branding" role="banner" class="container">
 				<<?php echo $hTag; ?> id="site-title">
 					<span>
 						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
 					</span>
 				</<?php echo $hTag;?>>
 				<div id="site-description"><?php bloginfo( 'description' ); ?></div>
+			</div>
+<?php
+				// Check to see if the header image has been removed
+				$header_image = get_header_image();
+				if ( ! empty( $header_image ) ) {
+			?>
+			<div class="header-image" style="height:<?php echo HEADER_IMAGE_HEIGHT; ?>px">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+					<?php
+						// The header image
+						// Check if this is a post or page, if it has a thumbnail, and if it's a big one
+						if ( is_singular() &&
+								has_post_thumbnail( $post->ID ) &&
+								( /* $src, $width, $height */ $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), array( HEADER_IMAGE_WIDTH, HEADER_IMAGE_WIDTH ) ) ) &&
+								$image[1] >= HEADER_IMAGE_WIDTH ) {
+							// Houston, we have a new header image!
+							echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
+						} else {
+					?><img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="" />
+<?php
+						} // end check for featured image or standard header
+					?>
+				</a>
+			</div>
+			<?php
+				} // end check for removed header image
+			?>
 
-				<?php
-				/**
-				 * @todo See about using this, but set it up as an option - Post Thumbnail for header
-				 */
-				/*
-					// Check if this is a post or page, if it has a thumbnail, and if it's a big one
-					if ( is_singular() &&
-							has_post_thumbnail( $post->ID ) &&
-							( $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'post-thumbnail' ) ) &&
-							$image[1] >= HEADER_IMAGE_WIDTH ) :
-						// Houston, we have a new header image!
-						echo get_the_post_thumbnail( $post->ID );
-					elseif ( get_header_image() ) : ?>
-						<img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="" />
-					<?php endif;
-				*/
-				?>
-			</div><!-- #branding -->
-
-			<div id="access" class="navigation" role="navigation">
+			<div id="access" class="navigation container" role="navigation">
 				<?php /* Allow screen readers and text browsers to skip to the content */ ?>
 				<div class="skip-link screen-reader-text"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'essence' ); ?>"><?php _e( 'Skip to content', 'essence' ); ?></a></div>
 				<?php do_action( 'essence_primary_nav' ); ?>
@@ -94,3 +101,4 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 			</div><!-- #access -->
 		</div><!-- #masthead -->
 	</div><!-- #header -->
+	<div id="wrapper" class="hfeed container">
