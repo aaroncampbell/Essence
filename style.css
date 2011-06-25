@@ -107,8 +107,9 @@ img.size-full {
 	text-decoration:none;
 }
 
-.header-image {
-	text-align:center;
+.header-image a img {
+	display:block;
+	margin:0 auto;
 }
 
 #site-description {
