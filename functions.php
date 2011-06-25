@@ -148,6 +148,14 @@ function essence_enqueue_scripts() {
 	wp_enqueue_script('superfish', get_template_directory_uri() . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
 	wp_enqueue_script('superfish-args', get_template_directory_uri() . '/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
 	wp_enqueue_script('label-over', get_template_directory_uri() . '/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
+	wp_enqueue_script('html5', get_template_directory_uri() . '/js/html5.js', null, '1.6.2', true);
+
+	/**
+	 * @var WP_Scripts
+	 */
+	global $wp_scripts;
+	// Conditionally load this only for IE < 9
+	$wp_scripts->add_data( 'html5', 'conditional', 'lt IE 9' );
 
 	/**
 	 * Load color box for galleries
