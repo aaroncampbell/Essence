@@ -64,8 +64,14 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 				// Check to see if the header image has been removed
 				$header_image = get_header_image();
 				if ( ! empty( $header_image ) ) {
+					if ( function_exists( 'getimagesize' ) ) {
+						list( $header_width, $header_height, $header_type, $header_attr ) = getimagesize( $header_image );
+					} else {
+						$header_width = HEADER_IMAGE_WIDTH;
+						$header_height = HEADER_IMAGE_HEIGHT;
+					}
 			?>
-			<div class="header-image" style="height:<?php echo HEADER_IMAGE_HEIGHT; ?>px">
+			<div class="header-image" style="height:<?php echo $header_height; ?>px">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
 					<?php
 						// The header image
@@ -77,7 +83,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 							// Houston, we have a new header image!
 							echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
 						} else {
-					?><img src="<?php header_image(); ?>" width="<?php echo HEADER_IMAGE_WIDTH; ?>" height="<?php echo HEADER_IMAGE_HEIGHT; ?>" alt="" />
+					?><img src="<?php header_image(); ?>" width="<?php echo $header_width; ?>" height="<?php echo $header_height; ?>" alt="" />
 <?php
 						} // end check for featured image or standard header
 					?>
