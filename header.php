@@ -65,7 +65,7 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 				$header_image = get_header_image();
 				if ( ! empty( $header_image ) ) {
 					if ( function_exists( 'getimagesize' ) ) {
-						list( $header_width, $header_height, $header_type, $header_attr ) = getimagesize( $header_image );
+						list( $header_width, $header_height, $header_type, $header_attr ) = getimagesize( str_replace( site_url('/'), ABSPATH, $header_image ) );
 					} else {
 						$header_width = HEADER_IMAGE_WIDTH;
 						$header_height = HEADER_IMAGE_HEIGHT;
