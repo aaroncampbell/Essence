@@ -71,8 +71,8 @@ if ( !empty( $_REQUEST['debug'] ) ) {
 						$header_height = HEADER_IMAGE_HEIGHT;
 					}
 			?>
-			<div class="header-image" style="height:<?php echo $header_height; ?>px">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+			<div class="header-image" style="height:<?php echo $header_height; ?>px;">
+				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="width:<?php echo $header_width; ?>px;">
 					<?php
 						// The header image
 						// Check if this is a post or page, if it has a thumbnail, and if it's a big one
