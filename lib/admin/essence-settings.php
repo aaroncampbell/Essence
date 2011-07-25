@@ -22,8 +22,31 @@ function essence_theme_settings_defaults() {
  */
 add_action('admin_init', 'essence_register_theme_settings', 5);
 function essence_register_theme_settings() {
-	register_setting( ESSENCE_SETTINGS_GROUP, ESSENCE_SETTINGS_FIELD );
-	add_option( ESSENCE_SETTINGS_FIELD, essence_theme_settings_defaults() );
+	register_setting( ESSENCE_SETTINGS_GROUP, ESSENCE_SETTINGS_FIELD, 'essence_sanitize_theme_settings' );
+	//add_option( ESSENCE_SETTINGS_FIELD, essence_theme_settings_defaults() );
+}
+
+function essence_sanitize_theme_settings( $options ) {
+	if ( isset( $options['blog_title_image'] ) ) {
+		$options['blog_title_image'] = esc_url_raw( $options['widgetize_header_right'] );
+	}
+	if ( isset( $options['nav'] ) ) {
+		$options['nav'] = essence_boolean( $options['nav'] );
+	}
+	if ( isset( $options['subnav'] ) ) {
+		$options['subnav'] = essence_boolean( $options['subnav'] );
+	}
+	if ( isset( $options['widgetize_header_right'] ) ) {
+		$options['widgetize_header_right'] = essence_boolean( $options['widgetize_header_right'] );
+	}
+	return $options;
+}
+
+function essence_boolean( $bool ) {
+	if ( 'false' == $bool )
+		return false;
+
+	return (bool) $bool;
 }
 
 function essence_theme_admin_settings() {
@@ -121,6 +144,11 @@ function essence_theme_settings_general_box() { ?>
 			<?php _e("Logo Image:", 'essence'); ?>
 		</label>
 		<input type="text" value="<?php esc_attr_e( essence_get_option('blog_title_image') ); ?>" class="regular-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[blog_title_image]" id="blog_title_image">
+	</p>
+	<p>
+		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_nav" value="0" />
+		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[nav]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_nav" value="1" <?php checked(1, essence_get_option('nav')); ?> />
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>[nav]"><?php _e("Include Navigation Menu?", 'essence'); ?></label>
 	</p>
 	<p>
 		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_subnav" value="0" />
