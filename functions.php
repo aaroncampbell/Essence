@@ -115,7 +115,7 @@ if ( ! isset( $content_width ) )
  *
  */
 function essence_enqueue_scripts() {
-	wp_enqueue_style( 'essence', get_stylesheet_uri(), array(), '20110725' );
+	wp_enqueue_style( 'essence', get_stylesheet_uri(), array( 'blueprint' ), '20110725' );
 	wp_enqueue_style( 'colorbox', get_template_directory_uri() . '/css/gallery.css', array(), '0.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint', get_template_directory_uri() . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint-print', get_template_directory_uri() . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
