@@ -28,11 +28,15 @@ get_header();
 					if ( ! empty( $category_description ) )
 						echo "<div class='archive-meta'>{$category_description}</div>";
 
+				do_action( 'essence_content_open' );
+				essence_content_nav( 'nav-above' );
+
 				/* Run the loop for the category page to output the posts.
 				 * If you want to overload this in a child theme then include a file
 				 * called loop-category.php and that will be used instead.
 				 */
 				get_template_part( 'loop', 'category' );
+				essence_content_nav( 'nav-below' );
 				?>
 
 			</div><!-- #content -->
