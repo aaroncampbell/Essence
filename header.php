@@ -55,7 +55,17 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 			<div id="branding" role="banner" class="container">
 				<<?php echo $hTag; ?> id="site-title">
 					<span>
-						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+							<?php
+							if ( essence_get_option( 'blog_title_image' ) ) {
+							?>
+							<img src="<?php echo esc_url( essence_get_option( 'blog_title_image' ) ) ?>" alt="<?php esc_attr_e( get_bloginfo( 'name' ) ); ?>" />
+							<?php
+							} else {
+								bloginfo( 'name' );
+							}
+							?>
+						</a>
 					</span>
 				</<?php echo $hTag;?>>
 				<div id="site-description"><?php bloginfo( 'description' ); ?></div>
