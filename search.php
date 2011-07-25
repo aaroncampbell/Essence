@@ -24,11 +24,14 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 <?php if ( have_posts() ) { ?>
 				<h1 class="page-title"><?php printf( __( 'Search Results for: %s', 'essence' ), '<span>' . get_search_query() . '</span>' ); ?></h1>
 				<?php
+				do_action( 'essence_content_open' );
+				essence_content_nav( 'nav-above' );
 				/* Run the loop for the search to output the results.
 				 * If you want to overload this in a child theme then include a file
 				 * called loop-search.php and that will be used instead.
 				 */
-				 get_template_part( 'loop', 'search' );
+				get_template_part( 'loop', 'search' );
+				essence_content_nav( 'nav-below' );
 				?>
 <?php } else { ?>
 				<div id="post-0" class="post no-results not-found">
