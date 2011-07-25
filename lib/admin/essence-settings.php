@@ -40,6 +40,7 @@ function essence_sanitize_theme_settings( $options ) {
 		$options['widgetize_header_right'] = essence_boolean( $options['widgetize_header_right'] );
 	}
 	dump( $options, '$options' );
+	exit;
 	return $options;
 }
 
