@@ -18,7 +18,7 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 
 ?>
 
-		<div id="container" class="span-15">
+		<div id="content-container" class="span-15">
 			<div id="content" role="main">
 
 <?php if ( have_posts() ) { ?>

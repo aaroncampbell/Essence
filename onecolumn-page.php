@@ -22,7 +22,7 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 get_header();
 ?>
 
-		<div id="container" class="onecolumn">
+		<div id="content-container" class="onecolumn">
 			<div id="content">
 
 			<?php
