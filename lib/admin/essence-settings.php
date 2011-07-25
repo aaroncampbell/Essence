@@ -77,7 +77,6 @@ function essence_theme_admin_settings() {
 			<form action="options.php" method="post">
 				<h2>
 					<?php esc_html_e( 'Essence Settings', 'essence' ); ?>
-					<input type="submit" name="Submit" value="<?php esc_attr_e('Update Options &raquo;', 'essence'); ?>" class="button-primary add-new-h2" />
 				</h2>
 
 
@@ -100,7 +99,7 @@ function essence_theme_admin_settings() {
 					}
 ?>
 						<p class="submit">
-							<input type="submit" name="Submit" value="<?php esc_attr_e('Update Options &raquo;', 'essence'); ?>" />
+							<input type="submit" name="Submit" value="<?php esc_attr_e('Update Options &raquo;', 'essence'); ?>" class="button-primary" />
 						</p>
 					</div>
 					<div class="postbox-container" style="width:24%;">
