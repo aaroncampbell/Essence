@@ -1,7 +1,7 @@
 <?php
 add_action( 'admin_menu', 'essence_admin_menu_setup' );
 function essence_admin_menu_setup() {
-	add_theme_page( __( 'Settings', 'essence' ), __( 'Settings', 'essence' ), 'manage_options', 'essence-settings', 'essence_theme_admin_settings' );
+	add_theme_page( __( 'Settings', 'essence' ), __( 'Settings', 'essence' ), 'edit_theme_options', 'essence-settings', 'essence_theme_admin_settings' );
 }
 
 add_action( 'admin_print_styles-appearance_page_essence-settings', 'essence_admin_page_styles' );
