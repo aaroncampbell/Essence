@@ -57,7 +57,7 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 				if ( essence_get_option( 'widgetize_header_right' ) ) {
 				?>
 					<div class="right">
-						<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
+						<?php dynamic_sidebar( 'header-right-widget-area' ); ?>
 					</div>
 				<?php
 				}
