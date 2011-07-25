@@ -2,7 +2,7 @@
 /**
  * The Sidebar containing the primary and secondary widget areas
  */
-if ( !empty( $_REQUEST['debug'] ) ) {
+if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 	if ( 'show' != $_REQUEST['debug'] ) {
 		echo '<!-- ';
 	}

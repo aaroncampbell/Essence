@@ -6,7 +6,7 @@
  *
  * @since 0.0.1
  */
-if ( !empty( $_REQUEST['debug'] ) ) {
+if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 	if ( 'show' != $_REQUEST['debug'] ) {
 		echo '<!-- ';
 	}

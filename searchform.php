@@ -9,7 +9,7 @@
  * @subpackage Twenty Ten
  * @since 3.0.0
  */
-if ( !empty( $_REQUEST['debug'] ) ) {
+if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 	if ( 'show' != $_REQUEST['debug'] ) {
 		echo '<!-- ';
 	}
