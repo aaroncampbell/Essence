@@ -164,6 +164,9 @@ blockquote {
 	border: 2px solid #DDD;
 	padding:10px;
 }
+.page-link {
+	clear:both;
+}
 /**
  * End Posts
  */
