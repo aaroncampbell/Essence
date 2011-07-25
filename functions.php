@@ -37,7 +37,7 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define( 'ESSENCE_VERSION', '0.0.1-201106121' );
+define( 'ESSENCE_VERSION', '0.0.2' );
 
 /**
  * Define Directory Location Constants
