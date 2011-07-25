@@ -146,17 +146,17 @@ function essence_theme_settings_general_box() { ?>
 	<p>
 		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_nav" value="0" />
 		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[nav]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_nav" value="1" <?php checked(1, essence_get_option('nav')); ?> />
-		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>[nav]"><?php _e("Include Navigation Menu?", 'essence'); ?></label>
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_nav"><?php _e("Include Navigation Menu?", 'essence'); ?></label>
 	</p>
 	<p>
 		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_subnav" value="0" />
 		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[subnav]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_subnav" value="1" <?php checked(1, essence_get_option('subnav')); ?> />
-		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>[subnav]"><?php _e("Include Secondary Navigation Menu?", 'essence'); ?></label>
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_subnav"><?php _e("Include Secondary Navigation Menu?", 'essence'); ?></label>
 	</p>
 	<p>
 		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="0" />
 		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="1" <?php checked(1, essence_get_option('widgetize_header_right')); ?> />
-		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]"><?php _e("Widgetize Right Side of Header?", 'essence'); ?></label>
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right"><?php _e("Widgetize Right Side of Header?", 'essence'); ?></label>
 	</p>
 <?php
 }
