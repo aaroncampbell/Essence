@@ -246,8 +246,8 @@ function essence_widgets_init() {
 			'name' => __( 'Header Right', 'essence' ),
 			'id' => 'header-right-widget-area',
 			'description' => __( 'The right side of the header' , 'essence' ),
-			'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-			'after_widget' => "</li>",
+			'before_widget' => '<div id="%1$s" class="widget-container %2$s">',
+			'after_widget' => "</div>",
 			'before_title' => '<h4 class="widget-title">',
 			'after_title' => '</h4>',
 		) );
