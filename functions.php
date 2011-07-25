@@ -239,6 +239,19 @@ function essence_widgets_init() {
 		'before_title' => '<h4 class="widget-title">',
 		'after_title' => '</h4>',
 	) );
+
+	if ( essence_get_option( 'widgetize_header_right' ) ) {
+		// Header widget
+		register_sidebar( array (
+			'name' => __( 'Header Right', 'essence' ),
+			'id' => 'header-right-widget-area',
+			'description' => __( 'The right side of the header' , 'essence' ),
+			'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
+			'after_widget' => "</li>",
+			'before_title' => '<h4 class="widget-title">',
+			'after_title' => '</h4>',
+		) );
+	}
 }
 add_action( 'init', 'essence_widgets_init' );
 

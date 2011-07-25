@@ -53,6 +53,17 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 	<div id="header">
 		<div id="masthead">
 			<div id="branding" role="banner" class="container">
+				<?php
+				if ( essence_get_option( 'widgetize_header_right' ) ) {
+				?>
+					<div class="right">
+						<ul class="xoxo">
+							<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
+						</ul>
+					</div>
+				<?php
+				}
+				?>
 				<<?php echo $hTag; ?> id="site-title">
 					<span>
 						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
