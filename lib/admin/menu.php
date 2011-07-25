@@ -17,7 +17,7 @@ function essence_admin_page_scripts() {
 }
 
 function essence_screen_icon_link( $name = 'essence' ) {
-	$link = '<a href="http://gotthemes.com">';
+	$link = '<a href="http://essencetheme.com">';
 	if ( function_exists( 'get_screen_icon' ) ) {
 		$link .= get_screen_icon( $name );
 	} else {
