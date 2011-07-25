@@ -26,6 +26,7 @@ function essence_register_theme_settings() {
 }
 
 function essence_sanitize_theme_settings( $options ) {
+	dump( $options, '$options' );
 	if ( isset( $options['blog_title_image'] ) ) {
 		$options['blog_title_image'] = esc_url_raw( $options['widgetize_header_right'] );
 	}
@@ -38,6 +39,7 @@ function essence_sanitize_theme_settings( $options ) {
 	if ( isset( $options['widgetize_header_right'] ) ) {
 		$options['widgetize_header_right'] = essence_boolean( $options['widgetize_header_right'] );
 	}
+	dump( $options, '$options' );
 	return $options;
 }
 
