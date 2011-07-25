@@ -37,76 +37,64 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define('ESSENCE_VERSION', '0.0.1-201106121');
-
-/**
- * Define Theme Name/Version Constants
- *
- **/
-define('PARENT_THEME_NAME', 'Essence');
-define('PARENT_THEME_VERSION', '1.4.1');
-define('PARENT_THEME_RELEASE_DATE', date_i18n('F j, Y', '1291960800'));
+define( 'ESSENCE_VERSION', '0.0.1-201106121' );
 
 /**
  * Define Directory Location Constants
  */
-define('PARENT_DIR', TEMPLATEPATH);
-define('CHILD_DIR', STYLESHEETPATH);
-define('ESSENCE_IMAGES_DIR', PARENT_DIR.'/images');
-define('ESSENCE_LIB_DIR', PARENT_DIR.'/lib');
-define('ESSENCE_FUNCTIONS_DIR', ESSENCE_LIB_DIR.'/functions');
-define('ESSENCE_STRUCTURE_DIR', ESSENCE_LIB_DIR.'/structure');
-define('ESSENCE_ADMIN_DIR', ESSENCE_LIB_DIR.'/admin');
-if( !defined('ESSENCE_LANGUAGES_DIR') ) // So we can define with a child theme
-	define('ESSENCE_LANGUAGES_DIR', PARENT_DIR.'/languages');
+define( 'ESSENCE_IMAGES_DIR', TEMPLATEPATH . '/images' );
+define( 'ESSENCE_LIB_DIR', TEMPLATEPATH . '/lib' );
+define( 'ESSENCE_FUNCTIONS_DIR', ESSENCE_LIB_DIR . '/functions' );
+define( 'ESSENCE_STRUCTURE_DIR', ESSENCE_LIB_DIR . '/structure' );
+define( 'ESSENCE_ADMIN_DIR', ESSENCE_LIB_DIR . '/admin' );
+if(  !defined( 'ESSENCE_LANGUAGES_DIR' )  ) // So we can define with a child theme
+	define( 'ESSENCE_LANGUAGES_DIR', TEMPLATEPATH . '/languages' );
 
 /**
  * Define URL Location Constants
  */
-define('ESSENCE_IMAGES_URL', get_template_directory_uri().'/images');
-define('ESSENCE_LIB_URL', get_template_directory_uri().'/lib');
-define('ESSENCE_FUNCTIONS_URL', ESSENCE_LIB_URL.'/functions');
-define('ESSENCE_STRUCTURE_URL', ESSENCE_LIB_URL.'/structure');
-define('ESSENCE_ADMIN_URL', ESSENCE_LIB_URL.'/admin');
-if( !defined('ESSENCE_LANGUAGES_URL') ) // So we can predefine to child theme
-	define('ESSENCE_LANGUAGES_URL', ESSENCE_LIB_URL.'/languages');
+define( 'ESSENCE_IMAGES_URL', get_template_directory_uri() . '/images' );
+define( 'ESSENCE_LIB_URL', get_template_directory_uri() . '/lib' );
+define( 'ESSENCE_FUNCTIONS_URL', ESSENCE_LIB_URL . '/functions' );
+define( 'ESSENCE_STRUCTURE_URL', ESSENCE_LIB_URL . '/structure' );
+define( 'ESSENCE_ADMIN_URL', ESSENCE_LIB_URL . '/admin' );
+if(  !defined( 'ESSENCE_LANGUAGES_URL' )  ) // So we can predefine to child theme
+	define( 'ESSENCE_LANGUAGES_URL', ESSENCE_LIB_URL . '/languages' );
 
 /**
- * Define Settings Field Constants (for DB storage)
+ * Define Settings Field Constants ( for DB storage )
  */
-define('ESSENCE_SETTINGS_FIELD', apply_filters('essence_settings_field', 'essence-settings'));
-define('ESSENCE_SETTINGS_GROUP', apply_filters('essence_settings_group', 'essence-settings-group'));
-//define('ESSENCE_SEO_SETTINGS_FIELD', apply_filters('essence_seo_settings_field', 'essence-seo-settings'));
+define( 'ESSENCE_SETTINGS_FIELD', apply_filters( 'essence_settings_field', 'essence-settings' ) );
+define( 'ESSENCE_SETTINGS_GROUP', apply_filters( 'essence_settings_group', 'essence-settings-group' ) );
 
 //	Run the essence_pre_framework Hook
-do_action('essence_pre_framework');
+do_action( 'essence_pre_framework' );
 
 /**
  * Load Framework Components, unless a child theme says not to
- *
- **/
-if ( !defined('ESSENCE_LOAD_FRAMEWORK') || ESSENCE_LOAD_FRAMEWORK !== false ) {
+ */
+if ( !defined('ESSENCE_LOAD_FRAMEWORK') || false !== ESSENCE_LOAD_FRAMEWORK ) {
 
-//	Load Framework
-//require_once(ESSENCE_LIB_DIR . '/framework.php');
+	//	Load Framework
+	//require_once(ESSENCE_LIB_DIR . '/framework.php');
 
-//	Load Functions
-require_once(ESSENCE_FUNCTIONS_DIR . '/tools.php');
-require_once(ESSENCE_FUNCTIONS_DIR . '/options.php');
+	//	Load Functions
+	require_once(ESSENCE_FUNCTIONS_DIR . '/tools.php');
+	require_once(ESSENCE_FUNCTIONS_DIR . '/options.php');
 
-//	Load Structure
-require_once(ESSENCE_STRUCTURE_DIR . '/menus.php');
-require_once(ESSENCE_STRUCTURE_DIR . '/galleries.php');
+	//	Load Structure
+	require_once(ESSENCE_STRUCTURE_DIR . '/menus.php');
+	require_once(ESSENCE_STRUCTURE_DIR . '/galleries.php');
 
-//	Load Admin
-require_once(ESSENCE_ADMIN_DIR . '/menu.php');
-require_once(ESSENCE_ADMIN_DIR . '/essence-settings.php');
+	//	Load Admin
+	require_once(ESSENCE_ADMIN_DIR . '/menu.php');
+	require_once(ESSENCE_ADMIN_DIR . '/essence-settings.php');
 
-//	Load Javascript
-//require_once(ESSENCE_JS_DIR . '/load-scripts.php');
+	//	Load Javascript
+	//require_once(ESSENCE_JS_DIR . '/load-scripts.php');
 
-//	Load CSS
-//require_once(ESSENCE_CSS_DIR . '/load-styles.php');
+	//	Load CSS
+	//require_once(ESSENCE_CSS_DIR . '/load-styles.php');
 
 }
 
@@ -127,7 +115,7 @@ if ( ! isset( $content_width ) )
  *
  */
 function essence_enqueue_scripts() {
-	wp_enqueue_style( 'essence', get_stylesheet_uri(), array(), ESSENCE_VERSION );
+	wp_enqueue_style( 'essence', get_stylesheet_uri(), array(), '20110725' );
 	wp_enqueue_style( 'colorbox', get_template_directory_uri() . '/css/gallery.css', array(), '0.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint', get_template_directory_uri() . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint-print', get_template_directory_uri() . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
@@ -146,8 +134,8 @@ function essence_enqueue_scripts() {
 	 */
 	wp_enqueue_script('hoverIntent', get_template_directory_uri() . '/js/hoverIntent.js', array('jquery'), '20110226', true);
 	wp_enqueue_script('superfish', get_template_directory_uri() . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
-	wp_enqueue_script('superfish-args', get_template_directory_uri() . '/js/superfish.args.js', array('superfish'), ESSENCE_VERSION, true);
-	wp_enqueue_script('label-over', get_template_directory_uri() . '/js/label_over.js', array('jquery'), ESSENCE_VERSION, true);
+	wp_enqueue_script('superfish-args', get_template_directory_uri() . '/js/superfish.args.js', array('superfish'), '20110725', true);
+	wp_enqueue_script('label-over', get_template_directory_uri() . '/js/label_over.js', array('jquery'), '20110725', true);
 	wp_enqueue_script('html5', get_template_directory_uri() . '/js/html5.js', null, '1.6.2', true);
 
 	/**
