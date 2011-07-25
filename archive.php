@@ -55,11 +55,15 @@ get_header();
 	 */
 	rewind_posts();
 
+	do_action( 'essence_content_open' );
+	essence_content_nav( 'nav-above' );
+
 	/* Run the loop for the archives page to output the posts.
 	 * If you want to overload this in a child theme then include a file
 	 * called loop-archive.php and that will be used instead.
 	 */
 	 get_template_part( 'loop', 'archive' );
+	essence_content_nav( 'nav-below' );
 ?>
 
 			</div><!-- #content -->

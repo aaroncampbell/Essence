@@ -56,11 +56,15 @@ get_header();
 	 */
 	rewind_posts();
 
+	do_action( 'essence_content_open' );
+	essence_content_nav( 'nav-above' );
+
 	/* Run the loop for the author archive page to output the authors posts
 	 * If you want to overload this in a child theme then include a file
 	 * called loop-author.php and that will be used instead.
 	 */
-	 get_template_part( 'loop', 'author' );
+	get_template_part( 'loop', 'author' );
+	essence_content_nav( 'nav-below' );
 ?>
 			</div><!-- #content -->
 		</div><!-- #container -->
