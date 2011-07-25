@@ -23,7 +23,6 @@ function essence_theme_settings_defaults() {
 add_action('admin_init', 'essence_register_theme_settings', 5);
 function essence_register_theme_settings() {
 	register_setting( ESSENCE_SETTINGS_GROUP, ESSENCE_SETTINGS_FIELD, 'essence_sanitize_theme_settings' );
-	//add_option( ESSENCE_SETTINGS_FIELD, essence_theme_settings_defaults() );
 }
 
 function essence_sanitize_theme_settings( $options ) {
@@ -89,14 +88,14 @@ function essence_theme_admin_settings() {
 					settings_fields( ESSENCE_SETTINGS_GROUP );
 					for ( $i = 1; $i <= $screen_layout_columns; $i++ ) {
 ?>
-					<div class="postbox-container" style="width:<?php echo $col_width; ?>;">
+						<div class="postbox-container" style="width:<?php echo $col_width; ?>;">
 <?php
 						do_action( "essence-settings-col{$i}-top" );
 						do_meta_boxes( 'essence-settings', "col{$i}", '' );
 						do_action( 'essence-settings', "col{$i}" );
 						do_action( "essence-settings-col{$i}-bottom" );
 ?>
-					</div>
+						</div>
 <?php
 					}
 ?>
