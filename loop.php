@@ -38,9 +38,9 @@ if ( ! have_posts() ) {
 <?php
 }
 
-	/**
-	 * Start the Loop.
-	 */
+/**
+ * Start the Loop.
+ */
 while ( have_posts() ) {
 	the_post();
 	get_template_part( 'content', get_post_format() );
