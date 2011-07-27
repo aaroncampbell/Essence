@@ -24,13 +24,17 @@ get_header();
 					printf( __( 'Tag Archives: %s', 'essence' ), '<span>' . single_tag_title( '', false ) . '</span>' );
 				?></h1>
 
-<?php
-/* Run the loop for the tag archive to output the posts
- * If you want to overload this in a child theme then include a file
- * called loop-tag.php and that will be used instead.
- */
- get_template_part( 'loop', 'tag' );
-?>
+				<?php
+				do_action( 'essence_content_open' );
+				essence_content_nav( 'nav-above' );
+
+				/* Run the loop for the tag archive to output the posts
+				 * If you want to overload this in a child theme then include a file
+				 * called loop-tag.php and that will be used instead.
+				 */
+				get_template_part( 'loop', 'tag' );
+				essence_content_nav( 'nav-below' );
+				?>
 			</div><!-- #content -->
 		</div><!-- #container -->
 
