@@ -3,7 +3,7 @@ Contributors: aaroncampbell
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=S89UBLE9C9NPC
 Requires at least: 3.1
 Tested up to: 3.2.1
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 
 A high-quality, well coded, fast loading theme designed as a base for new themes.
 
@@ -16,6 +16,9 @@ functionality without making the theme too large and cumbersome.  It should just
 do what you want and nothing more.
 
 == Changelog ==
+
+= 0.0.3 =
+* Added page navigation links to Tag templates
 
 = 0.0.2 =
 * Fixed error in category.php
