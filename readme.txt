@@ -19,6 +19,8 @@ do what you want and nothing more.
 
 = 0.0.4 =
 * Replace TEMPLATEPATH with get_template_directory() - See http://core.trac.wordpress.org/ticket/18298
+* Style the reply to comment link
+* Style the comment form
 
 = 0.0.3 =
 * Added page navigation links to Tag templates
