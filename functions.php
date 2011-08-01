@@ -725,7 +725,15 @@ function essence_comment( $comment, $args, $depth ) {
 		<div class="comment-body"><?php comment_text(); ?></div>
 
 		<div class="reply">
-			<?php comment_reply_link( array_merge( $args, array( 'depth' => $depth, 'max_depth' => $args['max_depth'] ) ) ); ?>
+			<?php
+			$comment_reply_link_args = array(
+				'depth'      => $depth,
+				'max_depth'  => $args['max_depth'],
+				'reply_text' => sprintf( __( 'Reply to %s &crarr;' ), get_comment_author() ),
+			);
+			$comment_reply_link_args = array_merge( $args, $comment_reply_link_args );
+			comment_reply_link( $comment_reply_link_args );
+			?>
 		</div><!-- .reply -->
 	</div><!-- #comment-##  -->
 

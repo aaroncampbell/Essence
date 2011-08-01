@@ -76,7 +76,10 @@ if ( have_comments() ) {
 	} // check for comment navigation
 } // end have_comments()
 
-comment_form();
+$comment_form_args = array(
+	'comment_notes_after' => '<p>' . __( '<strong>Note</strong>: If you are replying to another commenter, click the "Reply to {NAME} &crarr;" button under their comment!') . '</p>'
+);
+comment_form( $comment_form_args );
 ?>
 
 </div><!-- #comments -->
