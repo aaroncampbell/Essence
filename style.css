@@ -224,8 +224,20 @@ blockquote {
 .commentlist .bypostauthor {
 }
 
-#commentform textarea,
+#respond {
+	-moz-border-radius: 3px;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding:20px;
+}
+
+#commentform textarea {
+	margin-top:0;
+	width:99%;
+}
+
 #commentform input {
+	margin-top:0;
 	width:100%;
 }
 /**
