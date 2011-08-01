@@ -37,18 +37,18 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define( 'ESSENCE_VERSION', '0.0.2' );
+define( 'ESSENCE_VERSION', '0.0.4' );
 
 /**
  * Define Directory Location Constants
  */
-define( 'ESSENCE_IMAGES_DIR', TEMPLATEPATH . '/images' );
-define( 'ESSENCE_LIB_DIR', TEMPLATEPATH . '/lib' );
+define( 'ESSENCE_IMAGES_DIR', get_template_directory() . '/images' );
+define( 'ESSENCE_LIB_DIR', get_template_directory() . '/lib' );
 define( 'ESSENCE_FUNCTIONS_DIR', ESSENCE_LIB_DIR . '/functions' );
 define( 'ESSENCE_STRUCTURE_DIR', ESSENCE_LIB_DIR . '/structure' );
 define( 'ESSENCE_ADMIN_DIR', ESSENCE_LIB_DIR . '/admin' );
 if(  !defined( 'ESSENCE_LANGUAGES_DIR' )  ) // So we can define with a child theme
-	define( 'ESSENCE_LANGUAGES_DIR', TEMPLATEPATH . '/languages' );
+	define( 'ESSENCE_LANGUAGES_DIR', get_template_directory() . '/languages' );
 
 /**
  * Define URL Location Constants
@@ -311,10 +311,10 @@ function essence_setup() {
 	 */
 	// Make theme available for translation
 	// Translations can be filed in the /languages/ directory
-	load_theme_textdomain( 'essence', TEMPLATEPATH . '/languages' );
+	load_theme_textdomain( 'essence', get_template_directory() . '/languages' );
 
 	$locale = get_locale();
-	$locale_file = TEMPLATEPATH . "/languages/{$locale}.php";
+	$locale_file = get_template_directory() . "/languages/{$locale}.php";
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file );
 
