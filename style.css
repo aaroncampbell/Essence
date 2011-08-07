@@ -292,13 +292,24 @@ img.alignright {
 .widget-container h4,
 #breadcrumbs,
 blockquote,
-.wp-caption {
+.wp-caption,
+.notice {
 	background:#F6F6F6;
 	border:1px solid #DDD;
 }
+.error {
+	background:#ffebe8;
+	border:1px solid #c00;
+}
+.notice,
+.error,
 .wp-caption {
 	padding:5px;
 	text-align:center;
+}
+
+.error a {
+	color: #c00;
 }
 
 .wp-caption img {
