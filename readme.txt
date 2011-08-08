@@ -17,6 +17,9 @@ do what you want and nothing more.
 
 == Changelog ==
 
+= 0.0.5 =
+* info, alert, and error boxes recolored to match theme
+
 = 0.0.4 =
 * Replace TEMPLATEPATH with get_template_directory() - See http://core.trac.wordpress.org/ticket/18298
 * Style the reply to comment link
