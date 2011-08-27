@@ -4,14 +4,16 @@
  */
 function essence_theme_settings_defaults() {
 	$defaults = array( // define our defaults
-		'blog_title_image'			=> '',
-		'nav'						=> 1,
-		'nav_superfish'				=> 1,
-		'nav_home'					=> 1,
-		'subnav'					=> 0,
-		'subnav_superfish'			=> 1,
-		'subnav_home'				=> 0,
-		'widgetize_header_right'	=> 0,
+		'blog_title_image'       => '',
+		'nav'                    => true,
+		'nav_superfish'          => true,
+		'nav_home'               => true,
+		'subnav'                 => false,
+		'subnav_superfish'       => true,
+		'subnav_home'            => false,
+		'widgetize_header_right' => false,
+		'header_image_width'     => 940,
+		'header_image_height'    => 200,
 	);
 
 	return apply_filters('essence_theme_settings_defaults', $defaults);
@@ -26,18 +28,24 @@ function essence_register_theme_settings() {
 }
 
 function essence_sanitize_theme_settings( $options ) {
-	if ( isset( $options['blog_title_image'] ) ) {
+	if ( isset( $options['blog_title_image'] ) )
 		$options['blog_title_image'] = esc_url_raw( $options['blog_title_image'] );
-	}
-	if ( isset( $options['nav'] ) ) {
+
+	if ( isset( $options['nav'] ) )
 		$options['nav'] = essence_boolean( $options['nav'] );
-	}
-	if ( isset( $options['subnav'] ) ) {
+
+	if ( isset( $options['subnav'] ) )
 		$options['subnav'] = essence_boolean( $options['subnav'] );
-	}
-	if ( isset( $options['widgetize_header_right'] ) ) {
+
+	if ( isset( $options['widgetize_header_right'] ) )
 		$options['widgetize_header_right'] = essence_boolean( $options['widgetize_header_right'] );
-	}
+
+	if ( isset( $options['header_image_width'] ) )
+		$options['header_image_width'] = absint( $options['header_image_width'] );
+
+	if ( isset( $options['header_image_height'] ) )
+		$options['header_image_height'] = absint( $options['header_image_height'] );
+
 	return $options;
 }
 
@@ -79,8 +87,6 @@ function essence_theme_admin_settings() {
 					<?php esc_html_e( 'Essence Settings', 'essence' ); ?>
 				</h2>
 
-
-				</p>
 				<div class="metabox-holder">
 					<div style="width:<?php echo $main_width; ?>%; float:left;">
 <?php
@@ -157,6 +163,18 @@ function essence_theme_settings_general_box() { ?>
 		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="0" />
 		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="1" <?php checked(1, essence_get_option('widgetize_header_right')); ?> />
 		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right"><?php _e("Widgetize Right Side of Header?", 'essence'); ?></label>
+	</p>
+	<p>
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_width">
+			<?php _e("Header Image Width:", 'essence'); ?>
+		</label>
+		<input type="text" value="<?php esc_attr_e( essence_get_option('header_image_width') ); ?>" class="small-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_image_width]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_width">
+	</p>
+	<p>
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_height">
+			<?php _e("Header Image Height:", 'essence'); ?>
+		</label>
+		<input type="text" value="<?php esc_attr_e( essence_get_option('header_image_height') ); ?>" class="small-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_image_height]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_height">
 	</p>
 <?php
 }

@@ -37,7 +37,7 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define( 'ESSENCE_VERSION', '0.0.4' );
+define( 'ESSENCE_VERSION', '0.0.5-alpha' );
 
 /**
  * Define Directory Location Constants
@@ -306,6 +306,9 @@ function essence_setup() {
 	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
 
+	// Add default posts and comments RSS feed links to head
+	add_theme_support( 'flexible_header_image_upload' );
+
 	/**
 	 * @todo Generate POT and get translations
 	 */
@@ -336,8 +339,8 @@ function essence_setup() {
 
 	// The height and width of your custom header. You can hook into the theme's own filters to change these values.
 	// Add a filter to essence_header_image_width and essence_header_image_height to change these values.
-	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'essence_header_image_width',  940 ) );
-	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'essence_header_image_height',	198 ) );
+	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'essence_header_image_width', essence_get_option('header_image_width') ) );
+	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'essence_header_image_height', essence_get_option('header_image_height') ) );
 
 	/**
 	 * @todo Post thumbnails should be set to the size of my content showcase once that's implementd
@@ -729,7 +732,7 @@ function essence_comment( $comment, $args, $depth ) {
 			$comment_reply_link_args = array(
 				'depth'      => $depth,
 				'max_depth'  => $args['max_depth'],
-				'reply_text' => sprintf( __( 'Reply to %s &crarr;' ), get_comment_author() ),
+				'reply_text' => sprintf( __( 'Reply to %s &crarr;', 'essence' ), get_comment_author() ),
 			);
 			$comment_reply_link_args = array_merge( $args, $comment_reply_link_args );
 			comment_reply_link( $comment_reply_link_args );
