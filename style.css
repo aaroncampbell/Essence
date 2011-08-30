@@ -543,30 +543,6 @@ img.wp-smiley, img.wp-wink {
 	text-decoration:underline;
 }
 
-.widget_twitter div {
-	padding:0;
-}
-
-.widget_twitter .widget-title {
-	background-image:url(images/twitter-bird.png);
-	background-position:99% 2px;
-	background-repeat:no-repeat;
-}
-
-.widget_twitter ul li {
-	margin-bottom:5px;
-}
-
-.widget_twitter .xavisys-link {
-	list-style-type:none;
-	margin-top:10px;
-}
-
-.widget_twitter .entry-meta {
-	display:block;
-	font-size:80%;
-}
-
 .widget_search #s { /* This keeps the search inputs in line */
 	width:70%;
 }
@@ -649,6 +625,65 @@ img.wp-smiley, img.wp-wink {
 /**
  * End Widget Areas
  */
+
+/**
+ * Twitter Widget Pro styles
+ */
+.widget_twitter div {
+	padding:0;
+}
+
+.widget_twitter .widget-title {
+	background-image:url(images/twitter-bird.png);
+	background-position:99% 2px;
+	background-repeat:no-repeat;
+}
+
+.widget_twitter ul li {
+	margin-bottom:5px;
+}
+
+.widget_twitter .follow-button,
+.widget_twitter .xavisys-link {
+	list-style-type:none;
+	margin-top:10px;
+}
+
+.widget_twitter .entry-meta {
+	display:block;
+	font-size:80%;
+}
+
+.widget_twitter .intent-meta a {
+	background: url(images/everything-spritev2.png); /** from Twitter ressources */
+	display: inline-block;
+	height: 16px;
+	text-indent: -9999px;
+	width: 16px;
+}
+.widget_twitter .intent-meta a.in-reply-to {
+	background-position: 0 center;
+}
+.widget_twitter .intent-meta a:hover.in-reply-to {
+	background-position: -16px center;
+}
+.widget_twitter .intent-meta a.favorite {
+	background-position: -32px center;
+}
+.widget_twitter .intent-meta a:hover.favorite {
+	background-position: -48px center;
+}
+.widget_twitter .intent-meta a.retweet {
+	background-position: -80px center;
+}
+.widget_twitter .intent-meta a:hover.retweet {
+	background-position: -96px center;
+}
+
+/**
+ * End Twitter Widget Pro styles
+ */
+
 
 
 /**
