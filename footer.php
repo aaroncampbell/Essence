@@ -36,7 +36,7 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 
 				<div id="site-generator" class="span-9 last">
 					<?php do_action( 'essence_credits' ); ?>
-					<a href="<?php echo esc_url( __( 'http://gotthemes.com/', 'essence' ) ); ?>" title="<?php esc_attr_e( 'Essence Theme Framework for WordPress', 'essence' ); ?>" rel="generator"><?php _e( 'Proudly powered by Essence Theme Framework.', 'essence' ); ?></a>
+					<a href="<?php echo esc_url( apply_filters( 'essence-footer-link-url', 'http://essencetheme.com' ) ); ?>" title="<?php esc_attr_e( apply_filters( 'essence-footer-link-title', __( 'Essence Theme Framework for WordPress', 'essence' ) ) ); ?>" rel="generator"><?php esc_html_e( apply_filters( 'essence-footer-link-text', __( 'Proudly powered by Essence Theme Framework.', 'essence' ) ) ); ?></a>
 				</div><!-- #site-generator -->
 
 			</div><!-- #colophon -->
