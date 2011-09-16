@@ -2,8 +2,8 @@
 Contributors: aaroncampbell
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=S89UBLE9C9NPC
 Requires at least: 3.1
-Tested up to: 3.2.1
-Stable tag: 0.0.4
+Tested up to: 3.3.0
+Stable tag: 0.0.5
 
 A high-quality, well coded, fast loading theme designed as a base for new themes.
 
