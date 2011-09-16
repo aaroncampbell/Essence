@@ -22,13 +22,14 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 			<div id="colophon">
 
 				<?php
-					/* A sidebar in the footer? Yep. You can can customize
+					/**
+					 * A sidebar in the footer? Yep. You can can customize
 					 * your footer with four columns of widgets.
 					 */
 					get_sidebar( 'footer' );
 				?>
 
-				<div id="site-info" class=" span-15">
+				<div id="site-info" class="clear span-15">
 					<a href="<?php echo home_url( '/' ) ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
 						<?php bloginfo( 'name' ); ?>
 					</a>

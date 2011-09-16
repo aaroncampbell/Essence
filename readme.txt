@@ -22,6 +22,12 @@ do what you want and nothing more.
 * Add some missing text domains
 * Add settings for Header Image width/height so you can upload any size header image.
 * Styles for new features in Twitter Widget Pro
+* Fix footer floating next to widgets
+* Fix link to essencetheme.com
+* Don't require child themes to @import the Essence stylesheet
+* Automatically enqueue a child theme's style.css
+* Don't use essence_title()
+* Fix navigation hover gradients
 
 = 0.0.4 =
 * Replace TEMPLATEPATH with get_template_directory() - See http://core.trac.wordpress.org/ticket/18298

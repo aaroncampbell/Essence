@@ -115,11 +115,16 @@ if ( ! isset( $content_width ) )
  *
  */
 function essence_enqueue_scripts() {
-	wp_enqueue_style( 'essence', get_stylesheet_uri(), array( 'blueprint' ), '20110725' );
+	wp_enqueue_style( 'essence', get_template_directory_uri() . '/style.css', array( 'blueprint' ), '20110916' );
 	wp_enqueue_style( 'colorbox', get_template_directory_uri() . '/css/gallery.css', array(), '0.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint', get_template_directory_uri() . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
 	wp_enqueue_style( 'blueprint-print', get_template_directory_uri() . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
 	wp_enqueue_style( 'blueprint-ie', get_template_directory_uri() . '/css/blueprint/ie.css', array( 'blueprint' ), '1.0.1', 'screen, projection' );
+	if ( is_child_theme() ) {
+		$child_theme = get_theme_data( get_stylesheet_directory() . '/style.css' );
+		wp_enqueue_style( 'essence_child', get_stylesheet_uri(), array('essence'), $child_theme['Version'], 'screen, projection' );
+	}
+
 
 	/**
 	 * @var WP_Styles
@@ -641,53 +646,6 @@ function essence_posted_in() {
 		get_permalink(),
 		the_title_attribute( 'echo=0' )
 	);
-}
-endif;
-
-if ( ! function_exists( 'essence_title' ) ) :
-/**
- * DO NOT USE.  Currently used for the title tag.  Again, DO NOT USE.  This will
- * be replaced when the new wp_title_array filter is added (hopefully in 3.2)
- * https://core.trac.wordpress.org/ticket/17877
- *
- * @access private
- *
- * @since 0.0.1
- */
-function essence_title( $args = array() ) {
-	$defaults = array(
-		'sep'          => '|',
-		'seplocation'  => 'right',
-		'showsitename' => true,
-		'showsitedesc' => ( is_home() || is_front_page() ),
-		'showpagenum'  => true,
-	);
-
-	$args = wp_parse_args( $args, $defaults );
-
-	/*
-	 * Print the <title> tag based on what is being viewed.
-	 */
-
-	$title = wp_title( $args['sep'], false, $args['seplocation'] );
-
-	if ( $args['showsitename'] )
-		$title .= get_bloginfo( 'name', 'display' );
-
-	// Add the blog description for the home/front page.
-	if ( $args['showsitedesc'] ) {
-		$site_description = get_bloginfo( 'description', 'display' );
-		if ( !empty( $site_description ) )
-			$title .= " {$args['sep']} {$site_description}";
-	}
-
-	global $page, $paged; // Contains page number.
-
-	// Add a page number if necessary:
-	if ( $args['showpagenum'] && ( $paged >= 2 || $page >= 2 ) )
-		$title .= " {$args['sep']} " . sprintf( __( 'Page %s', 'essence' ), max( $paged, $page ) );
-
-	return $title;
 }
 endif;
 

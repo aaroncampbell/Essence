@@ -392,7 +392,7 @@ img.wp-smiley, img.wp-wink {
 	border-right:1px solid #999;
 	display:block;
 	font-size:12px;
-    margin:0;
+	margin:0;
 	padding:5px 10px 5px;
 	position:relative;
 	text-decoration:none;
@@ -401,7 +401,13 @@ img.wp-smiley, img.wp-wink {
 .navigation .menu li a:hover,
 .navigation .menu li a:active,
 .navigation .menu .current_page_item a {
-	background-color:#333;
+	background-color:#333; /* Fallback */
+	background-image:-ms-linear-gradient(top, #666 0%, #333 50%); /* IE10 */
+	background-image:-moz-linear-gradient(top, #666 0%, #333 50%); /* Mozilla Firefox */
+	background-image:-o-linear-gradient(top, #666 0%, #333 50%); /* Opera */
+	background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0, #666), color-stop(.5, #333)); /* Webkit (Safari/Chrome 10) */
+	background-image:-webkit-linear-gradient(top, #666 0%, #333 50%); /* Webkit (Chrome 11+) */
+	background-image:linear-gradient(top, #666 0%, #333 50%); /* Proposed W3C Markup */
 	color:#FFF;
 }
 
