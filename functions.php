@@ -37,7 +37,7 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define( 'ESSENCE_VERSION', '0.0.5-alpha' );
+define( 'ESSENCE_VERSION', '0.0.6-alpha' );
 
 /**
  * Define Directory Location Constants
@@ -280,7 +280,7 @@ if ( ! function_exists('essence_setup') ):
  * @uses register_default_headers() To register the default custom header images provided with the theme.
  * @uses set_post_thumbnail_size() To set a custom post thumbnail size.
  *
- * @since 3.0.0
+ * @since 0.0.1
  */
 function essence_setup() {
 
@@ -475,7 +475,7 @@ if ( ! function_exists( 'essence_admin_header_style' ) ) :
  *
  * Referenced via add_custom_image_header() in essence_setup().
  *
- * @since 3.0.0
+ * @since 0.0.1
  */
 function essence_admin_header_style() {
 ?>

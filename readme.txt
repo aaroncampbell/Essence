@@ -17,6 +17,9 @@ do what you want and nothing more.
 
 == Changelog ==
 
+= 0.0.6 =
+* Add support for speech input to search and settings
+
 = 0.0.5 =
 * info, alert, and error boxes recolored to match theme
 * Add some missing text domains

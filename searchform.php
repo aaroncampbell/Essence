@@ -7,7 +7,7 @@
  *
  * @package WordPress
  * @subpackage Twenty Ten
- * @since 3.0.0
+ * @since 0.0.1
  */
 if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
 	if ( 'show' != $_REQUEST['debug'] ) {
@@ -24,7 +24,7 @@ if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
     <form id="searchform" name="searchform" method="get" action="<?php echo home_url(); ?>">
 		<div>
 			<label for="s"><?php _e( 'Search', 'essence' ); ?></label>
-			<input type="text" id="s" name="s" />
+			<input type="text" id="s" name="s" x-webkit-speech />
 			<input type="submit" id="searchsubmit" value="<?php esc_attr_e( 'Search', 'essence' ); ?>" />
 		</div>
     </form>

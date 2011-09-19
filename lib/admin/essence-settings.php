@@ -147,7 +147,7 @@ function essence_theme_settings_general_box() { ?>
 		<label for="blog_title_image">
 			<?php _e("Logo Image:", 'essence'); ?>
 		</label>
-		<input type="text" value="<?php esc_attr_e( essence_get_option('blog_title_image') ); ?>" class="regular-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[blog_title_image]" id="blog_title_image">
+		<input type="text" value="<?php esc_attr_e( essence_get_option('blog_title_image') ); ?>" class="regular-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[blog_title_image]" id="blog_title_image" x-webkit-speech />
 	</p>
 	<p>
 		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_nav" value="0" />
@@ -168,13 +168,13 @@ function essence_theme_settings_general_box() { ?>
 		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_width">
 			<?php _e("Header Image Width:", 'essence'); ?>
 		</label>
-		<input type="text" value="<?php esc_attr_e( essence_get_option('header_image_width') ); ?>" class="small-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_image_width]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_width">
+		<input type="text" value="<?php esc_attr_e( essence_get_option('header_image_width') ); ?>" class="small-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_image_width]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_width" x-webkit-speech />
 	</p>
 	<p>
 		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_height">
 			<?php _e("Header Image Height:", 'essence'); ?>
 		</label>
-		<input type="text" value="<?php esc_attr_e( essence_get_option('header_image_height') ); ?>" class="small-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_image_height]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_height">
+		<input type="text" value="<?php esc_attr_e( essence_get_option('header_image_height') ); ?>" class="small-text code" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_image_height]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_height" x-webkit-speech />
 	</p>
 <?php
 }
