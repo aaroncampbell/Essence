@@ -10,6 +10,29 @@
  * Tags: gray, two-columns, right-sidebar, fixed-width, custom-background, custom-menu, full-width-template, translation-ready
  */
 
+body {
+	font-size:14px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+	/*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);*/
+}
+
+h1 {
+	font-size:2em;
+}
+h2 {
+	font-size:1.75em;
+}
+h5 {
+	font-size:1.1em
+}
+
 #content-container {
 	background-color:#FFF;
 	margin-top:1em;
@@ -50,6 +73,14 @@
 /**
  * End Error, alert, notice, success, and info boxes
  */
+
+.rounded-box {
+	background: #F6F6F6;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 10px;
+	border-radius: 10px;
+	padding:5px;
+}
 
 /**
  * Footer
@@ -197,6 +228,27 @@ blockquote {
  * End Posts
  */
 
+#entry-author-info {
+	margin:1em 0;
+}
+#entry-author-info #author-avatar {
+	float: left;
+	margin-right:30px;
+}
+#entry-author-info #author-description h2 {
+	margin-bottom:.25em;
+}
+#entry-author-info #author-link {
+	text-align:right;
+	margin-top:.25em;
+}
+
+.author-contact {
+	list-style: none;
+	margin:0;
+	padding:0;
+}
+
 /**
  * Comments
  * @todo comment styles
@@ -331,8 +383,8 @@ blockquote,
 }
 
 .wp-caption p.wp-caption-text {
-	font-size:11px;
-	line-height:12px;
+	font-size:.9em;
+	line-height:1em;
 	margin:0;
 }
 
@@ -391,7 +443,6 @@ img.wp-smiley, img.wp-wink {
 .navigation .menu li a {
 	border-right:1px solid #999;
 	display:block;
-	font-size:12px;
 	margin:0;
 	padding:5px 10px 5px;
 	position:relative;
@@ -434,7 +485,7 @@ img.wp-smiley, img.wp-wink {
 	border:1px solid #999;
 	border-top:none;
 	color:#FFF;
-	font-size:11px;
+	font-size:.9em;
 	margin:0 0 0 -1px;
 	padding:6px 10px;
 	position:relative;
@@ -522,9 +573,14 @@ img.wp-smiley, img.wp-wink {
 }
 
 .widget-container p,
-.widget-container div {
+.widget-container > div {
 	margin:0;
 	padding:10px;
+}
+
+.widget-container ul.gform_fields {
+	margin:0;
+	padding:0;
 }
 .widget-container h2,
 .widget-container h3,
@@ -553,7 +609,6 @@ img.wp-smiley, img.wp-wink {
 	width:70%;
 }
 .widget_search label {
-	font-size:14px;
 	font-weight:bold;
 	color:#222;
 	display:block;
@@ -597,13 +652,11 @@ img.wp-smiley, img.wp-wink {
 #wp-calendar caption {
 	border:1px solid #FFF;
 	color:#222;
-	font-size:14px;
 	font-weight:bold;
 	padding-bottom:4px;
 	text-align:left;
 }
 #wp-calendar thead {
-	font-size:11px;
 }
 #wp-calendar tbody td,
 #wp-calendar thead th {
@@ -738,7 +791,6 @@ img.wp-smiley, img.wp-wink {
 }
 .gallery .gallery-caption {
 	color: #888;
-	font-size: 12px;
 	margin: 0 0 12px;
 }
 .gallery dl {
@@ -770,7 +822,6 @@ img.wp-smiley, img.wp-wink {
 	border-bottom: 1px solid #ddd;
 	color: #1982d1;
 	clip: auto !important;
-	font-size: 12px;
 	position: absolute;
 	text-decoration: underline;
 	top: 0;
@@ -799,7 +850,6 @@ code {
 
 #site-info {
 	float:left;
-	font-size:14px;
 	font-weight:bold;
 }
 

@@ -613,7 +613,7 @@ function essence_posted_on() {
 			esc_attr( get_the_time() ),
 			get_the_date()
 		),
-		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s">%3$s</a></span>',
+		sprintf( '<span class="author vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>',
 			get_author_posts_url( get_the_author_meta( 'ID' ) ),
 			sprintf( esc_attr__( 'View all posts by %s', 'essence' ), get_the_author() ),
 			get_the_author()
@@ -728,3 +728,10 @@ function essence_content_nav( $nav_id ) {
 <?php
 	}
 }
+
+function essence_add_google_profile( $contactmethods ) {
+	// Add Google Profile
+	$contactmethods['google_profile'] = 'Google Profile URL';
+	return $contactmethods;
+}
+add_filter( 'user_contactmethods', 'essence_add_google_profile', null, 1);

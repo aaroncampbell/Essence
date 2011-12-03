@@ -38,7 +38,7 @@ if ( have_posts() ) {
 					<?php
 					if ( get_the_author_meta( 'description' ) ) { // If a user has filled out their description, show a bio on their entries
 					?>
-					<div id="entry-author-info">
+					<div id="entry-author-info" class="info">
 						<div id="author-avatar">
 							<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'essence_author_bio_avatar_size', 60 ) ); ?>
 						</div><!-- #author-avatar -->

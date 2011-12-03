@@ -22,21 +22,35 @@ get_header();
 	 */
 	if ( have_posts() )
 		the_post();
-?>
 
-				<h1 class="page-title author"><?php printf( __( 'Author Archives: %s', 'essence' ), "<span class='vcard'><a class='url fn n' href='" . get_author_posts_url( get_the_author_meta( 'ID' ) ) . "' title='" . esc_attr( get_the_author() ) . "' rel='me'>" . get_the_author() . "</a></span>" ); ?></h1>
-
-<?php
 	// If a user has filled out their description, show a bio on their entries.
 	if ( get_the_author_meta( 'description' ) ) {
 ?>
-					<div id="entry-author-info">
+					<div id="entry-author-info" class="rounded-box">
 						<div id="author-avatar">
 							<?php echo get_avatar( get_the_author_meta( 'user_email' ), apply_filters( 'essence_author_bio_avatar_size', 60 ) ); ?>
 						</div><!-- #author-avatar -->
 						<div id="author-description">
-							<h2><?php printf( __( 'About %s', 'essence' ), get_the_author() ); ?></h2>
-							<?php the_author_meta( 'description' ); ?>
+							<h1><?php the_author(); ?></h1>
+							<?php
+								the_author_meta( 'description' );
+								$contact_links = array();
+								foreach( _wp_get_user_contactmethods() as $method => $name ) {
+									$contact_method = get_the_author_meta( $method );
+									if ( $contact_method )
+										$contact_links[] = '<a href="' . esc_url($contact_method) . '" class="contact_method_' . esc_attr( $method ) . '" rel="me">' . esc_html( $name ) . '</a>';
+								}
+								if ( ! empty( $contact_links ) ) {
+									?>
+									<br />
+									<br />
+									<strong>Find me on:</strong>
+									<ul class="author-contact">
+										<li><?php echo implode( '</li><li>', $contact_links ); ?></li>
+									</ul>
+									<?php
+								}
+							?>
 						</div><!-- #author-description	-->
 					</div><!-- #entry-author-info -->
 <?php
