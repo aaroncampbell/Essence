@@ -41,3 +41,18 @@ if ( !function_exists('dump') ) {
 		echo $v;
 	}
 }
+
+/**
+ * For use with debugging
+ */
+if ( !function_exists('essence_show_template_file') ) {
+	function essence_show_template_file( $file ) {
+		if ( !empty( $_REQUEST['debug'] ) ) {
+			if ( 'show' != $_REQUEST['debug'] )
+				echo '<!-- ';
+			echo esc_html( sprintf( __( 'Theme File: %s' , 'essence' ), $file ) );
+			if ( 'show' != $_REQUEST['debug'] )
+				echo ' -->';
+		}
+	}
+}
