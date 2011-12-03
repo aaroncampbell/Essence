@@ -19,6 +19,7 @@ do what you want and nothing more.
 
 = 0.0.6 =
 * Add support for speech input to search and settings
+* Added essence_show_template_file()
 
 = 0.0.5 =
 * info, alert, and error boxes recolored to match theme
