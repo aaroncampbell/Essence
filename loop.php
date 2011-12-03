@@ -15,15 +15,7 @@
  *
  * @since 0.0.1
  */
-if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
-	if ( 'show' != $_REQUEST['debug'] ) {
-		echo '<!-- ';
-	}
-	esc_html_e( 'Theme File: ' . __FILE__ );
-	if ( 'show' != $_REQUEST['debug'] ) {
-		echo ' -->';
-	}
-}
+essence_show_template_file( __FILE__ );
 
 /* If there are no posts to display, such as an empty archive page */
 if ( ! have_posts() ) {

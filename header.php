@@ -2,15 +2,7 @@
 /**
  * The Header for our theme.
  */
-if ( WP_DEBUG && !empty( $_REQUEST['debug'] ) ) {
-	if ( 'show' != $_REQUEST['debug'] ) {
-		echo '<!-- ';
-	}
-	esc_html_e( 'Theme File: ' . __FILE__ );
-	if ( 'show' != $_REQUEST['debug'] ) {
-		echo ' -->';
-	}
-}
+essence_show_template_file( __FILE__ );
 ?><!DOCTYPE html>
 <!--[if IE 6]>
 <html class="ie6" <?php language_attributes(); ?>>
