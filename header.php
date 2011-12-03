@@ -76,7 +76,7 @@ essence_show_template_file( __FILE__ );
 				$header_image = get_header_image();
 				if ( ! empty( $header_image ) ) {
 					if ( function_exists( 'getimagesize' ) ) {
-						list( $header_width, $header_height, $header_type, $header_attr ) = getimagesize( str_replace( site_url('/'), ABSPATH, $header_image ) );
+						list( $header_width, $header_height, $header_type, $header_attr ) = getimagesize( $file_path = str_replace(WP_CONTENT_URL, WP_CONTENT_DIR, $header_image ) );
 					} else {
 						$header_width = HEADER_IMAGE_WIDTH;
 						$header_height = HEADER_IMAGE_HEIGHT;
