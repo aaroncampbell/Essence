@@ -14,6 +14,7 @@ function essence_theme_settings_defaults() {
 		'widgetize_header_right' => false,
 		'header_image_width'     => 940,
 		'header_image_height'    => 200,
+		'header_use_feat_img'    => false,
 	);
 
 	return apply_filters('essence_theme_settings_defaults', $defaults);
@@ -45,6 +46,9 @@ function essence_sanitize_theme_settings( $options ) {
 
 	if ( isset( $options['header_image_height'] ) )
 		$options['header_image_height'] = absint( $options['header_image_height'] );
+
+	if ( isset( $options['header_use_feat_img'] ) )
+		$options['header_use_feat_img'] = essence_boolean( $options['header_use_feat_img'] );
 
 	return $options;
 }
@@ -163,6 +167,11 @@ function essence_theme_settings_general_box() { ?>
 		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="0" />
 		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[widgetize_header_right]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right" value="1" <?php checked(1, essence_get_option('widgetize_header_right')); ?> />
 		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_widgetize_header_right"><?php _e("Widgetize Right Side of Header?", 'essence'); ?></label>
+	</p>
+	<p>
+		<input type="hidden" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_use_feat_img" value="0" />
+		<input type="checkbox" name="<?php echo ESSENCE_SETTINGS_FIELD; ?>[header_use_feat_img]" id="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_use_feat_img" value="1" <?php checked(1, essence_get_option('header_use_feat_img')); ?> />
+		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_use_feat_img"><?php _e("Widgetize Right Side of Header?", 'essence'); ?></label>
 	</p>
 	<p>
 		<label for="<?php echo ESSENCE_SETTINGS_FIELD; ?>_header_image_width">

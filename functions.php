@@ -352,7 +352,7 @@ function essence_setup() {
 	 */
 	// We'll be using post thumbnails for custom header images on posts and pages.
 	// We want them to be 940 pixels wide by 198 pixels tall (larger images will be auto-cropped to fit).
-	set_post_thumbnail_size( HEADER_IMAGE_WIDTH, HEADER_IMAGE_HEIGHT, true );
+	set_post_thumbnail_size( apply_filters( 'essence_thumbnail_image_width', HEADER_IMAGE_WIDTH ), apply_filters( 'essence_thumbnail_image_height', HEADER_IMAGE_HEIGHT ), apply_filters( 'essence_thumbnail_image_crop', true ) );
 
 	/**
 	 * @todo check on NO_HEADER_TEXT

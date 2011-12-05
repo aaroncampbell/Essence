@@ -20,7 +20,9 @@ function essence_wp_head() {
 					} else {
 						return ' ';
 					}
-				}
+				},
+				maxWidth: jQuery(window).width() - 60,
+				maxHeight: jQuery(window).height() - 100,
 			});
 		});
 	});

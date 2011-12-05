@@ -88,6 +88,7 @@ essence_show_template_file( __FILE__ );
 						// The header image
 						// Check if this is a post or page, if it has a thumbnail, and if it's a big one
 						if ( is_singular() &&
+								essence_get_option('header_use_feat_img') &&
 								has_post_thumbnail( $post->ID ) &&
 								( /* $src, $width, $height */ $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), array( HEADER_IMAGE_WIDTH, HEADER_IMAGE_WIDTH ) ) ) &&
 								$image[1] >= HEADER_IMAGE_WIDTH ) {
