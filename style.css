@@ -35,11 +35,14 @@ h5 {
 
 #content-container {
 	background-color:#FFF;
-	margin-top:1em;
+}
+
+#wrapper {
+	padding-top:1em;
 }
 
 #content {
-	padding:10px;
+	padding:0 10px 10px 10px;
 }
 
 /* Text meant only for screen readers */
@@ -569,7 +572,7 @@ img.wp-smiley, img.wp-wink {
 .widget-container {
 	background:#FFF;
 	border:1px solid #DDD;
-	margin:1em 0;
+	margin-bottom:1em;
 }
 
 .widget-container p,
