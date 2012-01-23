@@ -311,8 +311,8 @@ function essence_setup() {
 	// Add default posts and comments RSS feed links to head
 	add_theme_support( 'automatic-feed-links' );
 
-	// Add default posts and comments RSS feed links to head
-	add_theme_support( 'flexible_header_image_upload' );
+	// Add support for flexible headers
+	add_theme_support( 'custom-header', array( 'random-default' => true, 'flex-height' => true, 'suggested-height' => 200 ) );
 
 	/**
 	 * @todo Generate POT and get translations
@@ -481,7 +481,6 @@ function essence_admin_header_style() {
 ?>
 <style type="text/css">
 #headimg {
-	height: <?php echo HEADER_IMAGE_HEIGHT; ?>px;
 	width: <?php echo HEADER_IMAGE_WIDTH; ?>px;
 }
 #headimg h1, #headimg #desc {
