@@ -312,7 +312,14 @@ function essence_setup() {
 	add_theme_support( 'automatic-feed-links' );
 
 	// Add support for flexible headers
-	add_theme_support( 'custom-header', array( 'random-default' => true, 'flex-height' => true, 'suggested-height' => 200 ) );
+	$header_args = array(
+		'random-default' => true,
+		'flex-height' => true,
+		'suggested-height' => 200,
+		'flex-width' => true,
+		'suggested-width' => 950,
+	);
+	add_theme_support( 'custom-header', $header_args );
 
 	/**
 	 * @todo Generate POT and get translations
