@@ -375,90 +375,122 @@ function essence_setup() {
 		'berries' => array (
 			'url' => '%s/images/headers/berries.jpg',
 			'thumbnail_url' => '%s/images/headers/berries-thumbnail.jpg',
-			'description' => __( 'Berries', 'essence' )
+			'description' => __( 'Berries', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'cherryblossom' => array (
 			'url' => '%s/images/headers/cherryblossoms.jpg',
 			'thumbnail_url' => '%s/images/headers/cherryblossoms-thumbnail.jpg',
-			'description' => __( 'Cherry Blossoms', 'essence' )
+			'description' => __( 'Cherry Blossoms', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'concave' => array (
 			'url' => '%s/images/headers/concave.jpg',
 			'thumbnail_url' => '%s/images/headers/concave-thumbnail.jpg',
-			'description' => __( 'Concave', 'essence' )
+			'description' => __( 'Concave', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'fern' => array (
 			'url' => '%s/images/headers/fern.jpg',
 			'thumbnail_url' => '%s/images/headers/fern-thumbnail.jpg',
-			'description' => __( 'Fern', 'essence' )
+			'description' => __( 'Fern', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'forestfloor' => array (
 			'url' => '%s/images/headers/forestfloor.jpg',
 			'thumbnail_url' => '%s/images/headers/forestfloor-thumbnail.jpg',
-			'description' => __( 'Forest Floor', 'essence' )
+			'description' => __( 'Forest Floor', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'inkwell' => array (
 			'url' => '%s/images/headers/inkwell.jpg',
 			'thumbnail_url' => '%s/images/headers/inkwell-thumbnail.jpg',
-			'description' => __( 'Inkwell', 'essence' )
+			'description' => __( 'Inkwell', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'path' => array (
 			'url' => '%s/images/headers/path.jpg',
 			'thumbnail_url' => '%s/images/headers/path-thumbnail.jpg',
-			'description' => __( 'Path', 'essence' )
+			'description' => __( 'Path', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'sunset' => array (
 			'url' => '%s/images/headers/sunset.jpg',
 			'thumbnail_url' => '%s/images/headers/sunset-thumbnail.jpg',
-			'description' => __( 'Sunset', 'essence' )
+			'description' => __( 'Sunset', 'essence' ),
+			'width' => 940,
+			'height' => 198,
 		),
 		'wheel' => array(
 			'url' => '%s/images/headers/wheel.jpg',
 			'thumbnail_url' => '%s/images/headers/wheel-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Wheel', 'twentyeleven' )
+			'description' => __( 'Wheel', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		),
 		'shore' => array(
 			'url' => '%s/images/headers/shore.jpg',
 			'thumbnail_url' => '%s/images/headers/shore-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Shore', 'twentyeleven' )
+			'description' => __( 'Shore', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		),
 		'trolley' => array(
 			'url' => '%s/images/headers/trolley.jpg',
 			'thumbnail_url' => '%s/images/headers/trolley-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Trolley', 'twentyeleven' )
+			'description' => __( 'Trolley', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		),
 		'pine-cone' => array(
 			'url' => '%s/images/headers/pine-cone.jpg',
 			'thumbnail_url' => '%s/images/headers/pine-cone-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Pine Cone', 'twentyeleven' )
+			'description' => __( 'Pine Cone', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		),
 		'chessboard' => array(
 			'url' => '%s/images/headers/chessboard.jpg',
 			'thumbnail_url' => '%s/images/headers/chessboard-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Chessboard', 'twentyeleven' )
+			'description' => __( 'Chessboard', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		),
 		'lanterns' => array(
 			'url' => '%s/images/headers/lanterns.jpg',
 			'thumbnail_url' => '%s/images/headers/lanterns-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Lanterns', 'twentyeleven' )
+			'description' => __( 'Lanterns', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		),
 		'willow' => array(
 			'url' => '%s/images/headers/willow.jpg',
 			'thumbnail_url' => '%s/images/headers/willow-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Willow', 'twentyeleven' )
+			'description' => __( 'Willow', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		),
 		'hanoi' => array(
 			'url' => '%s/images/headers/hanoi.jpg',
 			'thumbnail_url' => '%s/images/headers/hanoi-thumbnail.jpg',
 			/* translators: header image description */
-			'description' => __( 'Hanoi Plant', 'twentyeleven' )
+			'description' => __( 'Hanoi Plant', 'twentyeleven' ),
+			'width' => 1000,
+			'height' => 288,
 		)
 	) );
 
@@ -482,9 +514,6 @@ function essence_admin_header_style() {
 <style type="text/css">
 #headimg {
 	width: <?php echo HEADER_IMAGE_WIDTH; ?>px;
-}
-#headimg h1, #headimg #desc {
-	display: none;
 }
 </style>
 <?php

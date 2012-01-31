@@ -75,12 +75,8 @@ essence_show_template_file( __FILE__ );
 				// Check to see if the header image has been removed
 				$header_image = get_header_image();
 				if ( ! empty( $header_image ) ) {
-					if ( function_exists( 'getimagesize' ) ) {
-						list( $header_width, $header_height, $header_type, $header_attr ) = getimagesize( $file_path = str_replace(WP_CONTENT_URL, WP_CONTENT_DIR, $header_image ) );
-					} else {
-						$header_width = HEADER_IMAGE_WIDTH;
-						$header_height = HEADER_IMAGE_HEIGHT;
-					}
+					$header_width = get_header_image_width();
+					$header_height = get_header_image_height();
 			?>
 			<div class="header-image" style="height:<?php echo $header_height; ?>px;">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="width:<?php echo $header_width; ?>px;">
