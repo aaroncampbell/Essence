@@ -1,7 +1,7 @@
 === Essence ===
 Contributors: aaroncampbell
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=S89UBLE9C9NPC
-Requires at least: 3.1
+Requires at least: 3.4
 Tested up to: 3.3.0
 Stable tag: 0.0.5
 
@@ -16,6 +16,10 @@ functionality without making the theme too large and cumbersome.  It should just
 do what you want and nothing more.
 
 == Changelog ==
+
+= 0.0.7 =
+* Add twitter sprite for web intents
+* Add support for new Flex headers in WordPress 3.4
 
 = 0.0.6 =
 * Add support for speech input to search and settings

@@ -121,7 +121,7 @@ function essence_enqueue_scripts() {
 	wp_enqueue_style( 'blueprint-print', get_template_directory_uri() . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
 	wp_enqueue_style( 'blueprint-ie', get_template_directory_uri() . '/css/blueprint/ie.css', array( 'blueprint' ), '1.0.1', 'screen, projection' );
 	if ( is_child_theme() ) {
-		$child_theme = get_theme_data( get_stylesheet_directory() . '/style.css' );
+		$child_theme = wp_get_theme( get_stylesheet_directory() . '/style.css' );
 		wp_enqueue_style( 'essence_child', get_stylesheet_uri(), array('essence'), $child_theme['Version'], 'screen, projection' );
 	}
 
@@ -315,9 +315,12 @@ function essence_setup() {
 	$header_args = array(
 		'random-default' => true,
 		'flex-height' => true,
-		'suggested-height' => 200,
+		'suggested-height' => apply_filters( 'essence_header_image_height', 200 ),
 		'flex-width' => true,
-		'suggested-width' => 950,
+		'suggested-width' => apply_filters( 'essence_header_image_width', 950 ),
+		'admin-preview-callback' => 'essence_admin_header_style',
+		'default-image' => '%s/images/headers/path.jpg',
+		'header-text' => false,
 	);
 	add_theme_support( 'custom-header', $header_args );
 
@@ -333,46 +336,15 @@ function essence_setup() {
 	if ( is_readable( $locale_file ) )
 		require_once( $locale_file );
 
-	/**
-	 * @todo implement custom backgrounds
-	 */
 	// This theme allows users to set a custom background
-	add_custom_background();
-
-	/**
-	 * @todo implement this header stuff
-	 */
-	// Your changeable header business starts here
-	if ( ! defined( 'HEADER_TEXTCOLOR' ) )
-		define( 'HEADER_TEXTCOLOR', '' );
-	// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
-	if ( ! defined( 'HEADER_IMAGE' ) )
-		define( 'HEADER_IMAGE', '%s/images/headers/path.jpg' );
-
-	// The height and width of your custom header. You can hook into the theme's own filters to change these values.
-	// Add a filter to essence_header_image_width and essence_header_image_height to change these values.
-	define( 'HEADER_IMAGE_WIDTH', apply_filters( 'essence_header_image_width', essence_get_option('header_image_width') ) );
-	define( 'HEADER_IMAGE_HEIGHT', apply_filters( 'essence_header_image_height', essence_get_option('header_image_height') ) );
+	add_theme_support( 'custom-background' );
 
 	/**
 	 * @todo Post thumbnails should be set to the size of my content showcase once that's implementd
 	 */
 	// We'll be using post thumbnails for custom header images on posts and pages.
 	// We want them to be 940 pixels wide by 198 pixels tall (larger images will be auto-cropped to fit).
-	set_post_thumbnail_size( apply_filters( 'essence_thumbnail_image_width', HEADER_IMAGE_WIDTH ), apply_filters( 'essence_thumbnail_image_height', HEADER_IMAGE_HEIGHT ), apply_filters( 'essence_thumbnail_image_crop', true ) );
-
-	/**
-	 * @todo check on NO_HEADER_TEXT
-	 */
-	// Don't support text inside the header image.
-	if ( ! defined( 'NO_HEADER_TEXT' ) )
-		define( 'NO_HEADER_TEXT', true );
-
-	// Add a way for the custom header to be styled in the admin panel that controls
-	// custom headers. See essence_admin_header_style(), below.
-	add_custom_image_header( '', 'essence_admin_header_style' );
-
-	// ... and thus ends the changeable header business.
+	set_post_thumbnail_size( apply_filters( 'essence_thumbnail_image_width', get_custom_header()->width ), apply_filters( 'essence_thumbnail_image_height', get_custom_header()->height ), apply_filters( 'essence_thumbnail_image_crop', true ) );
 
 	/**
 	 * @todo Include my own custom headers, talk to Matt about including these ones?

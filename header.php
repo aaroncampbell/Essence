@@ -75,11 +75,8 @@ essence_show_template_file( __FILE__ );
 				// Check to see if the header image has been removed
 				$header_image = get_header_image();
 				if ( ! empty( $header_image ) ) {
-					if ( function_exists( 'get_header_image_width' ) )
-						$header_width = get_header_image_width();
-					else
-						$header_width = HEADER_IMAGE_WIDTH;
-					$header_height = get_header_image_height();
+					$header_width = get_custom_header()->width;
+					$header_height = get_custom_header()->height;
 			?>
 			<div class="header-image" style="height:<?php echo $header_height; ?>px;">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="width:<?php echo $header_width; ?>px;">
@@ -94,7 +91,7 @@ essence_show_template_file( __FILE__ );
 							// Houston, we have a new header image!
 							echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
 						} else {
-					?><img src="<?php echo esc_url( $header_image ); ?>" width="<?php echo $header_width; ?>" height="<?php echo $header_height; ?>" alt="" />
+					?><img src="<?php header_image(); ?>" width="<?php echo $header_width; ?>" height="<?php echo $header_height; ?>" alt="" />
 <?php
 						} // end check for featured image or standard header
 					?>
