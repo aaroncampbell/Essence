@@ -14,8 +14,7 @@ essence_show_template_file( __FILE__ );
 get_header();
 ?>
 
-		<div id="content-container" class="span-15">
-			<div id="content" role="main">
+		<div id="content" class="columns eight" role="main">
 
 <?php
 	/* Queue the first post, that way we know
@@ -58,8 +57,7 @@ get_header();
 	essence_content_nav( 'nav-below' );
 ?>
 
-			</div><!-- #content -->
-		</div><!-- #container -->
+		</div><!-- #content -->
 
 <?php
 get_sidebar();

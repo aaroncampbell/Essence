@@ -6,13 +6,9 @@
  * Author URI: http://xavisys.com/
  * License: GNU General Public License
  * License URI: license.txt
- * Version: 0.0.6-alpha
+ * Version: 0.1.0-alpha
  * Tags: gray, two-columns, right-sidebar, fixed-width, custom-background, custom-menu, full-width-template, translation-ready
  */
-
-body {
-	font-size:14px;
-}
 
 h1,
 h2,
@@ -22,33 +18,26 @@ h5,
 h6 {
 	/*text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);*/
 }
-
-h1 {
-	font-size:2em;
-}
-h2 {
-	font-size:1.75em;
-}
-h5 {
-	font-size:1.1em
+.row {
+	max-width: 1140px;
 }
 
-#content-container {
-	background-color:#FFF;
-}
-
-#wrapper {
-	padding-top:1em;
+body .container {
+	padding-top: 1em;
 }
 
 #content {
-	padding:0 10px 10px 10px;
+	background-color:#FFF;
 }
 
-/* Text meant only for screen readers */
-.screen-reader-text {
-	position:absolute;
-	left:-9000px;
+/* Hide visually but not from screen readers */
+.screen-reader-text,
+.screen-reader-text span {
+	position: absolute;
+	left: -1000em;
+	height: 1px;
+	width: 1px;
+	overflow: hidden;
 }
 
 /**
@@ -156,13 +145,13 @@ img.size-full {
 	width: 50%;
 }
 
-#header #site-title {
+#site-title {
 	font-size:30px;
 	line-height:normal;
 	margin:12px 0 0 0;
 }
 
-#header #site-title a {
+#site-title a {
 	color:#666;
 	text-decoration:none;
 }
@@ -233,6 +222,7 @@ blockquote {
 
 #entry-author-info {
 	margin:1em 0;
+	padding:1%;
 }
 #entry-author-info #author-avatar {
 	float: left;
@@ -441,6 +431,7 @@ img.wp-smiley, img.wp-wink {
 .navigation .menu li {
 	float:left;
 	list-style:none;
+	margin-bottom: 0;
 }
 
 .navigation .menu li a {
@@ -477,8 +468,12 @@ img.wp-smiley, img.wp-wink {
 	position:absolute;
 	right:5px;
 	text-indent:-9999px;
-	top:11px;
+	top:50%;
 	width:9px;
+	-o-transform:      translate( 0,-50% );
+	-moz-transform:    translate( 0,-50% );
+	-webkit-transform: translate( 0,-50% );
+	transform:         translate( 0,-50% );
 }
 
 .navigation .menu li li a,
@@ -502,7 +497,6 @@ img.wp-smiley, img.wp-wink {
 
 .navigation .menu li li a .sf-sub-indicator {
 	background-image:url(images/arrow-right.png);
-	top:10px;
 }
 
 .navigation .menu li ul {
@@ -563,10 +557,6 @@ img.wp-smiley, img.wp-wink {
 	list-style-type:square;
 	margin:10px;
 	padding-left:15px;
-}
-
-.sidebar-right .widget-container {
-	margin-left:1em;
 }
 
 .widget-container {

@@ -9,10 +9,9 @@ essence_show_template_file( __FILE__ );
 get_header();
 ?>
 
-		<div id="content-container" class="span-15">
-			<div id="content">
-
+		<div id="content" class="columns eight" role="main">
 			<?php
+			do_action( 'essence_content_open' );
 			/* Run the loop to output the post.
 			 * If you want to overload this in a child theme then include a file
 			 * called loop-single.php and that will be used instead.
@@ -20,8 +19,7 @@ get_header();
 			get_template_part( 'loop', 'single' );
 			?>
 
-			</div><!-- #content -->
-		</div><!-- #ccontent-ontainer -->
+		</div><!-- #content -->
 
 <?php
 get_sidebar();

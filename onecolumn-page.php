@@ -14,8 +14,7 @@ essence_show_template_file( __FILE__ );
 get_header();
 ?>
 
-		<div id="content-container" class="onecolumn">
-			<div id="content">
+		<div id="content" class="columns twelve">
 
 			<?php
 			/* Run the loop to output the page.
@@ -25,8 +24,7 @@ get_header();
 			 get_template_part( 'loop', 'page' );
 			?>
 
-			</div><!-- #content -->
-		</div><!-- #container -->
+		</div><!-- #content -->
 
 <?php
 get_footer();

@@ -16,21 +16,19 @@ essence_show_template_file( __FILE__ );
 get_header();
 ?>
 
-    <div id="content-container" class="span-15">
-        <div id="content" role="main">
-			<?php
-			do_action( 'essence_content_open' );
-			essence_content_nav( 'nav-above' );
+    <div id="content" class="columns eight" role="main">
+		<?php
+		do_action( 'essence_content_open' );
+		essence_content_nav( 'nav-above' );
 
-			/* Run the loop to output the posts.
-			 * If you want to overload this in a child theme then include a file
-			 * called loop-index.php and that will be used instead.
-			 */
-			get_template_part( 'loop', 'index' );
-			essence_content_nav( 'nav-below' );
-			?>
-        </div><!-- #content -->
-    </div><!-- #content-container -->
+		/* Run the loop to output the posts.
+		 * If you want to overload this in a child theme then include a file
+		 * called loop-index.php and that will be used instead.
+		 */
+		get_template_part( 'loop', 'index' );
+		essence_content_nav( 'nav-below' );
+		?>
+	</div><!-- #content -->
 
 <?php
 get_sidebar();

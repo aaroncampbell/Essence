@@ -9,8 +9,7 @@ essence_show_template_file( __FILE__ );
 get_header();
 ?>
 
-		<div id="content-container" class="single-attachment span-15">
-			<div id="content" role="main">
+		<div id="content" class="single-attachment columns eight" role="main">
 
 			<?php
 			/* Run the loop to output the attachment.
@@ -20,8 +19,7 @@ get_header();
 			get_template_part( 'loop', 'attachment' );
 			?>
 
-			</div><!-- #content -->
-		</div><!-- #container -->
+		</div><!-- #content -->
 
 <?php
 get_sidebar();

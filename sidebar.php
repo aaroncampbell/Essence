@@ -6,8 +6,8 @@ essence_show_template_file( __FILE__ );
 
 ?>
 
-		<div class="span-9 last sidebar-right">
-			<div id="primary" class="widget-area" role="complementary">
+		<div class="columns four sidebar-right">
+			<div class="widget-area primary" role="complementary">
 				<ul class="xoxo">
 				<?php if ( ! dynamic_sidebar( 'primary-widget-area' ) ) { // begin primary widget area ?>
 					<li id="search" class="widget-container widget_search">
@@ -34,7 +34,7 @@ essence_show_template_file( __FILE__ );
 			</div><!-- #primary .widget-area -->
 
 			<?php if ( is_active_sidebar( 'secondary-widget-area' ) ) { // Nothing here by default and design ?>
-			<div id="secondary" class="widget-area sidebar-right" role="complementary">
+			<div class="widget-area sidebar-right secondary" role="complementary">
 				<ul class="xoxo">
 					<?php dynamic_sidebar( 'secondary-widget-area' ); ?>
 				</ul>

@@ -7,7 +7,7 @@ function essence_admin_menu_setup() {
 add_action( 'admin_print_styles-appearance_page_essence-settings', 'essence_admin_page_styles' );
 function essence_admin_page_styles() {
 	wp_enqueue_style( 'dashboard' );
-	wp_enqueue_style( 'essence-options-css', ESSENCE_ADMIN_URL . '/essence-admin.css' );
+	wp_enqueue_style( 'essence-options-css', get_template_directory_uri() . '/lib/admin/essence-admin.css' );
 }
 
 add_action( 'admin_print_scripts-appearance_page_essence-settings', 'essence_admin_page_scripts' );

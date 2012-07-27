@@ -13,7 +13,7 @@ essence_show_template_file( __FILE__ );
 
 ?>
 
-    <form id="searchform" name="searchform" method="get" action="<?php echo home_url(); ?>">
+    <form name="searchform" method="get" action="<?php echo home_url(); ?>">
 		<div>
 			<label for="s"><?php _e( 'Search', 'essence' ); ?></label>
 			<input type="text" id="s" name="s" x-webkit-speech />

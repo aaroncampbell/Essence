@@ -33,7 +33,7 @@ class Essence_Options {
 
 	public function get_option( $key, $setting = null ) {
 		// get setting
-		$setting = $setting ? $setting : ESSENCE_SETTINGS_FIELD;
+		$setting = $setting ? $setting : get_essence_settings_field();
 
 		// allow child theme to short-circuit this function
 		$pre = apply_filters( 'essence_pre_get_option_' . $key, false, $setting );
@@ -52,7 +52,7 @@ class Essence_Options {
 		if ( ! isset( $this->_settings_cache[$setting] ) ) {
 			// set value and cache setting
 			$options = get_option($setting);
-			if  ( ESSENCE_SETTINGS_FIELD == $setting ) {
+			if  ( get_essence_settings_field() == $setting ) {
 				$options = wp_parse_args( $options, essence_theme_settings_defaults() );
 			} elseif ( is_callable( "essence_{$setting}_defaults" ) ) {
 				$options = wp_parse_args( $options, call_user_func( "essence_{$setting}_defaults" ) );
@@ -101,4 +101,22 @@ function essence_option( $key, $setting = null ) {
 	// Instantiate our class
 	$essence_options = Essence_Options::getInstance();
 	echo $essence_options->get_option( $key, $setting );
+}
+
+/**
+ * Default values for essence theme settings
+ */
+function essence_theme_settings_defaults() {
+	$defaults = array( // define our defaults
+		'blog_title_image'       => '',
+		'nav'                    => true,
+		'nav_superfish'          => true,
+		'nav_home'               => true,
+		'subnav'                 => false,
+		'subnav_superfish'       => true,
+		'subnav_home'            => false,
+		'widgetize_header_right' => false,
+	);
+
+	return apply_filters('essence_theme_settings_defaults', $defaults);
 }

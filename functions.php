@@ -37,35 +37,15 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define( 'ESSENCE_VERSION', '0.0.6-alpha' );
+define( 'ESSENCE_VERSION', '0.1.0-alpha' );
 
-/**
- * Define Directory Location Constants
- */
-define( 'ESSENCE_IMAGES_DIR', get_template_directory() . '/images' );
-define( 'ESSENCE_LIB_DIR', get_template_directory() . '/lib' );
-define( 'ESSENCE_FUNCTIONS_DIR', ESSENCE_LIB_DIR . '/functions' );
-define( 'ESSENCE_STRUCTURE_DIR', ESSENCE_LIB_DIR . '/structure' );
-define( 'ESSENCE_ADMIN_DIR', ESSENCE_LIB_DIR . '/admin' );
-if(  !defined( 'ESSENCE_LANGUAGES_DIR' )  ) // So we can define with a child theme
-	define( 'ESSENCE_LANGUAGES_DIR', get_template_directory() . '/languages' );
+function get_essence_settings_field() {
+	return apply_filters( 'essence_settings_field', 'essence-settings' );
+}
 
-/**
- * Define URL Location Constants
- */
-define( 'ESSENCE_IMAGES_URL', get_template_directory_uri() . '/images' );
-define( 'ESSENCE_LIB_URL', get_template_directory_uri() . '/lib' );
-define( 'ESSENCE_FUNCTIONS_URL', ESSENCE_LIB_URL . '/functions' );
-define( 'ESSENCE_STRUCTURE_URL', ESSENCE_LIB_URL . '/structure' );
-define( 'ESSENCE_ADMIN_URL', ESSENCE_LIB_URL . '/admin' );
-if(  !defined( 'ESSENCE_LANGUAGES_URL' )  ) // So we can predefine to child theme
-	define( 'ESSENCE_LANGUAGES_URL', ESSENCE_LIB_URL . '/languages' );
-
-/**
- * Define Settings Field Constants ( for DB storage )
- */
-define( 'ESSENCE_SETTINGS_FIELD', apply_filters( 'essence_settings_field', 'essence-settings' ) );
-define( 'ESSENCE_SETTINGS_GROUP', apply_filters( 'essence_settings_group', 'essence-settings-group' ) );
+function get_essence_settings_group() {
+	return apply_filters( 'essence_settings_group', 'essence-settings-group' );
+}
 
 //	Run the essence_pre_framework Hook
 do_action( 'essence_pre_framework' );
@@ -73,75 +53,52 @@ do_action( 'essence_pre_framework' );
 /**
  * Load Framework Components, unless a child theme says not to
  */
-if ( !defined('ESSENCE_LOAD_FRAMEWORK') || false !== ESSENCE_LOAD_FRAMEWORK ) {
-
-	//	Load Framework
-	//require_once(ESSENCE_LIB_DIR . '/framework.php');
-
+if ( apply_filters( 'essence_load_framework', true ) ) {
 	//	Load Functions
-	require_once(ESSENCE_FUNCTIONS_DIR . '/tools.php');
-	require_once(ESSENCE_FUNCTIONS_DIR . '/options.php');
+	require_once( get_template_directory() . '/lib/functions/tools.php' );
+	require_once( get_template_directory() . '/lib/functions/options.php' );
 
 	//	Load Structure
-	require_once(ESSENCE_STRUCTURE_DIR . '/menus.php');
-	require_once(ESSENCE_STRUCTURE_DIR . '/galleries.php');
+	require_once( get_template_directory() . '/lib/structure/menus.php' );
+	require_once( get_template_directory() . '/lib/structure/galleries.php' );
 
-	//	Load Admin
-	require_once(ESSENCE_ADMIN_DIR . '/menu.php');
-	require_once(ESSENCE_ADMIN_DIR . '/essence-settings.php');
-
-	//	Load Javascript
-	//require_once(ESSENCE_JS_DIR . '/load-scripts.php');
-
-	//	Load CSS
-	//require_once(ESSENCE_CSS_DIR . '/load-styles.php');
-
+	if ( is_admin() ) {
+		//	Load Admin
+		require_once( get_template_directory() . '/lib/admin/menu.php' );
+		require_once( get_template_directory() . '/lib/admin/essence-settings.php' );
+	}
 }
 
 /**
- * Set the content width based on the theme's design and stylesheet.
- *
- * Used to set the width of images and content. Should be equal to the width the
- * theme is designed for, generally via the style.css stylesheet.
- *
- * @todo Swap this out based on the page layout?  Is that possible?
- */
-if ( ! isset( $content_width ) )
-	$content_width = 590;
-
-
-/**
  * This registers and enqueues front-end CSS & JS files
- *
  */
 function essence_enqueue_scripts() {
-	wp_enqueue_style( 'essence', get_template_directory_uri() . '/style.css', array( 'blueprint' ), '20110916' );
-	wp_enqueue_style( 'colorbox', get_template_directory_uri() . '/css/gallery.css', array(), '0.0.1', 'screen, projection' );
-	wp_enqueue_style( 'blueprint', get_template_directory_uri() . '/css/blueprint/screen.css', array(), '1.0.1', 'screen, projection' );
-	wp_enqueue_style( 'blueprint-print', get_template_directory_uri() . '/css/blueprint/print.css', array( 'blueprint' ), '1.0.1', 'print' );
-	wp_enqueue_style( 'blueprint-ie', get_template_directory_uri() . '/css/blueprint/ie.css', array( 'blueprint' ), '1.0.1', 'screen, projection' );
+	wp_enqueue_style( 'essence', get_template_directory_uri() . '/style.css', array( 'foundation' ), '20120515' );
+	wp_enqueue_style( 'foundation', get_template_directory_uri() . '/css/foundation/foundation.css', array(), '2.2.1' );
+	wp_enqueue_style( 'foundation-ie', get_template_directory_uri() . '/css/foundation/ie.css', array( 'foundation' ), '2.2.1' );
 	if ( is_child_theme() ) {
 		$child_theme = wp_get_theme( get_stylesheet_directory() . '/style.css' );
-		wp_enqueue_style( 'essence_child', get_stylesheet_uri(), array('essence'), $child_theme['Version'], 'screen, projection' );
+		wp_enqueue_style( 'essence_child', get_stylesheet_uri(), array('essence'), $child_theme['Version'] );
 	}
-
 
 	/**
 	 * @var WP_Styles
 	 */
 	global $wp_styles;
-	// Conditionally load this only for IE < 8
-	$wp_styles->add_data( 'blueprint-ie', 'conditional', 'lt IE 8' );
+	// Conditionally load this only for IE < 9
+	$wp_styles->add_data( 'foundation-ie', 'conditional', 'lt IE 9' );
 
 
 	/**
 	 * Load SuperFish
 	 */
-	wp_enqueue_script('hoverIntent', get_template_directory_uri() . '/js/hoverIntent.js', array('jquery'), '20110226', true);
-	wp_enqueue_script('superfish', get_template_directory_uri() . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true);
-	wp_enqueue_script('superfish-args', get_template_directory_uri() . '/js/superfish.args.js', array('superfish'), '20110725', true);
-	wp_enqueue_script('label-over', get_template_directory_uri() . '/js/label_over.js', array('jquery'), '20110725', true);
-	wp_enqueue_script('html5', get_template_directory_uri() . '/js/html5.js', null, '1.6.2', true);
+	wp_enqueue_script( 'hoverIntent', get_template_directory_uri() . '/js/hoverIntent.js', array('jquery'), '20110226', true );
+	wp_enqueue_script( 'superfish', get_template_directory_uri() . '/js/superfish.js', array('jquery', 'hoverIntent'), '1.4.8', true );
+	wp_enqueue_script( 'superfish-args', get_template_directory_uri() . '/js/superfish.args.js', array('superfish'), '20110725', true );
+	wp_enqueue_script( 'modernizr', get_template_directory_uri() . '/js/modernizr.js', array('jquery'), '2.5.2', true );
+	wp_enqueue_script( 'html5', get_template_directory_uri() . '/js/html5.js', null, '3.6', true );
+	wp_enqueue_script( 'foundation', get_template_directory_uri() . '/js/foundation.js', array('jquery'), '2.2.1', true );
+	wp_enqueue_script( 'essence', get_template_directory_uri() . '/js/essence.js', array( 'foundation' ), '20120524', true );
 
 	/**
 	 * @var WP_Scripts
@@ -149,11 +106,6 @@ function essence_enqueue_scripts() {
 	global $wp_scripts;
 	// Conditionally load this only for IE < 9
 	$wp_scripts->add_data( 'html5', 'conditional', 'lt IE 9' );
-
-	/**
-	 * Load color box for galleries
-	 */
-	wp_enqueue_script( 'colorbox', get_template_directory_uri() . '/js/colorbox/jquery.colorbox-min.js', array( 'jquery' ), '1.3.17.2', true );
 }
 add_action( 'wp_enqueue_scripts', 'essence_enqueue_scripts' );
 
@@ -164,9 +116,11 @@ function essence_init() {
 	 *
 	 * @todo ask Joost to include the essence filter in the plugin
 	 */
-	if ( function_exists('yoast_breadcrumb_output') ) {
-		add_action('essence_content_open','yoast_breadcrumb_output',10,1);
-	}
+	if ( function_exists( 'yoast_breadcrumb' ) )
+		add_action( 'essence_content_open', 'essence_yoast_breadcrumb' );
+}
+function essence_yoast_breadcrumb() {
+	yoast_breadcrumb('<ul class="breadcrumbs"><li>','</li></ul>');
 }
 add_action( 'init', 'essence_init' );
 
@@ -184,8 +138,8 @@ function essence_widgets_init() {
 		'name' => __( 'Primary Widget Area', 'essence' ),
 		'id' => 'primary-widget-area',
 		'description' => __( 'The primary widget area' , 'essence' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
+		'before_widget' => '<aside id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</aside>",
 		'before_title' => '<h4 class="widget-title">',
 		'after_title' => '</h4>',
 	) );
@@ -195,8 +149,8 @@ function essence_widgets_init() {
 		'name' => __( 'Secondary Widget Area', 'essence' ),
 		'id' => 'secondary-widget-area',
 		'description' => __( 'The secondary widget area' , 'essence' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
+		'before_widget' => '<aside id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</aside>",
 		'before_title' => '<h4 class="widget-title">',
 		'after_title' => '</h4>',
 	) );
@@ -206,8 +160,8 @@ function essence_widgets_init() {
 		'name' => __( 'First Footer Widget Area', 'essence' ),
 		'id' => 'first-footer-widget-area',
 		'description' => __( 'The first footer widget area' , 'essence' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
+		'before_widget' => '<aside id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</aside>",
 		'before_title' => '<h4 class="widget-title">',
 		'after_title' => '</h4>',
 	) );
@@ -217,8 +171,8 @@ function essence_widgets_init() {
 		'name' => __( 'Second Footer Widget Area', 'essence' ),
 		'id' => 'second-footer-widget-area',
 		'description' => __( 'The second footer widget area' , 'essence' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
+		'before_widget' => '<aside id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</aside>",
 		'before_title' => '<h4 class="widget-title">',
 		'after_title' => '</h4>',
 	) );
@@ -228,8 +182,8 @@ function essence_widgets_init() {
 		'name' => __( 'Third Footer Widget Area', 'essence' ),
 		'id' => 'third-footer-widget-area',
 		'description' => __( 'The third footer widget area' , 'essence' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
+		'before_widget' => '<aside id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</aside>",
 		'before_title' => '<h4 class="widget-title">',
 		'after_title' => '</h4>',
 	) );
@@ -239,8 +193,8 @@ function essence_widgets_init() {
 		'name' => __( 'Fourth Footer Widget Area', 'essence' ),
 		'id' => 'fourth-footer-widget-area',
 		'description' => __( 'The fourth footer widget area' , 'essence' ),
-		'before_widget' => '<li id="%1$s" class="widget-container %2$s">',
-		'after_widget' => "</li>",
+		'before_widget' => '<aside id="%1$s" class="widget-container %2$s">',
+		'after_widget' => "</aside>",
 		'before_title' => '<h4 class="widget-title">',
 		'after_title' => '</h4>',
 	) );
@@ -290,8 +244,8 @@ function essence_setup() {
 	/**
 	 * @todo actually add this support
 	 */
-	// Post Format support. You can also use the legacy "gallery" or "asides" (note the plural) categories.
-	$post_formats = array(
+	// Post Format support.
+	$post_formats = apply_filters( 'essence_post_formats', array(
 		'aside',
 		'chat',
 		'gallery',
@@ -301,8 +255,7 @@ function essence_setup() {
 		'status',
 		'video',
 		'audio',
-	);
-	$post_formats = apply_filters( 'essence_post_formats', $post_formats );
+	) );
 	add_theme_support( 'post-formats', $post_formats );
 
 	// This theme uses post thumbnails
@@ -342,136 +295,7 @@ function essence_setup() {
 	/**
 	 * @todo Post thumbnails should be set to the size of my content showcase once that's implementd
 	 */
-	// We'll be using post thumbnails for custom header images on posts and pages.
-	// We want them to be 940 pixels wide by 198 pixels tall (larger images will be auto-cropped to fit).
-	set_post_thumbnail_size( apply_filters( 'essence_thumbnail_image_width', get_custom_header()->width ), apply_filters( 'essence_thumbnail_image_height', get_custom_header()->height ), apply_filters( 'essence_thumbnail_image_crop', true ) );
-
-	/**
-	 * @todo Include my own custom headers, talk to Matt about including these ones?
-	 */
-	// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
-	register_default_headers( array (
-		'berries' => array (
-			'url' => '%s/images/headers/berries.jpg',
-			'thumbnail_url' => '%s/images/headers/berries-thumbnail.jpg',
-			'description' => __( 'Berries', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'cherryblossom' => array (
-			'url' => '%s/images/headers/cherryblossoms.jpg',
-			'thumbnail_url' => '%s/images/headers/cherryblossoms-thumbnail.jpg',
-			'description' => __( 'Cherry Blossoms', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'concave' => array (
-			'url' => '%s/images/headers/concave.jpg',
-			'thumbnail_url' => '%s/images/headers/concave-thumbnail.jpg',
-			'description' => __( 'Concave', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'fern' => array (
-			'url' => '%s/images/headers/fern.jpg',
-			'thumbnail_url' => '%s/images/headers/fern-thumbnail.jpg',
-			'description' => __( 'Fern', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'forestfloor' => array (
-			'url' => '%s/images/headers/forestfloor.jpg',
-			'thumbnail_url' => '%s/images/headers/forestfloor-thumbnail.jpg',
-			'description' => __( 'Forest Floor', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'inkwell' => array (
-			'url' => '%s/images/headers/inkwell.jpg',
-			'thumbnail_url' => '%s/images/headers/inkwell-thumbnail.jpg',
-			'description' => __( 'Inkwell', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'path' => array (
-			'url' => '%s/images/headers/path.jpg',
-			'thumbnail_url' => '%s/images/headers/path-thumbnail.jpg',
-			'description' => __( 'Path', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'sunset' => array (
-			'url' => '%s/images/headers/sunset.jpg',
-			'thumbnail_url' => '%s/images/headers/sunset-thumbnail.jpg',
-			'description' => __( 'Sunset', 'essence' ),
-			'width' => 940,
-			'height' => 198,
-		),
-		'wheel' => array(
-			'url' => '%s/images/headers/wheel.jpg',
-			'thumbnail_url' => '%s/images/headers/wheel-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Wheel', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		),
-		'shore' => array(
-			'url' => '%s/images/headers/shore.jpg',
-			'thumbnail_url' => '%s/images/headers/shore-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Shore', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		),
-		'trolley' => array(
-			'url' => '%s/images/headers/trolley.jpg',
-			'thumbnail_url' => '%s/images/headers/trolley-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Trolley', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		),
-		'pine-cone' => array(
-			'url' => '%s/images/headers/pine-cone.jpg',
-			'thumbnail_url' => '%s/images/headers/pine-cone-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Pine Cone', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		),
-		'chessboard' => array(
-			'url' => '%s/images/headers/chessboard.jpg',
-			'thumbnail_url' => '%s/images/headers/chessboard-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Chessboard', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		),
-		'lanterns' => array(
-			'url' => '%s/images/headers/lanterns.jpg',
-			'thumbnail_url' => '%s/images/headers/lanterns-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Lanterns', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		),
-		'willow' => array(
-			'url' => '%s/images/headers/willow.jpg',
-			'thumbnail_url' => '%s/images/headers/willow-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Willow', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		),
-		'hanoi' => array(
-			'url' => '%s/images/headers/hanoi.jpg',
-			'thumbnail_url' => '%s/images/headers/hanoi-thumbnail.jpg',
-			/* translators: header image description */
-			'description' => __( 'Hanoi Plant', 'twentyeleven' ),
-			'width' => 1000,
-			'height' => 288,
-		)
-	) );
+	add_image_size( 'post-thumbnail', apply_filters( 'essence_thumbnail_image_width', get_custom_header()->width ), apply_filters( 'essence_thumbnail_image_height', get_custom_header()->height ), apply_filters( 'essence_thumbnail_image_crop', true ) );
 
 	do_action( 'essence_setup' );
 }
@@ -491,9 +315,6 @@ if ( ! function_exists( 'essence_admin_header_style' ) ) :
 function essence_admin_header_style() {
 ?>
 <style type="text/css">
-#headimg {
-	width: <?php echo HEADER_IMAGE_WIDTH; ?>px;
-}
 </style>
 <?php
 }
@@ -507,14 +328,29 @@ if ( ! function_exists( 'essence_the_page_number' ) ) :
  *
  * @todo Make the | a setting?  Add rtl support?
  */
-function essence_the_page_number() {
+function essence_wp_title( $title, $sep, $seplocation ) {
 	global $page, $paged; // Contains page number.
+
+	// Add the blog description for the home/front page.
+	$site_description = get_bloginfo( 'description', 'display' );
+	if ( $site_description && ( is_home() || is_front_page() ) )
+		$title = get_bloginfo( 'name' ) . " {$sep} " . $site_description;
 
 	// Add a page number if necessary:
 	if ( $paged >= 2 || $page >= 2 )
-		echo ' | ' . sprintf( __( 'Page %s', 'essence' ), max( $paged, $page ) );
+		$title .= ' | ' . sprintf( __( 'Page %s', 'essence' ), max( $paged, $page ) );
+
+ 	// Determines position of the separator and direction of the breadcrumb
+	if ( 'right' == $seplocation ) { // sep on right, so reverse the order
+		$title_array = explode( $sep, $title );
+		$title_array = array_reverse( $title_array );
+		$title = implode( $sep, $title_array ) . $prefix;
+	}
+
+	return $title;
 }
 endif;
+add_filter( 'wp_title', 'essence_wp_title', null, 3 );
 
 /**
  * Get our wp_nav_menu() fallback, wp_page_menu(), to show a home link.
@@ -542,6 +378,7 @@ function essence_excerpt_length( $length ) {
 	return 40;
 }
 add_filter( 'excerpt_length', 'essence_excerpt_length' );
+
 /**
  * Returns a "Continue Reading" link for excerpts
  *
@@ -576,9 +413,8 @@ add_filter( 'excerpt_more', 'essence_auto_excerpt_more' );
  * @return string Excerpt with a pretty "Continue Reading" link
  */
 function essence_custom_excerpt_more( $output ) {
-	if ( has_excerpt() && ! is_attachment() ) {
+	if ( has_excerpt() && ! is_attachment() )
 		$output .= essence_continue_reading_link();
-	}
 	return $output;
 }
 add_filter( 'get_the_excerpt', 'essence_custom_excerpt_more' );
@@ -638,13 +474,13 @@ if ( ! function_exists( 'essence_posted_in' ) ) :
 function essence_posted_in() {
 	// Retrieves tag list of current post, separated by commas.
 	$tag_list = get_the_tag_list( '', ', ' );
-	if ( $tag_list ) {
+	if ( $tag_list )
 		$posted_in = __( 'This entry was posted in %1$s and tagged %2$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'essence' );
-	} elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) ) {
+	elseif ( is_object_in_taxonomy( get_post_type(), 'category' ) )
 		$posted_in = __( 'This entry was posted in %1$s. Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'essence' );
-	} else {
+	else
 		$posted_in = __( 'Bookmark the <a href="%3$s" title="Permalink to %4$s" rel="bookmark">permalink</a>.', 'essence' );
-	}
+
 	// Prints the string, replacing the placeholders.
 	printf(
 		$posted_in,
@@ -730,7 +566,7 @@ function essence_content_nav( $nav_id ) {
 			<h1 class="assistive-text"><?php _e( 'Post navigation', 'essence' ); ?></h1>
 			<div class="nav-previous"><?php next_posts_link( __( '<span class="meta-nav">&larr;</span> Older posts', 'essence' ) ); ?></div>
 			<div class="nav-next"><?php previous_posts_link( __( 'Newer posts <span class="meta-nav">&rarr;</span>', 'essence' ) ); ?></div>
-			<div class="clear"></div>
+			<div class="clearfix"></div>
 		</div><!-- #<?php esc_html_e( $nav_id ); ?> -->
 <?php
 	}

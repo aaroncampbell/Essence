@@ -5,63 +5,54 @@
  * @since 0.0.1
  */
 essence_show_template_file( __FILE__ );
-
-	/* The footer widget area is triggered if any of the areas
-	 * have widgets. So let's check that first.
-	 *
-	 * If none of the sidebars have widgets, then let's bail early.
-	 */
-	if (   ! is_active_sidebar( 'first-footer-widget-area'  )
-		&& ! is_active_sidebar( 'second-footer-widget-area' )
-		&& ! is_active_sidebar( 'third-footer-widget-area'  )
-		&& ! is_active_sidebar( 'fourth-footer-widget-area' )
-	)
-		return;
-	// If we get this far, we have widgets. Let do this.
-?>
-
-			<div id="footer-widget-area" role="complementary">
-
-<?php
-if ( is_active_sidebar( 'first-footer-widget-area' ) ) {
-?>
-				<div id="first" class="widget-area span-6">
-					<ul class="xoxo">
-						<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
-					</ul>
-				</div><!-- #first .widget-area -->
-<?php
+$essence_footer_sidebars = array(
+	'first-footer-widget-area',
+	'second-footer-widget-area',
+	'third-footer-widget-area',
+	'fourth-footer-widget-area',
+);
+foreach ( $essence_footer_sidebars as $index => $sidebar ) {
+	if ( ! is_active_sidebar( $sidebar  ) )
+		unset( $essence_footer_sidebars[$index] );
 }
 
-if ( is_active_sidebar( 'second-footer-widget-area' ) ) {
-?>
-				<div id="second" class="widget-area span-6">
-					<ul class="xoxo">
-						<?php dynamic_sidebar( 'second-footer-widget-area' ); ?>
-					</ul>
-				</div><!-- #second .widget-area -->
-<?php
-}
+/**
+ * The footer widget area is triggered if any of the areas have widgets.  If
+ * none do, return
+ */
+if ( empty( $essence_footer_sidebars ) )
+	return;
 
-if ( is_active_sidebar( 'third-footer-widget-area' ) ) {
-?>
-				<div id="third" class="widget-area span-6">
-					<ul class="xoxo">
-						<?php dynamic_sidebar( 'third-footer-widget-area' ); ?>
-					</ul>
-				</div><!-- #third .widget-area -->
-<?php
-}
-
-if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) {
-?>
-				<div id="fourth" class="widget-area span-6 last">
-					<ul class="xoxo">
-						<?php dynamic_sidebar( 'fourth-footer-widget-area' ); ?>
-					</ul>
-				</div><!-- #fourth .widget-area -->
-<?php
+switch ( 12 / count( $essence_footer_sidebars ) ) {
+	case 3:
+		$essence_footer_sidebar_columns = 'three';
+		break;
+	case 4:
+		$essence_footer_sidebar_columns = 'four';
+		break;
+	case 6:
+		$essence_footer_sidebar_columns = 'six';
+		break;
+	case 12:
+		$essence_footer_sidebar_columns = 'twelve';
+		break;
 }
 ?>
 
-			</div><!-- #footer-widget-area -->
+<div class="row footer" role="contentinfo">
+	<div id="footer-widget-area" role="complementary">
+		<?php
+		foreach ( $essence_footer_sidebars as $sidebar ) {
+			if ( is_active_sidebar( 'first-footer-widget-area' ) ) {
+		?>
+			<div class="widget-area columns <?php echo esc_attr( $essence_footer_sidebar_columns ) ?>">
+				<ul class="xoxo">
+					<?php dynamic_sidebar( $sidebar ); ?>
+				</ul>
+			</div><!-- .widget-area -->
+		<?php
+			}
+		}
+		?>
+	</div><!-- #footer-widget-area -->
+</div><!-- .row.footer -->

@@ -4,20 +4,24 @@
  */
 essence_show_template_file( __FILE__ );
 ?><!DOCTYPE html>
-<!--[if IE 6]>
-<html class="ie6" <?php language_attributes(); ?>>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>>
 <![endif]-->
 <!--[if IE 7]>
-<html class="ie7" <?php language_attributes(); ?>>
+<html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>>
 <![endif]-->
 <!--[if IE 8]>
-<html class="ie8" <?php language_attributes(); ?>>
+<html class="no-js lt-ie9" <?php language_attributes(); ?>>
 <![endif]-->
-<!--[if !(IE 6) | !(IE 7) | !(IE 8)  ]><!-->
-<html <?php language_attributes(); ?>>
+<!--[if gt IE 8]><!-->
+<html class="no-js" <?php language_attributes(); ?>>
 <!--<![endif]-->
 <head>
 	<meta charset="<?php bloginfo( 'charset' ); ?>" />
+
+	<!-- Set the viewport width to device width for mobile -->
 	<meta name="viewport" content="width=device-width" />
 	<title><?php wp_title(); ?></title>
 	<link rel="profile" href="http://gmpg.org/xfn/11" />
@@ -42,71 +46,59 @@ essence_show_template_file( __FILE__ );
 </head>
 
 <body <?php body_class(); ?>>
-	<div id="header">
-		<div id="masthead">
-			<div id="branding" role="banner" class="container">
+	<!-- container -->
+	<div class="container">
+		<div class="row">
+			<header id="branding" role="banner" class="twelve columns">
+				<hgroup<?php if ( essence_get_option( 'widgetize_header_right' ) ) { echo ' class="columns four"'; } ?>>
+					<<?php echo $hTag; ?> id="site-title">
+						<span>
+							<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
+								<?php
+								if ( essence_get_option( 'blog_title_image' ) ) {
+								?>
+								<img src="<?php echo esc_url( essence_get_option( 'blog_title_image' ) ) ?>" alt="<?php esc_attr_e( get_bloginfo( 'name' ) ); ?>" />
+								<?php
+								} else {
+									bloginfo( 'name' );
+								}
+								?>
+							</a>
+						</span>
+					</<?php echo $hTag;?>>
+					<aside id="site-description"><?php bloginfo( 'description' ); ?></aside>
+				</hgroup>
 				<?php
 				if ( essence_get_option( 'widgetize_header_right' ) ) {
 				?>
-					<div class="right span-12 last">
+					<aside class="columns eight">
 						<?php dynamic_sidebar( 'header-right-widget-area' ); ?>
-					</div>
+					</aside>
 				<?php
 				}
+					// Check to see if the header image has been removed
+					$header_image = get_header_image();
+					if ( ! empty( $header_image ) ) {
+						$header_width = get_custom_header()->width;
+						$header_height = get_custom_header()->height;
+						?>
+						<div class="header-image columns twelve">
+							<a href="<?php echo esc_url( home_url( '/' ) ); ?>">
+								<img src="<?php header_image(); ?>" alt="" />
+							</a>
+						</div>
+						<?php
+					} // end check for removed header image
 				?>
-				<<?php echo $hTag; ?> id="site-title">
-					<span>
-						<a href="<?php echo home_url( '/' ); ?>" title="<?php echo esc_attr( get_bloginfo( 'name', 'display' ) ); ?>" rel="home">
-							<?php
-							if ( essence_get_option( 'blog_title_image' ) ) {
-							?>
-							<img src="<?php echo esc_url( essence_get_option( 'blog_title_image' ) ) ?>" alt="<?php esc_attr_e( get_bloginfo( 'name' ) ); ?>" />
-							<?php
-							} else {
-								bloginfo( 'name' );
-							}
-							?>
-						</a>
-					</span>
-				</<?php echo $hTag;?>>
-				<div id="site-description"><?php bloginfo( 'description' ); ?></div>
-			</div>
-<?php
-				// Check to see if the header image has been removed
-				$header_image = get_header_image();
-				if ( ! empty( $header_image ) ) {
-					$header_width = get_custom_header()->width;
-					$header_height = get_custom_header()->height;
-			?>
-			<div class="header-image" style="height:<?php echo $header_height; ?>px;">
-				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" style="width:<?php echo $header_width; ?>px;">
-					<?php
-						// The header image
-						// Check if this is a post or page, if it has a thumbnail, and if it's a big one
-						if ( is_singular() &&
-								essence_get_option('header_use_feat_img') &&
-								has_post_thumbnail( $post->ID ) &&
-								( /* $src, $width, $height */ $image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), array( HEADER_IMAGE_WIDTH, HEADER_IMAGE_WIDTH ) ) ) &&
-								$image[1] >= HEADER_IMAGE_WIDTH ) {
-							// Houston, we have a new header image!
-							echo get_the_post_thumbnail( $post->ID, 'post-thumbnail' );
-						} else {
-					?><img src="<?php header_image(); ?>" width="<?php echo $header_width; ?>" height="<?php echo $header_height; ?>" alt="" />
-<?php
-						} // end check for featured image or standard header
-					?>
-				</a>
-			</div>
-			<?php
-				} // end check for removed header image
-			?>
-
-			<div id="access" class="navigation container" role="navigation">
-				<?php /* Allow screen readers and text browsers to skip to the content */ ?>
+			</header>
+		</div>
+		<div class="row">
+			<nav class="navigation columns twelve" role="navigation">
+				<h3 class="assistive-text"><?php _e( 'Main menu', 'twentyeleven' ); ?></h3>
+				<?php /* Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff. */ ?>
 				<div class="skip-link screen-reader-text"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'essence' ); ?>"><?php _e( 'Skip to content', 'essence' ); ?></a></div>
 				<?php do_action( 'essence_primary_nav' ); ?>
 				<?php do_action( 'essence_secondary_nav' ); ?>
-			</div><!-- #access -->
-		</div><!-- #masthead -->
-	</div><!-- #header -->
-	<div id="wrapper" class="hfeed container">
+			</nav><!-- #access -->
+		</div>
+		<div class="row">

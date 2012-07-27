@@ -30,7 +30,7 @@ function essence_wp_head() {
 </script>
 	<?php
 }
-add_action( 'wp_head', 'essence_wp_head' );
+//add_action( 'wp_head', 'essence_wp_head' );
 
 function essence_attachment_link( $link, $id ) {
 	if ( is_feed() || is_admin() )
