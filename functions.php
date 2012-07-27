@@ -70,6 +70,15 @@ if ( apply_filters( 'essence_load_framework', true ) ) {
 }
 
 /**
+ * Set the content width based on the theme's design and stylesheet.
+ *
+ * Used to set the width of images and content. Should be equal to the width the
+ * theme is designed for, generally via the style.css stylesheet.
+ */
+if ( ! isset( $content_width ) )
+	$content_width = 1140;
+
+/**
  * This registers and enqueues front-end CSS & JS files
  */
 function essence_enqueue_scripts() {
