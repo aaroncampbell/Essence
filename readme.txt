@@ -2,8 +2,8 @@
 Contributors: aaroncampbell
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=S89UBLE9C9NPC
 Requires at least: 3.4
-Tested up to: 3.3.0
-Stable tag: 0.0.5
+Tested up to: 3.4.1
+Stable tag: 0.1.0
 
 A high-quality, well coded, fast loading theme designed as a base for new themes.
 
@@ -16,6 +16,12 @@ functionality without making the theme too large and cumbersome.  It should just
 do what you want and nothing more.
 
 == Changelog ==
+
+= 0.1.0 =
+* Move from Blueprint to Foundation which is responsive
+* Further move toward HTML5
+* Remove all the pre-packaged headers
+* Remove a lot of constants
 
 = 0.0.7 =
 * Add twitter sprite for web intents
