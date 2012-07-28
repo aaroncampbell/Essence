@@ -94,7 +94,7 @@ essence_show_template_file( __FILE__ );
 		</div>
 		<div class="row">
 			<nav class="navigation columns twelve" role="navigation">
-				<h3 class="assistive-text"><?php _e( 'Main menu', 'twentyeleven' ); ?></h3>
+				<h3 class="assistive-text"><?php _e( 'Main menu', 'essence' ); ?></h3>
 				<?php /* Allow screen readers / text browsers to skip the navigation menu and get right to the good stuff. */ ?>
 				<div class="skip-link screen-reader-text"><a href="#content" title="<?php esc_attr_e( 'Skip to content', 'essence' ); ?>"><?php _e( 'Skip to content', 'essence' ); ?></a></div>
 				<?php do_action( 'essence_primary_nav' ); ?>
