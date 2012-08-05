@@ -17,6 +17,9 @@ do what you want and nothing more.
 
 == Changelog ==
 
+= 0.2.0 =
+* Add author-box.php to make it easier to specify your own author box
+
 = 0.1.0 =
 * Move from Blueprint to Foundation which is responsive
 * Further move toward HTML5

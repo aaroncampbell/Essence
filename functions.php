@@ -37,7 +37,7 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define( 'ESSENCE_VERSION', '0.1.0' );
+define( 'ESSENCE_VERSION', '0.2.0-alpha' );
 
 function get_essence_settings_field() {
 	return apply_filters( 'essence_settings_field', 'essence-settings' );
@@ -82,13 +82,11 @@ if ( ! isset( $content_width ) )
  * This registers and enqueues front-end CSS & JS files
  */
 function essence_enqueue_scripts() {
-	wp_enqueue_style( 'essence', get_template_directory_uri() . '/style.css', array( 'foundation' ), '20120515' );
-	wp_enqueue_style( 'foundation', get_template_directory_uri() . '/css/foundation/foundation.css', array(), '2.2.1' );
-	wp_enqueue_style( 'foundation-ie', get_template_directory_uri() . '/css/foundation/ie.css', array( 'foundation' ), '2.2.1' );
-	if ( is_child_theme() ) {
-		$child_theme = wp_get_theme( get_stylesheet_directory() . '/style.css' );
-		wp_enqueue_style( 'essence_child', get_stylesheet_uri(), array('essence'), $child_theme['Version'] );
-	}
+	wp_enqueue_style( 'essence', get_template_directory_uri() . '/style.css', array( 'foundation' ), '20120731' );
+	wp_enqueue_style( 'foundation', get_template_directory_uri() . '/css/foundation/foundation.css', array(), '3.0.7' );
+	wp_enqueue_style( 'foundation-ie', get_template_directory_uri() . '/css/foundation/ie.css', array( 'foundation' ), '3.0.7' );
+	if ( is_child_theme() )
+		wp_enqueue_style( 'essence_child', get_stylesheet_uri(), array('essence'), wp_get_theme()->get('Version') );
 
 	/**
 	 * @var WP_Styles
@@ -96,6 +94,13 @@ function essence_enqueue_scripts() {
 	global $wp_styles;
 	// Conditionally load this only for IE < 9
 	$wp_styles->add_data( 'foundation-ie', 'conditional', 'lt IE 9' );
+
+	/**
+	 * Add some JavaScript to pages with the comment form to support sites with
+	 * threaded comments (when in use).
+	 */
+	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) )
+		wp_enqueue_script( 'comment-reply' );
 
 
 	/**
