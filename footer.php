@@ -27,7 +27,7 @@ essence_show_template_file( __FILE__ );
 
 			<div id="site-generator" class="columns four">
 				<?php do_action( 'essence_credits' ); ?>
-				<a href="<?php echo esc_url( apply_filters( 'essence-footer-link-url', 'http://essencetheme.com' ) ); ?>" title="<?php esc_attr_e( apply_filters( 'essence-footer-link-title', __( 'Essence Theme Framework for WordPress', 'essence' ) ) ); ?>" rel="generator"><?php esc_html_e( apply_filters( 'essence-footer-link-text', __( 'Proudly powered by Essence Theme Framework.', 'essence' ) ) ); ?></a>
+				<a href="<?php echo esc_url( apply_filters( 'essence-footer-link-url', 'http://essencetheme.com' ) ); ?>" title="<?php esc_attr_e( apply_filters( 'essence-footer-link-title', __( 'Essence Theme Framework', 'essence' ) ) ); ?>" rel="generator"><?php esc_html_e( apply_filters( 'essence-footer-link-text', __( 'Proudly powered by Essence Theme Framework.', 'essence' ) ) ); ?></a>
 			</div><!-- #site-generator -->
 
 		</div><!-- .row.footer -->
