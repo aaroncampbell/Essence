@@ -3,7 +3,7 @@ Contributors: aaroncampbell
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=S89UBLE9C9NPC
 Requires at least: 3.4
 Tested up to: 3.4.1
-Stable tag: 0.1.0
+Stable tag: 0.2.0
 
 A high-quality, well coded, fast loading theme designed as a base for new themes.
 
@@ -19,6 +19,9 @@ do what you want and nothing more.
 
 = 0.2.0 =
 * Add author-box.php to make it easier to specify your own author box
+* Fix comment reply JS for inline replies
+* Upgrade to Foundation 3.0.7
+* Drop some IE7 fixes
 
 = 0.1.0 =
 * Move from Blueprint to Foundation which is responsive
