@@ -37,7 +37,7 @@
  * For more information on hooks, see http://codex.wordpress.org/Plugin_API.
  */
 
-define( 'ESSENCE_VERSION', '0.2.0-alpha' );
+define( 'ESSENCE_VERSION', '0.2.0' );
 
 function get_essence_settings_field() {
 	return apply_filters( 'essence_settings_field', 'essence-settings' );
